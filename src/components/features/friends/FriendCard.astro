@@ -1,0 +1,178 @@
+---
+import I18nKey from "../../../i18n/i18nKey";
+import { i18n } from "../../../i18n/translation";
+
+interface Props {
+	friend: {
+		title: string;
+		siteurl: string;
+		imgurl: string;
+		desc: string;
+		tags: string[];
+	};
+}
+
+const { friend } = Astro.props;
+
+const tagColorMap: Record<string, string> = {
+	administrator: "#EF4444",
+	creator: "#F97316",
+	contributor: "#06B6D4",
+	advisor: "#8B5CF6",
+	supporter: "#22C55E",
+};
+
+const defaultTagColor = "#94A3B8";
+
+function getTagColor(tag: string): string {
+	return tagColorMap[tag.toLowerCase()] || defaultTagColor;
+}
+---
+
+<div
+	class="friend-card group relative bg-white/40 dark:bg-white/[0.06] backdrop-blur-2xl rounded-2xl border border-white/50 dark:border-white/[0.08] overflow-hidden transition-all duration-500 hover:shadow-2xl hover:shadow-black/[0.08] dark:hover:shadow-black/30 hover:-translate-y-1.5 hover:border-white/70 dark:hover:border-white/[0.15]"
+	data-title={friend.title.toLowerCase()}
+	data-desc={friend.desc.toLowerCase()}
+	data-tags={friend.tags.join(",")}
+>
+	<div class="absolute inset-0 rounded-2xl bg-gradient-to-br from-white/40 via-transparent to-transparent dark:from-white/[0.04] dark:via-transparent dark:to-transparent pointer-events-none"></div>
+	<div class="absolute -inset-px rounded-2xl bg-gradient-to-br from-white/60 via-transparent to-transparent dark:from-white/[0.06] dark:via-transparent dark:to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+
+	<div class="relative p-6">
+		<div class="flex items-start gap-4 mb-4">
+			<div
+				class="w-16 h-16 flex-shrink-0 rounded-2xl overflow-hidden bg-white/60 dark:bg-white/[0.08] ring-1 ring-white/50 dark:ring-white/[0.06] shadow-lg shadow-black/[0.04] dark:shadow-black/20 transition-all duration-500 group-hover:ring-white/70 dark:group-hover:ring-white/[0.15] group-hover:shadow-xl"
+			>
+				<img
+					src={friend.imgurl}
+					alt={friend.title}
+					class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500 ease-out"
+					loading="lazy"
+				/>
+			</div>
+
+			<div class="flex-1 min-w-0 pt-1">
+				<h3
+					class="text-xl font-bold text-black/85 dark:text-white/90 mb-1 truncate group-hover:text-[var(--primary)] transition-colors duration-300"
+				>
+					{friend.title}
+				</h3>
+			</div>
+		</div>
+
+		<p
+			class="text-sm text-black/55 dark:text-white/50 mb-4 line-clamp-2 min-h-[2.5rem] leading-relaxed"
+		>
+			{friend.desc}
+		</p>
+
+		<div class="flex flex-wrap gap-2.5 mb-4">
+			{
+				friend.tags.map((tag) => {
+					const color = getTagColor(tag);
+					return (
+						<span
+							class="tag-item inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-semibold rounded-full transition-all duration-300 hover:scale-105 hover:shadow-md cursor-default"
+							style={{
+								backgroundColor: `${color}18`,
+								color: color,
+								border: `1px solid ${color}35`,
+							}}
+						>
+							<span
+								class="tag-dot w-1.5 h-1.5 rounded-full"
+								style={{
+									backgroundColor: color,
+									boxShadow: `0 0 0 0 ${color}`,
+								}}
+							></span>
+							{tag}
+						</span>
+					);
+				})
+			}
+		</div>
+
+		<div class="flex gap-2">
+			<a
+				href={friend.siteurl}
+				target="_blank"
+				rel="noopener noreferrer"
+				class="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-[var(--primary)] text-white font-semibold text-sm shadow-lg shadow-[var(--primary)]/25 hover:shadow-xl hover:shadow-[var(--primary)]/35 hover:brightness-110 active:scale-[0.97] transition-all duration-300"
+			>
+				<svg
+					class="w-4 h-4"
+					fill="none"
+					stroke="currentColor"
+					viewBox="0 0 24 24"
+				>
+					<path
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						stroke-width="2"
+						d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+					></path>
+				</svg>
+				{i18n(I18nKey.friendsVisit)}
+			</a>
+		</div>
+	</div>
+
+	<div
+		class="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-white/70 dark:via-white/[0.08] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+	></div>
+</div>
+
+<style>
+	.friend-card {
+		animation: fadeInUp 0.6s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+		opacity: 0;
+	}
+
+	@keyframes fadeInUp {
+		from {
+			opacity: 0;
+			transform: translateY(24px) scale(0.97);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0) scale(1);
+		}
+	}
+
+	.friend-card:nth-child(1) { animation-delay: 0.04s; }
+	.friend-card:nth-child(2) { animation-delay: 0.08s; }
+	.friend-card:nth-child(3) { animation-delay: 0.12s; }
+	.friend-card:nth-child(4) { animation-delay: 0.16s; }
+	.friend-card:nth-child(5) { animation-delay: 0.20s; }
+	.friend-card:nth-child(6) { animation-delay: 0.24s; }
+	.friend-card:nth-child(7) { animation-delay: 0.28s; }
+	.friend-card:nth-child(8) { animation-delay: 0.32s; }
+	.friend-card:nth-child(9) { animation-delay: 0.36s; }
+	.friend-card:nth-child(10) { animation-delay: 0.40s; }
+	.friend-card:nth-child(11) { animation-delay: 0.44s; }
+	.friend-card:nth-child(12) { animation-delay: 0.48s; }
+
+	.tag-item {
+		transition: all 0.25s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+	}
+
+	.tag-item:hover .tag-dot {
+		animation: pulse 0.8s ease-in-out infinite;
+	}
+
+	@keyframes pulse {
+		0% {
+			box-shadow: 0 0 0 0 currentColor;
+			opacity: 1;
+		}
+		70% {
+			box-shadow: 0 0 0 6px transparent;
+			opacity: 0.7;
+		}
+		100% {
+			box-shadow: 0 0 0 0 transparent;
+			opacity: 1;
+		}
+	}
+</style>

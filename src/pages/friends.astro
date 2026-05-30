@@ -1,0 +1,256 @@
+---
+import { getEntry, render } from "astro:content";
+import Comment from "@components/comment/index.astro";
+import FriendCard from "@components/features/friends/FriendCard.astro";
+import { PageHeader } from "@components/features/page-header";
+import Markdown from "@components/misc/Markdown.astro";
+import MainGridLayout from "@layouts/MainGridLayout.astro";
+
+import { siteConfig } from "../config";
+import { getShuffledFriendsList } from "../data/friends";
+import I18nKey from "../i18n/i18nKey";
+import { i18n } from "../i18n/translation";
+
+export const prerender = true;
+
+if (!siteConfig.featurePages.friends) {
+	return Astro.redirect("/404/");
+}
+
+const friendsPost = await getEntry("spec", "friends");
+
+if (!friendsPost) {
+	throw new Error("friends page content not found");
+}
+
+const { Content } = await render(friendsPost);
+const friendsList = getShuffledFriendsList();
+const allTags = Array.from(new Set(friendsList.flatMap((item) => item.tags)));
+
+const tagColorMap: Record<string, string> = {
+	administrator: "#EF4444",
+	creator: "#F97316",
+	contributor: "#06B6D4",
+	advisor: "#8B5CF6",
+	supporter: "#22C55E",
+};
+
+const filterAllColor = "#6366F1";
+
+function getTagColor(tag: string): string {
+	return tagColorMap[tag.toLowerCase()] || "#94A3B8";
+}
+---
+
+<MainGridLayout
+	title={i18n(I18nKey.friends)}
+	description={i18n(I18nKey.friends)}
+>
+	<script is:inline>
+		window.isFriendsPage = true;
+	</script>
+	<script>
+		import("../scripts/right-sidebar-layout.js");
+	</script>
+
+	<div
+		class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative min-h-32"
+	>
+		<div class="card-base z-10 px-9 py-6 relative w-full">
+			<PageHeader
+				title={i18n(I18nKey.friends)}
+				subtitle={i18n(I18nKey.friendsSubtitle)}
+			/>
+
+			<div class="mb-6 space-y-3">
+				<div class="w-full">
+					<div class="relative">
+						<input
+							type="text"
+							id="friend-search"
+							placeholder={i18n(I18nKey.friendsSearchPlaceholder)}
+							class="w-full px-4 py-2 pl-10 rounded-lg bg-[var(--btn-regular-bg)]
+									text-black/90 dark:text-white/90
+									border border-black/10 dark:border-white/10
+									focus:outline-none focus:ring-2 focus:ring-[var(--primary)]/50
+									transition-all duration-200"
+						/>
+						<svg
+							class="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-black/40 dark:text-white/40"
+							fill="none"
+							stroke="currentColor"
+							viewBox="0 0 24 24"
+						>
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+							></path>
+						</svg>
+					</div>
+				</div>
+
+				<div class="filter-container flex flex-wrap gap-2">
+					<button
+						class="filter-tag active"
+						data-tag="all"
+						style={{
+							"--tag-color": filterAllColor,
+							"--tag-bg": `${filterAllColor}18`,
+							"--tag-border": `${filterAllColor}35`,
+						}}
+					>
+						<span class="filter-tag-dot"></span>
+						{i18n(I18nKey.friendsFilterAll)}
+					</button>
+					{
+						allTags.map((tag) => {
+							const color = getTagColor(tag);
+							return (
+								<button
+									class="filter-tag"
+									data-tag={tag}
+									style={{
+										"--tag-color": color,
+										"--tag-bg": `${color}18`,
+										"--tag-border": `${color}35`,
+									}}
+								>
+									<span class="filter-tag-dot"></span>
+									{tag}
+								</button>
+							);
+						})
+					}
+				</div>
+			</div>
+
+			<div
+				id="friends-grid"
+				class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 mb-6"
+			>
+				{friendsList.map((item) => <FriendCard friend={item} />)}
+			</div>
+
+			<div id="no-results" class="hidden text-center py-12">
+				<svg
+					class="w-16 h-16 mx-auto mb-4 text-black/20 dark:text-white/20"
+					fill="none"
+					stroke="currentColor"
+					viewBox="0 0 24 24"
+				>
+					<path
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						stroke-width="2"
+						d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+					></path>
+				</svg>
+				<p class="text-black/50 dark:text-white/50 text-lg">
+					{i18n(I18nKey.friendsNoResults)}
+				</p>
+			</div>
+
+			<Markdown class="mt-8 prose dark:prose-invert max-w-none">
+				<Content />
+			</Markdown>
+		</div>
+	</div>
+
+	<script is:inline src="/js/friends-page-handler.js"></script>
+
+	<div class="mt-4">
+		<Comment path="/friends/" />
+	</div>
+</MainGridLayout>
+
+<style>
+	#friend-search:focus {
+		box-shadow: 0 0 0 3px var(--primary) / 0.1;
+	}
+
+	.filter-container {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+	}
+
+	.filter-tag {
+		position: relative;
+		padding: 0.5rem 1rem 0.5rem 2rem;
+		border: 1px solid var(--tag-border, rgba(148, 163, 184, 0.2));
+		border-radius: var(--radius-large);
+		background: var(--tag-bg, rgba(148, 163, 184, 0.1));
+		color: var(--tag-color, #94A3B8);
+		font-size: 0.875rem;
+		font-weight: 600;
+		cursor: pointer;
+		transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+		white-space: nowrap;
+		overflow: hidden;
+	}
+
+	.filter-tag-dot {
+		position: absolute;
+		left: 0.75rem;
+		top: 50%;
+		transform: translateY(-50%);
+		width: 0.5rem;
+		height: 0.5rem;
+		border-radius: 50%;
+		background: var(--tag-color);
+		transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+		box-shadow: 0 0 0 0 var(--tag-color);
+	}
+
+	.filter-tag:hover:not(.active) {
+		background: var(--tag-bg);
+		border-color: var(--tag-color);
+		transform: translateY(-2px);
+		box-shadow: 0 4px 12px -2px var(--tag-color);
+	}
+
+	.filter-tag:hover:not(.active) .filter-tag-dot {
+		box-shadow: 0 0 8px 2px var(--tag-color);
+		transform: translateY(-50%) scale(1.3);
+	}
+
+	.filter-tag.active {
+		background: var(--tag-color);
+		color: #FFFFFF;
+		border-color: var(--tag-color);
+		box-shadow: 0 4px 16px -2px var(--tag-color);
+		transform: translateY(-1px);
+	}
+
+	.filter-tag.active .filter-tag-dot {
+		background: #FFFFFF;
+		box-shadow: 0 0 12px 2px rgba(255, 255, 255, 0.6);
+		transform: translateY(-50%) scale(1.2);
+	}
+
+	.filter-tag.active:hover {
+		background: var(--tag-color) !important;
+		color: #FFFFFF !important;
+		border-color: var(--tag-color) !important;
+		transform: translateY(-2px);
+		box-shadow: 0 6px 20px -2px var(--tag-color);
+	}
+
+	.filter-tag::after {
+		content: '';
+		position: absolute;
+		inset: 0;
+		border-radius: inherit;
+		opacity: 0;
+		background: radial-gradient(circle at center, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
+		transition: opacity 0.3s ease;
+		pointer-events: none;
+	}
+
+	.filter-tag:active::after {
+		opacity: 1;
+		transition: opacity 0s;
+	}
+</style>
