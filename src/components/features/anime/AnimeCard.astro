@@ -1,5 +1,7 @@
 ---
 import Image from "@components/atoms/Image/Image.astro";
+import I18nKey from "../../../i18n/i18nKey";
+import { i18n } from "../../../i18n/translation";
 
 interface Props {
 	anime: {
@@ -20,21 +22,55 @@ interface Props {
 		class: string;
 		icon: string;
 	};
-	yearLabel: string;
-	studioLabel: string;
 }
 
-const { anime, statusInfo, yearLabel, studioLabel } = Astro.props;
+const { anime, statusInfo } = Astro.props;
 
 const progressPercent =
 	anime.totalEpisodes > 0 ? (anime.progress / anime.totalEpisodes) * 100 : 0;
+
+// --- 标签颜色映射逻辑 ---
+// 为了让每个漫画下的标签颜色统一，使用动漫标题作为种子
+const tagColors = [
+	"#6366f1", // Indigo
+	"#8b5cf6", // Violet
+	"#d946ef", // Fuchsia
+	"#ec4899", // Pink
+	"#f43f5e", // Rose
+	"#ef4444", // Red
+	"#f97316", // Orange
+	"#eab308", // Yellow
+	"#22c55e", // Green
+	"#10b981", // Emerald
+	"#14b8a6", // Teal
+	"#06b6d4", // Cyan
+	"#3b82f6", // Blue
+	"#6366f1", // Indigo
+];
+
+function hashCode(str: string): number {
+	let hash = 0;
+	for (let i = 0; i < str.length; i++) {
+		const char = str.charCodeAt(i);
+		hash = (hash << 5) - hash + char;
+		hash |= 0; // Convert to 32bit integer
+	}
+	return Math.abs(hash);
+}
+
+function getTagColor(tag: string, seed: string): string {
+	// 基于动漫标题 + 标签名生成唯一但稳定的颜色索引
+	const combined = seed + "::" + tag;
+	const index = hashCode(combined) % tagColors.length;
+	return tagColors[index];
+}
 ---
 
 <div
-	class="group relative bg-[var(--card-bg)] border border-[var(--line-divider)] rounded-[var(--radius-large)] overflow-hidden hover:shadow-lg"
+	class="group relative liquid-glass-card rounded-[var(--radius-large)] overflow-hidden hover:shadow-xl"
 	data-anime-status={anime.status}
 >
-	<div class="relative anime-cover-container aspect-[2/3] overflow-hidden">
+	<div class="relative anime-cover-container aspect-[2/3] overflow-hidden rounded-t-[var(--radius-large)]">
 		<a
 			href={anime.link}
 			target="_blank"
@@ -44,19 +80,20 @@ const progressPercent =
 			<Image
 				src={anime.cover}
 				alt={anime.title}
-				class="w-full h-full object-cover transition-transform duration-200 group-hover:scale-110"
+				class="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-110"
 				widths={[200, 400, 600]}
 				sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 20vw"
 			/>
+			<!-- 播放按钮覆盖层 -->
 			<div
-				class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+				class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 ease-out"
 			>
 				<div class="absolute inset-0 flex items-center justify-center">
 					<div
-						class="w-12 h-12 rounded-full bg-white/90 flex items-center justify-center"
+						class="w-14 h-14 rounded-full bg-white/20 backdrop-blur-md border border-white/30 flex items-center justify-center shadow-lg transform translate-y-2 group-hover:translate-y-0 transition-all duration-300 ease-out"
 					>
 						<svg
-							class="w-6 h-6 text-gray-800 ml-1"
+							class="w-7 h-7 text-white ml-1 drop-shadow-lg"
 							fill="currentColor"
 							viewBox="0 0 24 24"
 						>
@@ -67,18 +104,20 @@ const progressPercent =
 			</div>
 		</a>
 
+		<!-- 状态标签 (Liquid-Glass 风格) -->
 		<div
-			class={`absolute top-2 left-2 px-2 py-1 rounded-md text-xs font-medium ${statusInfo.class}`}
+			class={`absolute top-3 left-3 px-3 py-1.5 rounded-full text-xs font-semibold backdrop-blur-md border border-white/20 shadow-lg flex items-center gap-1.5 transition-all duration-300 hover:scale-105 ${statusInfo.class}`}
 		>
-			<span class="mr-1">{statusInfo.icon}</span>
+			<span class="text-sm leading-none">{statusInfo.icon}</span>
 			<span>{statusInfo.text}</span>
 		</div>
 
+		<!-- 评分标签 (Liquid-Glass 风格) -->
 		<div
-			class="absolute top-2 right-2 bg-black/70 text-white px-2 py-1 rounded-md text-xs font-medium flex items-center gap-1"
+			class="absolute top-3 right-3 bg-black/30 backdrop-blur-md text-white px-3 py-1.5 rounded-full text-xs font-semibold flex items-center gap-1.5 border border-white/20 shadow-lg transition-all duration-300 hover:scale-105"
 		>
 			<svg
-				class="w-3 h-3 text-yellow-400"
+				class="w-3.5 h-3.5 text-yellow-400 drop-shadow-sm"
 				fill="currentColor"
 				viewBox="0 0 20 20"
 			>
@@ -89,68 +128,188 @@ const progressPercent =
 			<span>{anime.rating}</span>
 		</div>
 
+		<!-- 追番进度条 (仅在看状态显示) -->
 		{
 			anime.status === "watching" && (
-				<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-2">
-					<div class="w-full bg-white/20 rounded-full h-1.5 mb-1">
+				<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-3 pt-8">
+					<div class="w-full bg-white/15 backdrop-blur-sm rounded-full h-2 mb-2 border border-white/10">
 						<div
-							class="bg-gradient-to-r from-emerald-400 to-teal-400 h-1.5 rounded-full transition-all duration-300"
+							class="bg-gradient-to-r from-emerald-400 to-teal-400 h-2 rounded-full shadow-lg shadow-emerald-400/30 transition-all duration-700 ease-out"
 							style={`width: ${progressPercent}%`}
 						/>
 					</div>
-					<div class="text-white text-xs font-medium">
-						{anime.progress}/{anime.totalEpisodes} (
-						{Math.round(progressPercent)}%)
+					<div class="text-white text-xs font-medium flex justify-between">
+						<span>{anime.progress}/{anime.totalEpisodes}</span>
+						<span>{Math.round(progressPercent)}%</span>
 					</div>
 				</div>
 			)
 		}
 	</div>
 
-	<div class="p-3">
+	<!-- 卡片信息区域 -->
+	<div class="p-4 glass-content">
 		<h3
-			class="text-sm font-bold text-black/90 dark:text-white/90 mb-1 leading-tight"
+			class="text-sm font-bold text-gray-800 dark:text-gray-100 mb-1.5 leading-tight truncate"
+			title={anime.title}
 		>
 			{anime.title}
 		</h3>
 		<p
-			class="text-black/60 dark:text-white/60 text-xs mb-2 line-clamp-2"
+			class="text-gray-500 dark:text-gray-400 text-xs mb-3 line-clamp-2 leading-relaxed"
 			title={anime.description}
 		>
 			{anime.description}
 		</p>
 
-		<div class="space-y-1 text-xs">
+		<div class="space-y-1.5 text-xs">
+			<!-- 年份 -->
 			<div class="flex justify-between items-center">
-				<span class="text-black/50 dark:text-white/50 shrink-0">
-					{yearLabel}
+				<span class="text-gray-400 dark:text-gray-500 shrink-0 font-medium">
+					{i18n(I18nKey.animeYear)}
 				</span>
 				<span
-					class="text-black/70 dark:text-white/70 truncate ml-2 text-right"
+					class="text-gray-700 dark:text-gray-300 truncate ml-2 text-right"
 				>
 					{anime.year}
 				</span>
 			</div>
+			<!-- 制作公司 -->
 			<div class="flex justify-between items-start">
-				<span class="text-black/50 dark:text-white/50 shrink-0 mt-0.5">
-					{studioLabel}
+				<span class="text-gray-400 dark:text-gray-500 shrink-0 mt-0.5 font-medium">
+					{i18n(I18nKey.animeStudio)}
 				</span>
 				<span
-					class="text-black/70 dark:text-white/70 text-right ml-2 line-clamp-2 break-words"
+					class="text-gray-700 dark:text-gray-300 text-right ml-2 line-clamp-2 break-words"
 					title={anime.studio}
 				>
 					{anime.studio}
 				</span>
 			</div>
-			<div class="flex flex-wrap gap-1 mt-2">
+			
+			<!-- 标签区域 (使用统一的颜色方案) -->
+			<div class="flex flex-wrap gap-1.5 mt-3 pt-2 border-t border-gray-200/50 dark:border-gray-700/50">
 				{
-					anime.genre.map((g) => (
-						<span class="px-1.5 py-0.5 bg-[var(--btn-regular-bg)] text-black/70 dark:text-white/70 rounded text-xs">
-							{g}
-						</span>
-					))
+					anime.genre.map((tag) => {
+						const color = getTagColor(tag, anime.title);
+						return (
+							<span
+								class="tag-item inline-flex items-center gap-1.5 px-2.5 py-1 text-xs font-semibold rounded-full transition-all duration-300 hover:scale-105 hover:shadow-md cursor-default"
+								style={{
+									backgroundColor: `${color}18`,
+									color: color,
+									border: `1px solid ${color}35`,
+								}}
+							>
+								<span
+									class="tag-dot w-1.5 h-1.5 rounded-full"
+									style={{
+										backgroundColor: color,
+										boxShadow: `0 0 0 0 ${color}`,
+									}}
+								></span>
+								{tag}
+							</span>
+						);
+					})
 				}
 			</div>
 		</div>
 	</div>
 </div>
+
+<style is:global>
+	/* ========== Liquid-Glass 核心样式 ========== */
+	.liquid-glass-card {
+		background: rgba(255, 255, 255, 0.25);
+		backdrop-filter: blur(12px) saturate(180%);
+		-webkit-backdrop-filter: blur(12px) saturate(180%);
+		border: 1px solid rgba(255, 255, 255, 0.3);
+		box-shadow: 
+			0 4px 6px -1px rgba(0, 0, 0, 0.05),
+			0 10px 15px -3px rgba(0, 0, 0, 0.05),
+			inset 0 1px 0 rgba(255, 255, 255, 0.2);
+		transition: all 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+	}
+
+	.liquid-glass-card:hover {
+		background: rgba(255, 255, 255, 0.35);
+		border-color: rgba(255, 255, 255, 0.5);
+		box-shadow: 
+			0 10px 25px -5px rgba(0, 0, 0, 0.1),
+			0 20px 40px -10px rgba(0, 0, 0, 0.1),
+			inset 0 1px 0 rgba(255, 255, 255, 0.3);
+		transform: translateY(-2px);
+	}
+
+	/* 深色模式适配 */
+	:root.dark .liquid-glass-card,
+	.dark .liquid-glass-card {
+		background: rgba(30, 30, 40, 0.45);
+		border: 1px solid rgba(255, 255, 255, 0.08);
+		box-shadow: 
+			0 4px 6px -1px rgba(0, 0, 0, 0.2),
+			0 10px 15px -3px rgba(0, 0, 0, 0.3),
+			inset 0 1px 0 rgba(255, 255, 255, 0.05);
+	}
+
+	:root.dark .liquid-glass-card:hover,
+	.dark .liquid-glass-card:hover {
+		background: rgba(40, 40, 55, 0.55);
+		border-color: rgba(255, 255, 255, 0.12);
+		box-shadow: 
+			0 10px 25px -5px rgba(0, 0, 0, 0.4),
+			0 20px 40px -10px rgba(0, 0, 0, 0.4),
+			inset 0 1px 0 rgba(255, 255, 255, 0.08);
+	}
+
+	/* 卡片底部信息区域背景 */
+	.glass-content {
+		background: rgba(255, 255, 255, 0.15);
+		backdrop-filter: blur(8px);
+		-webkit-backdrop-filter: blur(8px);
+		border-top: 1px solid rgba(255, 255, 255, 0.2);
+	}
+
+	:root.dark .glass-content,
+	.dark .glass-content {
+		background: rgba(20, 20, 30, 0.3);
+		border-top: 1px solid rgba(255, 255, 255, 0.06);
+	}
+
+	/* ========== 标签动画 ========== */
+	.tag-item {
+		transition: all 0.25s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+	}
+
+	.tag-item:hover .tag-dot {
+		animation: pulse 0.8s ease-in-out infinite;
+	}
+
+	@keyframes pulse {
+		0% {
+			box-shadow: 0 0 0 0 currentColor;
+			opacity: 1;
+		}
+		70% {
+			box-shadow: 0 0 0 6px transparent;
+			opacity: 0.7;
+		}
+		100% {
+			box-shadow: 0 0 0 0 transparent;
+			opacity: 1;
+		}
+	}
+	.bg-emerald-500\/80 {
+		background: rgba(16, 185, 129, 0.25) !important;
+		backdrop-filter: blur(8px);
+	}
+	.bg-blue-500\/80 {
+		background: rgba(59, 130, 246, 0.25) !important;
+		backdrop-filter: blur(8px);
+	}
+	.bg-purple-500\/80 {
+		background: rgba(139, 92, 246, 0.25) !important;
+		backdrop-filter: blur(8px);
+	}
+</style>

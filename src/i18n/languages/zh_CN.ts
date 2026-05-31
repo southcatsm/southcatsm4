@@ -191,6 +191,9 @@ export const zh_CN: Translation = {
 	[Key.skillsByCategory]: "按分类分布",
 	[Key.noData]: "暂无数据",
 
+	//捐赠
+	[Key.donate]: "赞助",
+
 	// 时间线页面
 	[Key.timeline]: "时间线",
 	[Key.timelineSubtitle]: "我的成长历程和重要里程碑",

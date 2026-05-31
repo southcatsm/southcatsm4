@@ -21,10 +21,10 @@ export const siteConfig: SiteConfig = {
 		diary: true, // 日记页面开关
 		friends: true, // 友链页面开关
 		projects: true, // 项目页面开关
-		skills: true, // 技能页面开关
+		skills: false, // 技能页面开关
 		timeline: true, // 时间线页面开关
 		albums: true, // 相册页面开关
-		devices: true, // 设备页面开关
+		devices: false, // 设备页面开关
 	},
 
 	// navbar
@@ -102,23 +102,29 @@ export const siteConfig: SiteConfig = {
 	},
 
 	banner: {
-		// 支持单张图片或图片数组，当数组长度 > 1 时自动启用轮播
+		// if array>1 lunbo
 		src: {
 			desktop: [
-				"/assets/desktop-banner/1.webp",
-				"/assets/desktop-banner/2.webp",
-				"/assets/desktop-banner/3.webp",
-				"/assets/desktop-banner/4.webp",
-			], // 桌面横幅图片
+				"/assets/desktop-banner/IMG_1801.png",
+				"/assets/desktop-banner/IMG_1802.png",
+				"/assets/desktop-banner/IMG_1803.png",
+				"/assets/desktop-banner/IMG_1804.png",
+				"/assets/desktop-banner/IMG_1805.png",
+				"/assets/desktop-banner/IMG_1806.png",
+				"/assets/desktop-banner/IMG_1807.png",
+			], // PC
 			mobile: [
-				"/assets/mobile-banner/1.webp",
-				"/assets/mobile-banner/2.webp",
-				"/assets/mobile-banner/3.webp",
-				"/assets/mobile-banner/4.webp",
-			], // 移动横幅图片
-		}, // 使用本地横幅图片
+				"/assets/mobile-banner/IMG_1808.png",
+				"/assets/mobile-banner/IMG_1809.png",
+				"/assets/mobile-banner/IMG_1810.png",
+				"/assets/mobile-banner/IMG_1811.png",
+				"/assets/mobile-banner/IMG_1812.png",
+				"/assets/mobile-banner/IMG_1813.png",
+				"/assets/mobile-banner/IMG_1814.png",
+			], // PE
+		}, 
 
-		position: "center", // 等同于 object-position，仅支持 'top', 'center', 'bottom'。默认为 'center'
+		position: "center", // object-position 'top', 'center', 'bottom' 'center'
 
 		carousel: {
 			enable: true, // true:lun bo; false: suiji
@@ -142,7 +148,7 @@ export const siteConfig: SiteConfig = {
 
 		homeText: {
 			enable: true, // text
-			title: "Southcatsm's blog", // main-title
+			title: "Southcatsm's blogs", // main-title
 
 			subtitle: [
 				"故事的开头总是这样，适逢其会，猝不及防",

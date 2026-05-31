@@ -25,9 +25,9 @@ export const profileConfig: ProfileConfig = {
 			url: "https://github.com/southcatsm",
 		},
 		{
-			name: "Instagram",
-			icon: "fa7-brands:instagram",
-			url: "https://www.instagram.com/southcatsm/",
+			name: "Donate",
+			icon: "material-symbols:coffee",
+			url: "/donate/",
 		},
 		{
 			name: "E-Mail",

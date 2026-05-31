@@ -37,7 +37,7 @@ export const friendsData: FriendItem[] = [
 	},
 	{
 		id: 4,
-		title: "Gris",
+		title: "GrisEs",
 		imgurl: "http://q1.qlogo.cn/g?b=qq&nk=1033440375&s=100",
 		desc: "Facing the sea, with spring flowers in bloom",
 		siteurl: "https://space.bilibili.com/1658622019",

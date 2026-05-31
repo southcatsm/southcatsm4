@@ -247,6 +247,9 @@ export const ja: Translation = {
 	[Key.skillsByCategory]: "カテゴリー別",
 	[Key.noData]: "データなし",
 
+	//Donate
+	[Key.donate]: "寄付する",
+
 	// タイムラインページ
 	[Key.timeline]: "タイムライン",
 	[Key.timelineSubtitle]: "成長への旅と重要なマイルストーン",

@@ -1,21 +1,27 @@
 import type { FullscreenWallpaperConfig } from "../types/config";
 
-// 全屏壁纸配置
+// FULLSCREEN
 export const fullscreenWallpaperConfig: FullscreenWallpaperConfig = {
 	src: {
 		desktop: [
-			"/assets/desktop-banner/1.webp",
-			"/assets/desktop-banner/2.webp",
-			"/assets/desktop-banner/3.webp",
-			"/assets/desktop-banner/4.webp",
-		], // 桌面横幅图片
+			"/assets/desktop-banner/IMG_1801.png",
+			"/assets/desktop-banner/IMG_1802.png",
+			"/assets/desktop-banner/IMG_1803.png",
+			"/assets/desktop-banner/IMG_1804.png",
+			"/assets/desktop-banner/IMG_1805.png",
+			"/assets/desktop-banner/IMG_1806.png",
+			"/assets/desktop-banner/IMG_1807.png",
+		], // PC
 		mobile: [
-			"/assets/mobile-banner/1.webp",
-			"/assets/mobile-banner/2.webp",
-			"/assets/mobile-banner/3.webp",
-			"/assets/mobile-banner/4.webp",
-		], // 移动横幅图片
-	}, // 使用本地横幅图片
+			"/assets/mobile-banner/IMG_1808.png",
+			"/assets/mobile-banner/IMG_1809.png",
+			"/assets/mobile-banner/IMG_1810.png",
+			"/assets/mobile-banner/IMG_1811.png",
+			"/assets/mobile-banner/IMG_1812.png",
+			"/assets/mobile-banner/IMG_1813.png",
+			"/assets/mobile-banner/IMG_1814.png",
+		], // PE
+	}, 
 	position: "center", // 壁纸位置，等同于 object-position
 	carousel: {
 		enable: true, // 启用轮播

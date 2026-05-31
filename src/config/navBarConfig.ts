@@ -162,7 +162,7 @@ export const navBarConfig: NavBarConfig = {
 		{
 			name: "My",
 			url: "/content/",
-			icon: "material-symbols:coffee",
+			icon: "material-symbols:cloud",
 			children: [
 				{
 					name: "Anime",
@@ -180,10 +180,9 @@ export const navBarConfig: NavBarConfig = {
 					icon: "material-symbols:photo-library",
 				},
 				{
-					name: "Devices",
-					url: "/devices/",
-					icon: "material-symbols:devices",
-					external: false, // 内部链接，当前页导航
+					name: "Timeline",
+					url: "/timeline/",
+					icon: "material-symbols:timeline",
 				},
 			],
 		},
@@ -191,24 +190,5 @@ export const navBarConfig: NavBarConfig = {
 		LinkPreset.Friends,
 		LinkPreset.About,
 		
-
-		// 自定义一级下拉菜单示例：其他页面
-		{
-			name: "Others",
-			url: "#", // "#" 作为占位 URL，点击不会跳转
-			icon: "material-symbols:more-horiz",
-			children: [
-				{
-					name: "Skills",
-					url: "/skills/",
-					icon: "material-symbols:psychology",
-				},
-				{
-					name: "Timeline",
-					url: "/timeline/",
-					icon: "material-symbols:timeline",
-				},
-			],
-		},
 	],
 };

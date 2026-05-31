@@ -229,6 +229,9 @@ export const zh_TW: Translation = {
 	[Key.skillsByLevel]: "按等級分布",
 	[Key.skillsByCategory]: "按分類分布",
 
+	//Donate
+	[Key.donate]: "捐贈",
+
 	// 時間線頁面
 	[Key.timeline]: "時間線",
 	[Key.timelineSubtitle]: "我的成長歷程和重要里程碑",

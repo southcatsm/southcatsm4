@@ -187,6 +187,8 @@ enum I18nKey {
 	skillsByCategory = "skillsByCategory",
 	noData = "noData",
 
+	donate = "donate",
+
 	// Timeline page
 	timeline = "timeline",
 	timelineSubtitle = "timelineSubtitle",

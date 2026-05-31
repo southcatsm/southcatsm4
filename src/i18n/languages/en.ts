@@ -266,6 +266,9 @@ export const en: Translation = {
 	[Key.timelineStartDate]: "Start Date",
 	[Key.timelineDuration]: "Duration",
 
+	//Donate
+	[Key.donate]: "Donate",
+
 	// Password Protection
 	[Key.passwordProtected]: "Password Protected",
 	[Key.passwordProtectedTitle]: "This content is password protected",
