@@ -1,0 +1,532 @@
+{
+  "title": "PHROLOVA",
+  "mode": "external",
+  "hidden": false,
+  "description": "弗洛洛是天，弗洛洛是地！不可以惹弗洛洛生气！每天都要夸弗洛洛！记住弗洛洛是世界上最好的！必须细心照顾弗洛洛的小情绪！要一直坚定的爱弗洛洛！",
+  "date": "2025-10-16",
+  "location": "FRACTSIDUS",
+  "tags": ["ACG", "游戏"],
+  "cover": "https://cdn-docs.southcat.cc/albums/phrolova/cover.png",
+  "layout": "masonry",
+  "columns": 3,
+  "photos": [
+    {
+      "id": "fll-1",
+      "src": "https://cdn-docs.southcat.cc/albums/phrolova/IMG_1892.jpeg",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "fll-2",
+      "src": "https://cdn-docs.southcat.cc/albums/phrolova/IMG_1893.JPG",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "fll-3",
+      "src": "https://cdn-docs.southcat.cc/albums/phrolova/IMG_1895.JPG",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "fll-4",
+      "src": "https://cdn-docs.southcat.cc/albums/phrolova/IMG_1896.JPG",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "fll-5",
+      "src": "https://cdn-docs.southcat.cc/albums/phrolova/IMG_1897.GIF",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "fll-6",
+      "src": "https://cdn-docs.southcat.cc/albums/phrolova/IMG_1899.GIF",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "fll-7",
+      "src": "https://cdn-docs.southcat.cc/albums/phrolova/IMG_1917.PNG",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "fll-8",
+      "src": "https://cdn-docs.southcat.cc/albums/phrolova/IMG_1918.PNG",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "fll-9",
+      "src": "https://cdn-docs.southcat.cc/albums/phrolova/IMG_1920.GIF",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "fll-10",
+      "src": "https://cdn-docs.southcat.cc/albums/phrolova/IMG_1931.JPG",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "fll-11",
+      "src": "https://cdn-docs.southcat.cc/albums/phrolova/IMG_1932.GIF",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "fll-12",
+      "src": "https://cdn-docs.southcat.cc/albums/phrolova/IMG_1933.GIF",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "fll-13",
+      "src": "https://cdn-docs.southcat.cc/albums/phrolova/IMG_1934.JPG",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "fll-14",
+      "src": "https://cdn-docs.southcat.cc/albums/phrolova/IMG_1935.GIF",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "fll-15",
+      "src": "https://cdn-docs.southcat.cc/albums/phrolova/IMG_1937.JPG",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "fll-16",
+      "src": "https://cdn-docs.southcat.cc/albums/phrolova/IMG_1939.JPG",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "fll-17",
+      "src": "https://cdn-docs.southcat.cc/albums/phrolova/IMG_1941.GIF",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "fll-18",
+      "src": "https://cdn-docs.southcat.cc/albums/phrolova/IMG_1942.JPG",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "fll-19",
+      "src": "https://cdn-docs.southcat.cc/albums/phrolova/IMG_1961.GIF",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "fll-20",
+      "src": "https://cdn-docs.southcat.cc/albums/phrolova/IMG_1962.GIF",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "fll-21",
+      "src": "https://cdn-docs.southcat.cc/albums/phrolova/IMG_1963.GIF",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "fll-22",
+      "src": "https://cdn-docs.southcat.cc/albums/phrolova/IMG_1964.GIF",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "fll-23",
+      "src": "https://cdn-docs.southcat.cc/albums/phrolova/IMG_1965.GIF",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "fll-24",
+      "src": "https://cdn-docs.southcat.cc/albums/phrolova/IMG_1966.GIF",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "fll-25",
+      "src": "https://cdn-docs.southcat.cc/albums/phrolova/IMG_1967.GIF",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "fll-26",
+      "src": "https://cdn-docs.southcat.cc/albums/phrolova/IMG_1968.GIF",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "fll-27",
+      "src": "https://cdn-docs.southcat.cc/albums/phrolova/IMG_1969.GIF",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "fll-28",
+      "src": "https://cdn-docs.southcat.cc/albums/phrolova/IMG_1970.jpeg",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "fll-29",
+      "src": "https://cdn-docs.southcat.cc/albums/phrolova/IMG_2034.jpeg",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "fll-30",
+      "src": "https://cdn-docs.southcat.cc/albums/phrolova/IMG_2035.GIF",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "fll-31",
+      "src": "https://cdn-docs.southcat.cc/albums/phrolova/IMG_2036.GIF",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "fll-32",
+      "src": "https://cdn-docs.southcat.cc/albums/phrolova/IMG_2037.PNG",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "fll-33",
+      "src": "https://cdn-docs.southcat.cc/albums/phrolova/IMG_2038.GIF",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "fll-34",
+      "src": "https://cdn-docs.southcat.cc/albums/phrolova/IMG_2039.GIF",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "fll-35",
+      "src": "https://cdn-docs.southcat.cc/albums/phrolova/IMG_2041.jpeg",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "fll-36",
+      "src": "https://cdn-docs.southcat.cc/albums/phrolova/IMG_2042.PNG",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "fll-37",
+      "src": "https://cdn-docs.southcat.cc/albums/phrolova/IMG_2043.jpeg",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "fll-38",
+      "src": "https://cdn-docs.southcat.cc/albums/phrolova/IMG_2044.GIF",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "fll-39",
+      "src": "https://cdn-docs.southcat.cc/albums/phrolova/IMG_2045.jpeg",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "fll-40",
+      "src": "https://cdn-docs.southcat.cc/albums/phrolova/IMG_2046.GIF",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "fll-41",
+      "src": "https://cdn-docs.southcat.cc/albums/phrolova/IMG_2047.GIF",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "fll-42",
+      "src": "https://cdn-docs.southcat.cc/albums/phrolova/IMG_2048.jpeg",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "fll-43",
+      "src": "https://cdn-docs.southcat.cc/albums/phrolova/IMG_2049.jpeg",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "fll-44",
+      "src": "https://cdn-docs.southcat.cc/albums/phrolova/IMG_2050.jpeg",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "fll-45",
+      "src": "https://cdn-docs.southcat.cc/albums/phrolova/IMG_2051.jpeg",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "fll-46",
+      "src": "https://cdn-docs.southcat.cc/albums/phrolova/IMG_2052.GIF",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "fll-47",
+      "src": "https://cdn-docs.southcat.cc/albums/phrolova/IMG_2053.jpeg",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "fll-48",
+      "src": "https://cdn-docs.southcat.cc/albums/phrolova/IMG_2054.jpeg",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "fll-49",
+      "src": "https://cdn-docs.southcat.cc/albums/phrolova/IMG_2055.jpeg",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "fll-50",
+      "src": "https://cdn-docs.southcat.cc/albums/phrolova/IMG_2064.jpeg",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "fll-51",
+      "src": "https://cdn-docs.southcat.cc/albums/phrolova/IMG_2066.GIF",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "fll-52",
+      "src": "https://cdn-docs.southcat.cc/albums/phrolova/IMG_2067.GIF",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "fll-53",
+      "src": "https://cdn-docs.southcat.cc/albums/phrolova/IMG_2074.jpeg",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "fll-54",
+      "src": "https://cdn-docs.southcat.cc/albums/phrolova/IMG_2075.JPG",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "fll-55",
+      "src": "https://cdn-docs.southcat.cc/albums/phrolova/IMG_2076.PNG",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "fll-56",
+      "src": "https://cdn-docs.southcat.cc/albums/phrolova/IMG_2077.JPG",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "fll-57",
+      "src": "https://cdn-docs.southcat.cc/albums/phrolova/IMG_2078.PNG",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "fll-58",
+      "src": "https://cdn-docs.southcat.cc/albums/phrolova/IMG_2079.jpeg",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "fll-59",
+      "src": "https://cdn-docs.southcat.cc/albums/phrolova/IMG_2080.jpeg",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "fll-60",
+      "src": "https://cdn-docs.southcat.cc/albums/phrolova/IMG_2086.GIF",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "fll-61",
+      "src": "https://cdn-docs.southcat.cc/albums/phrolova/IMG_2100.PNG",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "fll-62",
+      "src": "https://cdn-docs.southcat.cc/albums/phrolova/IMG_2101.PNG",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "fll-63",
+      "src": "https://cdn-docs.southcat.cc/albums/phrolova/IMG_2105.PNG",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "fll-64",
+      "src": "https://cdn-docs.southcat.cc/albums/phrolova/IMG_2106.PNG",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "fll-65",
+      "src": "https://cdn-docs.southcat.cc/albums/phrolova/IMG_2107.PNG",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "fll-66",
+      "src": "https://cdn-docs.southcat.cc/albums/phrolova/IMG_2122.JPG",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "fll-67",
+      "src": "https://cdn-docs.southcat.cc/albums/phrolova/IMG_2123.JPG",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "fll-68",
+      "src": "https://cdn-docs.southcat.cc/albums/phrolova/IMG_2124.JPG",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "fll-69",
+      "src": "https://cdn-docs.southcat.cc/albums/phrolova/IMG_2126.PNG",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "fll-70",
+      "src": "https://cdn-docs.southcat.cc/albums/phrolova/IMG_2127.PNG",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "fll-71",
+      "src": "https://cdn-docs.southcat.cc/albums/phrolova/IMG_2129.JPG",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "fll-72",
+      "src": "https://cdn-docs.southcat.cc/albums/phrolova/IMG_2133.JPG",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "fll-73",
+      "src": "https://cdn-docs.southcat.cc/albums/phrolova/IMG_2160.GIF",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "fll-74",
+      "src": "https://cdn-docs.southcat.cc/albums/phrolova/IMG_2161.JPG",
+      "alt": "",
+      "title": "",
+      "description": ""
+    }
+  ]
+}

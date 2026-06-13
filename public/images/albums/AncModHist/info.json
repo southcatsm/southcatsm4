@@ -1,0 +1,217 @@
+{
+  "title": "人类群星闪耀时·其一",
+  "mode": "external",
+  "hidden": false,
+  "description": "为了给自己家游戏争夺称号，名人们开始了他们的辩驳...",
+  "date": "2026-01-10",
+  "location": "Universe",
+  "tags": ["历史", "搞笑", "游戏"],
+  "cover": "https://cdn-docs.southcat.cc/albums/ancmodhist/cover.jpg",
+  "layout": "grid",
+  "columns": 3,
+  "photos": [
+    {
+      "id": "amh-1",
+      "src": "https://cdn-docs.southcat.cc/albums/ancmodhist/IMG_1512.JPG",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "amh-2",
+      "src": "https://cdn-docs.southcat.cc/albums/ancmodhist/IMG_1513.JPG",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "amh-3",
+      "src": "https://cdn-docs.southcat.cc/albums/ancmodhist/IMG_1514.JPG",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "amh-4",
+      "src": "https://cdn-docs.southcat.cc/albums/ancmodhist/IMG_1515.JPG",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "amh-5",
+      "src": "https://cdn-docs.southcat.cc/albums/ancmodhist/IMG_1516.JPG",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "amh-6",
+      "src": "https://cdn-docs.southcat.cc/albums/ancmodhist/IMG_1517.JPG",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "amh-7",
+      "src": "https://cdn-docs.southcat.cc/albums/ancmodhist/IMG_1518.JPG",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "amh-8",
+      "src": "https://cdn-docs.southcat.cc/albums/ancmodhist/IMG_1519.JPG",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "amh-9",
+      "src": "https://cdn-docs.southcat.cc/albums/ancmodhist/IMG_1520.JPG",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "amh-10",
+      "src": "https://cdn-docs.southcat.cc/albums/ancmodhist/IMG_1521.JPG",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "amh-11",
+      "src": "https://cdn-docs.southcat.cc/albums/ancmodhist/IMG_1522.JPG",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "amh-12",
+      "src": "https://cdn-docs.southcat.cc/albums/ancmodhist/IMG_1523.JPG",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "amh-13",
+      "src": "https://cdn-docs.southcat.cc/albums/ancmodhist/IMG_1524.JPG",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "amh-14",
+      "src": "https://cdn-docs.southcat.cc/albums/ancmodhist/IMG_1525.JPG",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "amh-15",
+      "src": "https://cdn-docs.southcat.cc/albums/ancmodhist/IMG_1526.JPG",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "amh-16",
+      "src": "https://cdn-docs.southcat.cc/albums/ancmodhist/IMG_1527.JPG",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "amh-17",
+      "src": "https://cdn-docs.southcat.cc/albums/ancmodhist/IMG_1528.JPG",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "amh-18",
+      "src": "https://cdn-docs.southcat.cc/albums/ancmodhist/IMG_1529.JPG",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "amh-19",
+      "src": "https://cdn-docs.southcat.cc/albums/ancmodhist/IMG_1532.JPG",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "amh-20",
+      "src": "https://cdn-docs.southcat.cc/albums/ancmodhist/IMG_1533.JPG",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "amh-21",
+      "src": "https://cdn-docs.southcat.cc/albums/ancmodhist/IMG_1534.JPG",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "amh-22",
+      "src": "https://cdn-docs.southcat.cc/albums/ancmodhist/IMG_1541.JPG",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "amh-23",
+      "src": "https://cdn-docs.southcat.cc/albums/ancmodhist/IMG_1542.JPG",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "amh-24",
+      "src": "https://cdn-docs.southcat.cc/albums/ancmodhist/IMG_1543.JPG",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "amh-25",
+      "src": "https://cdn-docs.southcat.cc/albums/ancmodhist/IMG_1546.JPG",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "amh-26",
+      "src": "https://cdn-docs.southcat.cc/albums/ancmodhist/IMG_1547.JPG",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "amh-27",
+      "src": "https://cdn-docs.southcat.cc/albums/ancmodhist/IMG_1548.JPG",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "amh-28",
+      "src": "https://cdn-docs.southcat.cc/albums/ancmodhist/IMG_1549.PNG",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "amh-29",
+      "src": "https://cdn-docs.southcat.cc/albums/ancmodhist/IMG_1550.JPG",
+      "alt": "",
+      "title": "",
+      "description": ""
+    }
+  ]
+}
