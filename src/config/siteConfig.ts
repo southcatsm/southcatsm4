@@ -5,7 +5,7 @@ const SITE_LANG = "zh_CN"; // en/ja/zh_CN
 export const siteConfig: SiteConfig = {
 	title: "Southcatsm",
 	subtitle: "scsm's blog",
-	siteURL: "https://pre.southcat.cc/",
+	siteURL: "https://prev.southcat.cc/",
 	siteStartDate: "2021-09-14", 
 
 	lang: SITE_LANG,

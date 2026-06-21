@@ -21,14 +21,10 @@ const categories = [
 
 const getCategoryText = (category: string) => {
 	switch (category) {
-		case "web":
-			return i18n(I18nKey.projectsWeb);
-		case "mobile":
-			return i18n(I18nKey.projectsMobile);
-		case "desktop":
-			return i18n(I18nKey.projectsDesktop);
-		case "other":
-			return i18n(I18nKey.projectsOther);
+		case "tools":
+			return i18n(I18nKey.projectsTools);
+		case "novels":
+			return i18n(I18nKey.projectsNovels);
 		case UNCATEGORIZED:
 			return i18n(I18nKey.uncategorized);
 		default:
@@ -38,14 +34,11 @@ const getCategoryText = (category: string) => {
 
 const getCategoryIcon = (category: string) => {
 	switch (category) {
-		case "web":
-			return "material-symbols:language";
-		case "mobile":
-			return "material-symbols:smartphone";
-		case "desktop":
-			return "material-symbols:desktop-windows";
-		case "other":
-			return "material-symbols:widgets";
+		case "tools":
+			return "material-symbols:code-xml";
+		case "novels":
+			return "material-symbols:book";
+
 		default:
 			return "material-symbols:folder";
 	}
@@ -98,7 +91,7 @@ const subtitle = i18n(I18nKey.projectsSubtitle);
 			>
 				{
 					projectsData.map((project) => (
-						<ProjectCard project={project} maxTechStack={4} />
+						<ProjectCard project={project} maxTags={4} />
 					))
 				}
 			</div>

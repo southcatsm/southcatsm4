@@ -1,0 +1,77 @@
+{
+  "title": "Delicious Fast food",
+  "mode": "external",
+  "hidden": false,
+  "description": "Hungry? Come grab some cyber fast food~ No thanks needed ^ω^",
+  "date": "2024-02-04",
+  "location": "A Snack Bar",
+  "tags": ["治愈"],
+  "cover": "https://cdn-docs.southcat.cc/albums/fastfood/cover.png",
+  "layout": "masonary",
+  "columns": 2,
+  "photos": [
+    {
+      "id": "ffd-1",
+      "src": "https://cdn-docs.southcat.cc/albums/fastfood/IMG_4801.GIF",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "ffd-2",
+      "src": "https://cdn-docs.southcat.cc/albums/fastfood/IMG_4802.GIF",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "ffd-3",
+      "src": "https://cdn-docs.southcat.cc/albums/fastfood/IMG_4803.GIF",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "ffd-4",
+      "src": "https://cdn-docs.southcat.cc/albums/fastfood/IMG_4804.GIF",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "ffd-5",
+      "src": "https://cdn-docs.southcat.cc/albums/fastfood/IMG_4805.GIF",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "ffd-6",
+      "src": "https://cdn-docs.southcat.cc/albums/fastfood/IMG_4806.GIF",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "ffd-7",
+      "src": "https://cdn-docs.southcat.cc/albums/fastfood/IMG_4807.GIF",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "ffd-8",
+      "src": "https://cdn-docs.southcat.cc/albums/fastfood/IMG_4808.GIF",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "ffd-9",
+      "src": "https://cdn-docs.southcat.cc/albums/fastfood/IMG_4809.GIF",
+      "alt": "",
+      "title": "",
+      "description": ""
+    }
+  ]
+}

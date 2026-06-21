@@ -1,35 +1,101 @@
 ---
 import { Icon } from "astro-icon/components";
-
 import I18nKey from "../../../i18n/i18nKey";
 import { i18n } from "../../../i18n/translation";
 import type { ProjectCardProps } from "./types";
 
-const { project, maxTechStack = 4 } = Astro.props as ProjectCardProps;
+const { project, maxTags = 4 } = Astro.props as ProjectCardProps;
 
 const hasImage = !!project.image;
 const showImageArea = project.showImage !== false && hasImage;
 const hasVisitUrl = !!project.visitUrl;
-const hasSourceCode = !!project.sourceCode;
+const hasGuider = !!project.guider;
 
 const getStatusText = (status: string) => {
 	switch (status) {
 		case "completed":
 			return i18n(I18nKey.projectsCompleted);
-		case "in-progress":
-			return i18n(I18nKey.projectsInProgress);
+		case "recommend":
+			return i18n(I18nKey.projectsRecommend);
+		case "hot":
+			return i18n(I18nKey.projectsHot);
 		case "planned":
 			return i18n(I18nKey.projectsPlanned);
 		default:
 			return status;
 	}
 };
+
+const getStatusStyle = (status: string) => {
+	switch (status) {
+		case "completed":
+			return {
+				bg: "rgba(34, 197, 94, 0.12)",
+				text: "rgb(22, 163, 74)",
+				border: "rgba(34, 197, 94, 0.3)",
+				glow: "rgba(34, 197, 94, 0.4)",
+				shadow: "0 0 16px rgba(34, 197, 94, 0.15)",
+			};
+		case "recommend":
+			return {
+				bg: "rgba(251, 146, 60, 0.12)",
+				text: "rgb(234, 88, 12)",
+				border: "rgba(251, 146, 60, 0.3)",
+				glow: "rgba(251, 146, 60, 0.4)",
+				shadow: "0 0 16px rgba(251, 146, 60, 0.15)",
+			};
+		case "hot":
+			return {
+				bg: "rgba(239, 68, 68, 0.12)",
+				text: "rgb(220, 38, 38)",
+				border: "rgba(239, 68, 68, 0.3)",
+				glow: "rgba(239, 68, 68, 0.4)",
+				shadow: "0 0 16px rgba(239, 68, 68, 0.15)",
+			};
+		case "planned":
+			return {
+				bg: "rgba(96, 165, 250, 0.12)",
+				text: "rgb(37, 99, 235)",
+				border: "rgba(96, 165, 250, 0.3)",
+				glow: "rgba(96, 165, 250, 0.4)",
+				shadow: "0 0 16px rgba(96, 165, 250, 0.15)",
+			};
+		default:
+			return {
+				bg: "rgba(156, 163, 175, 0.12)",
+				text: "rgb(107, 114, 128)",
+				border: "rgba(156, 163, 175, 0.3)",
+				glow: "rgba(156, 163, 175, 0.4)",
+				shadow: "0 0 12px rgba(156, 163, 175, 0.12)",
+			};
+	}
+};
+
+function hashCode(str: string): number {
+	let hash = 0;
+	for (let i = 0; i < str.length; i++) {
+		const char = str.charCodeAt(i);
+		hash = (hash << 5) - hash + char;
+		hash |= 0;
+	}
+	return Math.abs(hash);
+}
+
+function getTagColor(tag: string): string {
+	const h = hashCode(tag) % 360;
+	const s = 65 + (hashCode(tag + "salt") % 20);
+	const l = 55 + (hashCode(tag + "lum") % 15);
+	return `hsl(${h}, ${s}%, ${l}%)`;
+}
 ---
 
 <div
-	class="project-card group relative rounded-xl border border-black/10 dark:border-white/10 overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
+	class="project-card group relative bg-white/40 dark:bg-white/[0.06] backdrop-blur-2xl rounded-2xl border border-white/50 dark:border-white/[0.08] overflow-hidden transition-all duration-500 hover:shadow-2xl hover:shadow-black/[0.08] dark:hover:shadow-black/30 hover:-translate-y-1.5 hover:border-white/70 dark:hover:border-white/[0.15]"
 	data-category={project.category}
 >
+	<div class="absolute inset-0 rounded-2xl bg-gradient-to-br from-white/40 via-transparent to-transparent dark:from-white/[0.04] dark:via-transparent dark:to-transparent pointer-events-none"></div>
+	<div class="absolute -inset-px rounded-2xl bg-gradient-to-br from-white/60 via-transparent to-transparent dark:from-white/[0.06] dark:via-transparent dark:to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+
 	{
 		showImageArea && (
 			<div class="aspect-video overflow-hidden relative bg-gradient-to-br from-[var(--primary)]/5 to-[var(--primary)]/10">
@@ -37,7 +103,7 @@ const getStatusText = (status: string) => {
 					<img
 						src={project.image!}
 						alt={project.title}
-						class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+						class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500 ease-out"
 						loading="lazy"
 					/>
 				) : (
@@ -49,49 +115,84 @@ const getStatusText = (status: string) => {
 				)}
 				<div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 				{project.featured && (
-					<div class="absolute top-3 right-3">
-						<Icon
-							name="material-symbols:star-rounded"
-							class="text-[var(--primary)] text-xl drop-shadow-sm"
-							style="filter: drop-shadow(0 1px 2px rgba(0,0,0,0.2));"
-						/>
+					<div class="absolute top-3 right-3 z-10">
+						<div class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/40 dark:bg-black/50 backdrop-blur-md border border-white/30 dark:border-white/20 shadow-lg">
+							<Icon
+								name="material-symbols:star-rounded"
+								class="text-yellow-400 text-base drop-shadow-[0_0_6px_rgba(250,204,21,0.8)]"
+							/>
+							<span class="text-xs font-bold text-white tracking-wide drop-shadow-md">
+								STAR
+							</span>
+						</div>
 					</div>
 				)}
 			</div>
 		)
 	}
 
-	<div class="p-5">
-		<div class="flex items-center justify-between mb-3">
+	<div class="relative p-6">
+		<div class="flex items-start justify-between mb-3 gap-3">
 			<h3
-				class="text-lg font-bold text-black/90 dark:text-white/90 truncate group-hover:text-[var(--primary)] transition-colors duration-200"
+				class="text-xl font-bold text-black/85 dark:text-white/90 truncate group-hover:text-[var(--primary)] transition-colors duration-300"
 			>
 				{project.title}
 			</h3>
-			<span
-				class="shrink-0 ml-3 px-2 py-0.5 text-xs rounded-md bg-[var(--primary)]/10 text-[var(--primary)] font-medium"
-			>
-				{getStatusText(project.status)}
-			</span>
+			{
+				(() => {
+					const statusStyle = getStatusStyle(project.status);
+					return (
+						<span
+							class="status-badge shrink-0 px-3 py-1 text-xs font-semibold rounded-full inline-flex items-center gap-1.5"
+							style={{
+								backgroundColor: statusStyle.bg,
+								color: statusStyle.text,
+								border: `1px solid ${statusStyle.border}`,
+								boxShadow: statusStyle.shadow,
+							}}
+						>
+							{getStatusText(project.status)}
+						</span>
+					);
+				})()
+			}
 		</div>
 
 		<p
-			class="text-sm text-black/60 dark:text-white/60 mb-4 line-clamp-2 min-h-[2.5rem]"
+			class="text-sm text-black/55 dark:text-white/50 mb-4 line-clamp-2 min-h-[2.5rem] leading-relaxed"
 		>
 			{project.description}
 		</p>
 
 		{
-			project.techStack && project.techStack.length > 0 && (
-				<div class="flex flex-wrap gap-2 mb-4">
-					{project.techStack.slice(0, maxTechStack).map((tech) => (
-						<span class="px-2 py-1 text-xs rounded-md bg-[var(--primary)]/10 text-[var(--primary)] font-medium">
-							{tech}
-						</span>
-					))}
-					{project.techStack.length > maxTechStack && (
-						<span class="px-2 py-1 text-xs rounded-md bg-[var(--btn-regular-bg)] text-black/50 dark:text-white/50 font-medium">
-							+{project.techStack.length - maxTechStack}
+			project.taga && project.taga.length > 0 && (
+				<div class="flex flex-wrap gap-2.5 mb-4">
+					{project.taga.slice(0, maxTags).map((tg) => {
+						const color = getTagColor(tg);
+						return (
+							<span
+								class="tag-item inline-flex items-center bg-[var(--primary)]/15 gap-1.5 px-2.5 py-1 text-xs font-semibold rounded-full transition-all duration-300 hover:scale-105 hover:shadow-md cursor-default outline outline-1 outline-offset-1"
+								style={{
+									backgroundColor: `${color}18`,
+									color: color,
+									border: `1px solid ${color}35`,
+									outlineColor: `${color}20`,
+								}}
+							>
+								<span
+									class="tag-dot w-1.5 h-1.5 rounded-full"
+									style={{
+										backgroundColor: color,
+										boxShadow: `0 0 0 0 ${color}`,
+									}}
+								></span>
+								{tg}
+							</span>
+						);
+					})}
+					{project.taga.length > maxTags && (
+						<span class="inline-flex items-center px-2.5 py-1 text-xs font-semibold rounded-full bg-[var(--btn-regular-bg)] text-black/50 dark:text-white/50 border border-black/10 dark:border-white/10 outline outline-1 outline-offset-1 outline-black/5 dark:outline-white/5">
+							+{project.taga.length - maxTags}
 						</span>
 					)}
 				</div>
@@ -99,31 +200,31 @@ const getStatusText = (status: string) => {
 		}
 
 		{
-			(hasVisitUrl || hasSourceCode) && (
+			(hasVisitUrl || hasGuider) && (
 				<div class="flex gap-2">
 					{hasVisitUrl && (
 						<a
 							href={project.visitUrl!}
-							target="_blank"
+							target="_self"
 							rel="noopener noreferrer"
-							class="btn-regular flex-1 flex items-center justify-center gap-2 px-4 py-2 rounded-lg text-sm font-medium"
+							class="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-[var(--primary)] text-white font-semibold text-sm shadow-lg shadow-[var(--primary)]/25 hover:shadow-xl hover:shadow-[var(--primary)]/35 hover:brightness-110 active:scale-[0.97] transition-all duration-300"
 						>
 							<Icon
 								name="material-symbols:open-in-new"
-								class="text-base w-4 h-4"
+								class="w-4 h-4"
 							/>
 							{i18n(I18nKey.projectsVisit)}
 						</a>
 					)}
-					{hasSourceCode && (
+					{hasGuider && (
 						<a
-							href={project.sourceCode!}
+							href={project.guider!}
 							target="_blank"
 							rel="noopener noreferrer"
-							class="btn-regular flex items-center justify-center gap-2 px-4 py-2 rounded-lg text-sm font-medium"
+							class="flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-[var(--btn-regular-bg)] text-black/70 dark:text-white/70 font-semibold text-sm border border-black/10 dark:border-white/10 hover:shadow-lg hover:brightness-110 active:scale-[0.97] transition-all duration-300"
 							style={hasVisitUrl ? "" : "flex: 1;"}
 						>
-							<Icon name="mdi:github" class="text-base w-4 h-4" />
+							<Icon name="material-symbols:unknown-document" class="w-4 h-4" />
 							{!hasVisitUrl && "GitHub"}
 						</a>
 					)}
@@ -133,14 +234,13 @@ const getStatusText = (status: string) => {
 	</div>
 
 	<div
-		class="absolute inset-0 bg-gradient-to-br from-[var(--primary)]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
-	>
-	</div>
+		class="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-white/70 dark:via-white/[0.08] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+	></div>
 </div>
 
 <style>
 	.project-card {
-		animation: fadeInUp 0.5s ease-out forwards;
+		animation: fadeInUp 0.6s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
 		opacity: 0;
 	}
 
@@ -151,43 +251,95 @@ const getStatusText = (status: string) => {
 	@keyframes fadeInUp {
 		from {
 			opacity: 0;
-			transform: translateY(20px);
+			transform: translateY(24px) scale(0.97);
 		}
 		to {
 			opacity: 1;
-			transform: translateY(0);
+			transform: translateY(0) scale(1);
 		}
 	}
 
-	.project-card:nth-child(1) {
-		animation-delay: 0.05s;
-	}
-	.project-card:nth-child(2) {
-		animation-delay: 0.1s;
-	}
-	.project-card:nth-child(3) {
-		animation-delay: 0.15s;
-	}
-	.project-card:nth-child(4) {
-		animation-delay: 0.2s;
-	}
-	.project-card:nth-child(5) {
-		animation-delay: 0.25s;
-	}
-	.project-card:nth-child(6) {
-		animation-delay: 0.3s;
-	}
-	.project-card:nth-child(7) {
-		animation-delay: 0.35s;
-	}
-	.project-card:nth-child(8) {
-		animation-delay: 0.4s;
-	}
+	.project-card:nth-child(1) { animation-delay: 0.04s; }
+	.project-card:nth-child(2) { animation-delay: 0.08s; }
+	.project-card:nth-child(3) { animation-delay: 0.12s; }
+	.project-card:nth-child(4) { animation-delay: 0.16s; }
+	.project-card:nth-child(5) { animation-delay: 0.20s; }
+	.project-card:nth-child(6) { animation-delay: 0.24s; }
+	.project-card:nth-child(7) { animation-delay: 0.28s; }
+	.project-card:nth-child(8) { animation-delay: 0.32s; }
+	.project-card:nth-child(9) { animation-delay: 0.36s; }
+	.project-card:nth-child(10) { animation-delay: 0.40s; }
+	.project-card:nth-child(11) { animation-delay: 0.44s; }
+	.project-card:nth-child(12) { animation-delay: 0.48s; }
 
 	.line-clamp-2 {
 		display: -webkit-box;
 		-webkit-line-clamp: 2;
 		-webkit-box-orient: vertical;
 		overflow: hidden;
+	}
+
+	.tag-item {
+		transition: all 0.25s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+	}
+
+	.tag-item:hover .tag-dot {
+		animation: pulse 0.8s ease-in-out infinite;
+	}
+
+	.status-badge {
+		position: relative;
+		overflow: hidden;
+		backdrop-filter: blur(8px);
+		-webkit-backdrop-filter: blur(8px);
+		transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+	}
+
+	.status-badge::before {
+		content: '';
+		position: absolute;
+		inset: 0;
+		background: linear-gradient(135deg, transparent 0%, currentColor 100%);
+		opacity: 0.06;
+		pointer-events: none;
+		transition: opacity 0.3s ease;
+	}
+
+	.status-badge:hover {
+		transform: translateY(-1px);
+	}
+
+	.status-badge:hover::before {
+		opacity: 0.12;
+	}
+
+	.status-badge:hover .status-dot {
+		animation: statusPulse 1s ease-in-out infinite;
+	}
+
+	@keyframes statusPulse {
+		0%, 100% {
+			transform: scale(1);
+			filter: brightness(1);
+		}
+		50% {
+			transform: scale(1.4);
+			filter: brightness(1.4);
+		}
+	}
+
+	@keyframes pulse {
+		0% {
+			box-shadow: 0 0 0 0 currentColor;
+			opacity: 1;
+		}
+		70% {
+			box-shadow: 0 0 0 6px transparent;
+			opacity: 0.7;
+		}
+		100% {
+			box-shadow: 0 0 0 0 transparent;
+			opacity: 1;
+		}
 	}
 </style>

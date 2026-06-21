@@ -1,14 +1,15 @@
 export interface Project {
+tag: boolean;
 	id: string;
 	title: string;
 	description: string;
 	image?: string;
 	category: string;
-	techStack: string[];
-	status: "completed" | "in-progress" | "planned";
+	taga: string[];
+	status: "completed" | "hot" | "planned" |  "recommend";
 	demoUrl?: string;
 	sourceUrl?: string;
-	liveDemo?: string;
+	guider?: string;
 	sourceCode?: string;
 	visitUrl?: string;
 	startDate: string;
@@ -22,5 +23,5 @@ export interface ProjectCardProps {
 	project: Project;
 	size?: "small" | "medium" | "large";
 	showImage?: boolean;
-	maxTechStack?: number;
+	maxTags?: number;
 }

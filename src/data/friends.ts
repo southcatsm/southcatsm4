@@ -22,7 +22,7 @@ export const friendsData: FriendItem[] = [
 	{
 		id: 2,
 		title: "Northrabsl",
-		imgurl: "/assets/friends/141730585.jpg",
+		imgurl: "https://cdn-docs.southcat.cc/common/avatars/141730585.jpg",
 		desc: "The wind has just started to blow. It's time to strive bravely for life.",
 		siteurl: "https://github.com/northrabsl",
 		tags: ["Creator", "Contributor"],
@@ -30,7 +30,7 @@ export const friendsData: FriendItem[] = [
 	{
 		id: 3,
 		title: "Daeroa",
-		imgurl: "/assets/friends/207446151.gif",
+		imgurl: "https://cdn-docs.southcat.cc/common/avatars/207446151.gif",
 		desc: "When our goal is the horizon, all we leave to the world is our backs.",
 		siteurl: "https://github.com/daeroa",
 		tags: ["Advisor", "Contributor"],
@@ -46,7 +46,7 @@ export const friendsData: FriendItem[] = [
 	{
 		id: 5,
 		title: "Fradirina Mirijee",
-		imgurl: "/assets/friends/mirijee.png",
+		imgurl: "https://cdn-docs.southcat.cc/common/avatars/26261997.png",
 		desc: "好久不见，管制一号",
 		siteurl: "https://space.bilibili.com/1449471887",
 		tags: ["Advisor", "Contributor"],
@@ -54,7 +54,7 @@ export const friendsData: FriendItem[] = [
 	{
 		id: 6,
 		title: "he",
-		imgurl: "/assets/friends/saber.png",
+		imgurl: "https://cdn-docs.southcat.cc/common/avatars/31965131.png",
 		desc: "橘子不去想苹果的问题",
 		siteurl: "https://live.kuaishou.com/profile/3xd3ra98qks7e3u",
 		tags: ["Supporter", "Contributor"],
@@ -70,7 +70,7 @@ export const friendsData: FriendItem[] = [
 	{
 		id: 8,
 		title: "wy",
-		imgurl: "/assets/friends/mdd.png",
+		imgurl: "https://cdn-docs.southcat.cc/common/avatars/16473113.png",
 		desc: "你必须忘记点什么，才有欢乐",
 		siteurl: "https://www.douyin.com/user/MS4wLjABAAAAOxiycUNoddfryM8M_HAwMKzRZaq3BNF5ryRSd-4XfJs",
 		tags: ["Contributor"],

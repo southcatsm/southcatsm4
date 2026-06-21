@@ -1,0 +1,84 @@
+{
+  "title": "你已急哭",
+  "mode": "external",
+  "hidden": false,
+  "description": "你已急哭你已急哭你已急哭你已急哭你已急哭你已急哭你已急哭你已急哭你已急哭你已急哭",
+  "date": "2025-12-01",
+  "location": "Extragalactic Systems",
+  "tags": ["搞笑"],
+  "cover": "https://cdn-docs.southcat.cc/albums/youvecried/cover.png",
+  "layout": "grid",
+  "columns": 3,
+  "photos": [
+    {
+      "id": "yvc-1",
+      "src": "https://cdn-docs.southcat.cc/albums/youvecried/IMG_4816.png",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "yvc-2",
+      "src": "https://cdn-docs.southcat.cc/albums/youvecried/IMG_4817.png",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "yvc-3",
+      "src": "https://cdn-docs.southcat.cc/albums/youvecried/IMG_4818.png",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "yvc-4",
+      "src": "https://cdn-docs.southcat.cc/albums/youvecried/IMG_4819.png",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "yvc-5",
+      "src": "https://cdn-docs.southcat.cc/albums/youvecried/IMG_4820.png",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "yvc-6",
+      "src": "https://cdn-docs.southcat.cc/albums/youvecried/IMG_4821.png",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "yvc-7",
+      "src": "https://cdn-docs.southcat.cc/albums/youvecried/IMG_4822.png",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "yvc-8",
+      "src": "https://cdn-docs.southcat.cc/albums/youvecried/IMG_4823.png",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "yvc-9",
+      "src": "https://cdn-docs.southcat.cc/albums/youvecried/IMG_4824.png",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "yvc-10",
+      "src": "https://cdn-docs.southcat.cc/albums/youvecried/IMG_4825.png",
+      "alt": "",
+      "title": "",
+      "description": ""
+    }
+  ]
+}
