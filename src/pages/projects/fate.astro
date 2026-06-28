@@ -1,0 +1,66 @@
+---
+import { Icon } from "astro-icon/components";
+import Comment from "@components/comment/index.astro";
+import I18nKey from "../../i18n/i18nKey";
+import { PageHeader } from "@components/features/page-header";
+import { ShareCard } from "@components/features/posts/";
+import { i18n } from "../../i18n/translation";
+import MainGridLayout from "../../layouts/MainGridLayout.astro";
+const title = i18n(I18nKey.projectSuccubus),
+      subtitle = i18n(I18nKey.projectSuccubusSubtitle);
+const a = {
+	"title":"西北三狼跪碎膝盖骨",
+	"description":"他熬过了虐待，他踩着仇人的尸骨上位，却没想到刀尖最后指向了唯一的兄弟，那就一起死吧。",
+	"pubdate":"2025-03-22",
+	"url":"https://prev.southcat.cc/projects/myrevenge/",
+	"sitetitle":"Southcatsm's blogs",
+	"avatar":"https://cdn-docs.southcat.cc/profile.png",
+	"coverimage":"https://cdn-docs.southcat.cc/projects/novels/myrevenge.png"
+}
+---
+<MainGridLayout title={title} description={subtitle}>
+	<!-- 引入右侧边栏布局管理器 -->
+	<script>
+		import("../../scripts/right-sidebar-layout.js");
+	</script>
+	
+    <div
+		class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative min-h-32"
+	>
+        
+		<div class="card-base z-10 px-9 py-6 relative w-full">
+            <!-- word count and reading time -->
+			<div
+				class="flex flex-row text-black/30 dark:text-white/30 gap-5 mb-3 transition onload-animation"
+			>
+				<a
+						href="/projects/"
+						class="inline-flex items-center gap-1.5 text-sm text-white/90 hover:text-white bg-black/30 hover:bg-black/50 backdrop-blur-sm px-3 py-1.5 rounded-lg transition-colors"
+					>
+						<Icon
+							name="material-symbols:arrow-back"
+							class="text-base"
+						/>
+						{i18n(I18nKey.projectBackTo)}
+				</a>
+			</div>
+
+			<PageHeader title={title} subtitle={subtitle} />
+            
+			<ShareCard
+                title={a.title}
+                pubDate={a.pubdate}
+                url={a.url}
+                description={a.description}
+                avatar={a.avatar}
+                coverImage={a.coverimage}
+                siteTitle={a.sitetitle}
+			>
+		    </ShareCard>
+		</div>
+	</div>
+    <div class="mt-4">
+		    <Comment path="/projects/fate/" />
+	</div>
+
+</MainGridLayout>

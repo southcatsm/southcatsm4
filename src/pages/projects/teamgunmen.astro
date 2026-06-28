@@ -4,30 +4,30 @@ import Comment from "@components/comment/index.astro";
 import { Icon } from "astro-icon/components";
 import { PageHeader } from "@components/features/page-header";
 import Markdown from "@components/misc/Markdown.astro";
-import { PublishedDate, ReadingTime, WordCount } from "@components/features/posts/atoms";
+import { ReadingTime, PublishedDate, WordCount } from "@components/features/posts/atoms";
 import { ShareCard } from "@components/features/posts/";
 import I18nKey from "../../i18n/i18nKey";
 import { i18n } from "../../i18n/translation";
 import MainGridLayout from "../../layouts/MainGridLayout.astro";
 import CoverImage from "@components/widgets/music-player/atoms/CoverImage.svelte";
 
-const my_revenge = await getEntry("spec", "novels/myrevenge");
-if (!my_revenge) {
+const TeamGunmen = await getEntry("spec", "novels/teamgunmen");
+if (!TeamGunmen) {
 	throw new Error("page content not found");
 }
-const { Content } = await render(my_revenge),
-	  { remarkPluginFrontmatter } = await render(my_revenge);
-const title = i18n(I18nKey.projectNovMrg),
-      subtitle = i18n(I18nKey.projectNovMrgSubtitle),
-	  dt = new Date("2025-03-22");
+const { Content } = await render(TeamGunmen),
+	  { remarkPluginFrontmatter } = await render(TeamGunmen);
+const title = i18n(I18nKey.projectNovTgm),
+      subtitle = i18n(I18nKey.projectNovTgmSubtitle),
+	  dt = new Date("2025-04-28");
 const a = {
-	"title":"西北三狼跪碎膝盖骨",
-	"description":"他熬过了虐待，他踩着仇人的尸骨上位，却没想到刀尖最后指向了唯一的兄弟，那就一起死吧。",
-	"pubdate":"2025-03-22",
-	"url":"https://prev.southcat.cc/projects/myrevenge/",
+	"title":"破晓四洋枪",
+	"description":"四十万人用枪炮换来了自由，却换不来自己的生存。洋枪起义的胜利之日，竟是四位天骄的葬身之时。",
+	"pubdate":"2025-04-28",
+	"url":"https://prev.southcat.cc/projects/teamgunmen/",
 	"sitetitle":"Southcatsm's blogs",
 	"avatar":"https://cdn-docs.southcat.cc/profile.png",
-	"coverimage":"https://cdn-docs.southcat.cc/projects/novels/myrevenge.png"
+	"coverimage":"https://cdn-docs.southcat.cc/projects/novels/teamgunmen.png"
 }
 ---
 
@@ -55,7 +55,6 @@ const a = {
 						/>
 						{i18n(I18nKey.projectBackTo)}
 				</a>
-				
 				<div class="flex flex-row items-center">
 					<PublishedDate date={dt} />
 				</div>
@@ -94,7 +93,7 @@ const a = {
 	</div>
 	
 	<div class="mt-4">
-		<Comment path="/projects/myrevenge/" />
+		<Comment path="/projects/teamgunmen/" />
 	</div>
 	
 </MainGridLayout>

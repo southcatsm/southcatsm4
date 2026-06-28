@@ -1,0 +1,99 @@
+---
+import { getEntry, render } from "astro:content";
+import Comment from "@components/comment/index.astro";
+import { Icon } from "astro-icon/components";
+import { PageHeader } from "@components/features/page-header";
+import Markdown from "@components/misc/Markdown.astro";
+import { ReadingTime, WordCount, PublishedDate } from "@components/features/posts/atoms";
+import { ShareCard } from "@components/features/posts/";
+import I18nKey from "../../i18n/i18nKey";
+import { i18n } from "../../i18n/translation";
+import MainGridLayout from "../../layouts/MainGridLayout.astro";
+import CoverImage from "@components/widgets/music-player/atoms/CoverImage.svelte";
+
+const crematoriuma = await getEntry("spec", "novels/crematorium");
+if (!crematoriuma) {
+	throw new Error("page content not found");
+}
+const { Content } = await render(crematoriuma),
+	  { remarkPluginFrontmatter } = await render(crematoriuma);
+const title = i18n(I18nKey.projectNovCre),
+      subtitle = i18n(I18nKey.projectNovCreSubtitle),
+	  dt = new Date("2025-06-22");
+const a = {
+	"title":"天降白月光VS清纯青梅",
+	"description":"退婚时你冷酷无情，追妻时你狼狈不堪，只是这次我连头都不会回，而你却死在了别人的水晶球下。",
+	"pubdate":"2025-06-22",
+	"url":"https://prev.southcat.cc/projects/crematorium/",
+	"sitetitle":"Southcatsm's blogs",
+	"avatar":"https://cdn-docs.southcat.cc/profile.png",
+	"coverimage":"https://cdn-docs.southcat.cc/projects/novels/crematorium.png"
+}
+---
+
+<MainGridLayout title={title} description={subtitle}>
+	<script>
+		import("../../scripts/right-sidebar-layout.js");
+	</script>
+
+
+	<div
+		class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative min-h-32"
+	>
+        
+		<div class="card-base z-10 px-9 py-6 relative w-full">
+			<div
+				class="flex flex-row text-black/30 dark:text-white/30 gap-5 mb-3 transition onload-animation"
+			>
+				<a
+						href="/projects/"
+						class="inline-flex items-center gap-1.5 text-sm text-white/90 hover:text-white bg-black/30 hover:bg-black/50 backdrop-blur-sm px-3 py-1.5 rounded-lg transition-colors"
+					>
+						<Icon
+							name="material-symbols:arrow-back"
+							class="text-base"
+						/>
+						{i18n(I18nKey.projectBackTo)}
+				</a>
+				<div class="flex flex-row items-center">
+					<PublishedDate date={dt} />
+				</div>
+				<div class="flex flex-row items-center">
+					<WordCount
+						words={remarkPluginFrontmatter.words}
+						variant="meta"
+					/>
+				</div>
+				<div class="flex flex-row items-center">
+					<ReadingTime
+						minutes={remarkPluginFrontmatter.minutes}
+						variant="meta"
+					/>
+				</div>
+			</div>
+
+			<PageHeader title={title} subtitle={subtitle} />
+            
+			<!-- 从MD文件读取的内容 -->
+			<Markdown class="mt-2">
+				<Content />
+			</Markdown>
+			<ShareCard
+				title={a.title}
+				pubDate={a.pubdate}
+				url={a.url}
+				description={a.description}
+				avatar={a.avatar}
+				coverImage={a.coverimage}
+				siteTitle={a.sitetitle}
+				>
+			</ShareCard>
+		</div>
+		
+	</div>
+	
+	<div class="mt-4">
+		<Comment path="/projects/crematorium/" />
+	</div>
+	
+</MainGridLayout>

@@ -1,0 +1,294 @@
+---
+import { Icon } from "astro-icon/components";
+import { getEntry, render } from "astro:content";
+import Comment from "@components/comment/index.astro";
+import Markdown from "@components/misc/Markdown.astro";
+import I18nKey from "../../i18n/i18nKey";
+import { PageHeader } from "@components/features/page-header";
+import { ShareCard } from "@components/features/posts/";
+import { PublishedDate } from "@components/features/posts/atoms";
+import { i18n } from "../../i18n/translation";
+import MainGridLayout from "../../layouts/MainGridLayout.astro";
+const succubuss = await getEntry("spec", "succubus");
+if (!succubuss) {
+	throw new Error("page content not found");
+}
+const { Content } = await render(succubuss);
+const title = i18n(I18nKey.projectSuccubus),
+      subtitle = i18n(I18nKey.projectSuccubusSubtitle),
+	  dt = new Date("2024-11-11");
+const a = {
+	"title":"魅魔生成器",
+	"description":"检测一下你是怎样的一个魅魔哦(<ゝω・)☆",
+	"pubdate":"2024-11-11",
+	"url":"https://prev.southcat.cc/projects/succubus/",
+	"sitetitle":"Southcatsm's blogs",
+	"avatar":"https://cdn-docs.southcat.cc/profile.png",
+	"coverimage":"https://cdn-docs.southcat.cc/projects/succubus/IMG_9752.png"
+}
+---
+<MainGridLayout title={title} description={subtitle}>
+	<script>
+		import("../../scripts/right-sidebar-layout.js");
+	</script>
+	
+    <div
+		class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative min-h-32"
+	>
+        
+		<div class="card-base z-10 px-9 py-6 relative w-full">
+			<div
+				class="flex flex-row text-black/30 dark:text-white/30 gap-5 mb-3 transition onload-animation"
+			>
+				<a
+						href="/projects/"
+						class="inline-flex items-center gap-1.5 text-sm text-white/90 hover:text-white bg-black/30 hover:bg-black/50 backdrop-blur-sm px-3 py-1.5 rounded-lg transition-colors"
+					>
+						<Icon
+							name="material-symbols:arrow-back"
+							class="text-base"
+						/>
+						{i18n(I18nKey.projectBackTo)}
+				</a>
+				<div class="flex flex-row items-center">
+					<PublishedDate date={dt} />
+				</div>
+			</div>
+			<PageHeader title={title} subtitle={subtitle} />
+            
+            <div class="w-full">
+				<div class="relative flex items-center gap-2">
+					<div class="relative flex-1">
+						<input
+							type="text"
+							id="sctxt"
+							placeholder="请输入名字..."
+							class="w-full px-4 py-2 pl-10 rounded-lg bg-[var(--btn-regular-bg)]
+								text-black/90 dark:text-white/90
+								border border-black/10 dark:border-white/10
+								focus:outline-none focus:ring-2 focus:ring-[var(--primary)]/50
+								transition-all duration-200"
+						/>
+						<svg
+							class="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-black/40 dark:text-white/40"
+							fill="none"
+							stroke="currentColor"
+							viewBox="0 0 24 24"
+						>
+							<path
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							stroke-width="2"
+							d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+							></path>
+						</svg>
+					</div>
+					<button class="btn-regular px-8 py-2 rounded-lg inline-flex items-center gap-3" id="scbtn">
+						<label>{i18n(I18nKey.projectSearch)}</label>
+					</button>
+				</div>
+			</div>
+			<br />
+			<div id="resultContainer" class="hidden max-w-3xl mx-auto p-6">
+				<table class="w-full border-2 border-pink-300 dark:border-pink-700 rounded-2xl overflow-hidden shadow-lg shadow-pink-200/50 dark:shadow-pink-900/30 transition-all duration-300 bg-white/70 dark:bg-gray-800/70 backdrop-blur-md">
+					<thead class="bg-gradient-to-r from-pink-400 to-purple-400 dark:from-pink-600 dark:to-purple-700 transition-all duration-300">
+						<tr>
+							<th colspan="3" class="px-6 py-4 text-2xl font-bold text-white drop-shadow-md transition-colors duration-300">
+								{i18n(I18nKey.projectSuccubusReceiveArchvie)}
+							</th>
+						</tr>
+					</thead>
+					<tbody class="font-bold text-sm">
+						<tr class="divide-x divide-pink-100 dark:divide-pink-800">
+							<td class="px-4 py-3 text-pink-600 dark:text-pink-400 bg-white/50 dark:bg-gray-900/30">
+								<span class="text-gray-400 dark:text-gray-500">姓名：</span>
+								<span class="truncate max-w-[120px] inline-block" id="tname"></span>
+							</td>
+							<td class="px-4 py-3 text-purple-600 dark:text-purple-400 bg-white/50 dark:bg-gray-900/30">
+								<span class="text-gray-400 dark:text-gray-500">性别：</span><label id="tgender"></label>
+							</td>
+							<td class="px-4 py-3 text-blue-500 dark:text-blue-400 bg-white/50 dark:bg-gray-900/30">
+								<span class="text-gray-400 dark:text-gray-500">标签：</span><label id="tcategory"></label>
+							</td>
+						</tr>
+						<tr class="divide-x divide-pink-100 dark:divide-pink-800 border-t border-pink-100 dark:border-pink-800">
+							<td class="px-4 py-3 text-green-600 dark:text-green-400 bg-white/50 dark:bg-gray-900/30">
+								<span class="text-gray-400 dark:text-gray-500">身高：</span><label id="theight"></label>
+							</td>
+							<td class="px-4 py-3 text-yellow-600 dark:text-yellow-400 bg-white/50 dark:bg-gray-900/30">
+								<span class="text-gray-400 dark:text-gray-500">三围：</span><label id="tmeasurements"></label>
+							</td>
+							<td class="px-4 py-3 text-red-500 dark:text-red-400 bg-white/50 dark:bg-gray-900/30">
+								<span class="text-gray-400 dark:text-gray-500">罩杯：</span><label id="tcup"></label>
+							</td>
+						</tr>
+						<tr class="divide-x divide-pink-100 dark:divide-pink-800 border-t border-pink-100 dark:border-pink-800">
+							<td class="px-4 py-3 text-amber-700 dark:text-amber-400 bg-white/50 dark:bg-gray-900/30">
+								<span class="text-gray-400 dark:text-gray-500">发色：</span><label id="thair"></label>
+							</td>
+							<td class="px-4 py-3 text-teal-600 dark:text-teal-400 bg-white/50 dark:bg-gray-900/30">
+								<span class="text-gray-400 dark:text-gray-500">经验人数：</span><label id="texperience"></label>
+							</td>
+							<td class="px-4 py-3 text-fuchsia-600 dark:text-fuchsia-400 bg-white/50 dark:bg-gray-900/30">
+								<span class="text-gray-400 dark:text-gray-500">性欲值：</span><label id="tdesire"></label>
+							</td>
+						</tr>
+						<tr class="divide-x divide-pink-100 dark:divide-pink-800 border-t border-pink-100 dark:border-pink-800">
+							<td class="px-4 py-3 text-rose-600 dark:text-rose-400 bg-white/50 dark:bg-gray-900/30">
+								<span class="text-gray-400 dark:text-gray-500">敏感点：</span><label id="tpos"></label>
+							</td>
+							<td class="px-4 py-3 text-indigo-600 dark:text-indigo-400 bg-white/50 dark:bg-gray-900/30">
+								<span class="text-gray-400 dark:text-gray-500">银纹：</span><label id="tline"></label>
+							</td>
+							<td class="px-4 py-3 text-cyan-600 dark:text-cyan-400 bg-white/50 dark:bg-gray-900/30">
+								<span class="text-gray-400 dark:text-gray-500">高潮率：</span><label id="tclimax"></label>
+							</td>
+						</tr>
+						<tr class="divide-x divide-pink-100 dark:divide-pink-800 border-t border-pink-100 dark:border-pink-800">
+							<td class="px-4 py-3 text-orange-600 dark:text-orange-400 bg-white/50 dark:bg-gray-900/30">
+								<span class="text-gray-400 dark:text-gray-500">性癖：</span><label id="thobby"></label>
+							</td>
+							<td class="px-4 py-3 text-emerald-600 dark:text-emerald-400 break-words max-w-[200px] bg-white/50 dark:bg-gray-900/30">
+								<span class="text-gray-400 dark:text-gray-500">特殊能力：</span><label id="tability"></label>
+							</td>
+							<td class="px-4 py-3 text-violet-600 dark:text-violet-400 bg-white/50 dark:bg-gray-900/30">
+								<span class="text-gray-400 dark:text-gray-500">评分：</span><label id="trating"></label>
+							</td>
+						</tr>
+						<tr class="divide-x divide-pink-100 dark:divide-pink-800 border-t border-pink-100 dark:border-pink-800">
+							<td class="px-4 py-3 bg-white/50 dark:bg-gray-900/30" colspan="3">
+								<div class="flex gap-4 justify-center">
+									<span class="text-red-500 dark:text-red-400">
+										<span class="text-gray-400 dark:text-gray-500">S：</span><label id="tS"></label>%
+									</span>
+									<span class="text-blue-500 dark:text-blue-400">
+										<span class="text-gray-400 dark:text-gray-500">M：</span><label id="tM"></label>%
+									</span>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<ShareCard
+                title={a.title}
+                pubDate={a.pubdate}
+                url={a.url}
+                description={a.description}
+                avatar={a.avatar}
+                coverImage={a.coverimage}
+                siteTitle={a.sitetitle}
+			>
+		    </ShareCard>
+			<Markdown class="mt-2">
+				<Content />
+			</Markdown>
+		</div>
+	</div>
+
+    <div class="mt-4">
+		<Comment path="/projects/succubus/" />
+	</div>
+
+</MainGridLayout>
+
+<script>
+	function uuid4() {
+		let d = new Date().getTime(), d2 = performance.now() || 0;
+		return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+			let r = Math.random() * 16;
+			if (d > 0) {
+				r = (d + r) % 16 | 0;
+				d = Math.floor(d / 16);
+			} else {
+				r = (d2 + r) % 16 | 0;
+				d2 = Math.floor(d2 / 16);
+			}
+			return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+		}); 
+	}
+	function show(){
+		const input = document.getElementById("sctxt") as HTMLInputElement | null;
+		const container = document.getElementById("resultContainer");
+		if (!input || !container) return;
+		const name = input.value.trim();
+		if (name.length === 0) {
+			const placeholder = input.placeholder;
+			input.placeholder = "名字不能为空哦！";
+			input.classList.add("ring-2", "ring-red-400/50");
+			setTimeout(() => {
+				input.placeholder = placeholder;
+				input.classList.remove("ring-2", "ring-red-400/50");
+			}, 2000);
+			container.classList.add("hidden");
+			return;
+		}
+		const apiUrl = `https://api.southcat.cc/v2-succubus?uuid=${uuid4()}&name=${encodeURIComponent(name)}`;
+		fetch(apiUrl)
+			.then((response: Response) => {
+				if (!response.ok) {
+					throw new Error("Network response was not ok");
+				}
+				return response.json();
+			})
+			.then((data: any) => {
+				const tname = document.getElementById("tname"),
+					tgender = document.getElementById("tgender"),
+					tcategory = document.getElementById("tcategory"),
+					theight = document.getElementById("theight"),
+					tmeasurements = document.getElementById("tmeasurements"),
+					tcup = document.getElementById("tcup"),
+					thair = document.getElementById("thair"),
+					texperience = document.getElementById("texperience"),
+					tdesire = document.getElementById("tdesire"),
+					thobby = document.getElementById("thobby"),
+					tability = document.getElementById("tability"),
+					trating = document.getElementById("trating"),
+					tpos = document.getElementById("tpos"),
+					tline = document.getElementById("tline"),
+					tclimax = document.getElementById("tclimax"),
+					tS = document.getElementById("tS"),
+					tM = document.getElementById("tM");
+
+				if (tname) tname.textContent = data.name;
+				if (tgender) tgender.textContent = data.gender;
+				if (tcategory) tcategory.textContent = data.category;
+				if (theight) theight.textContent = data.height;
+				if (data.measurements) {
+					const m: any = data.measurements;
+					const parts = [m.bust, m.waist, m.wips].filter(Boolean).join(" ");
+					if (tmeasurements) tmeasurements.textContent = parts;
+					if (tcup) tcup.textContent = m.cup ? `${m.cup} Cup` : "";
+				}
+				if (thair) thair.textContent = data.hair;
+				if (texperience) texperience.textContent = data.experience;
+				if (tdesire) tdesire.textContent = data.desire;
+				if (thobby) thobby.textContent = data.hobby;
+				if (tability) tability.textContent = data.ability;
+				if (trating) trating.textContent = data.rating;
+				if (tpos) tpos.textContent = data.pos;
+				if (tline) tline.textContent = data.line;
+				if (tclimax) tclimax.textContent = data.climax;
+				if (data.SM) {
+					const sm: any = data.SM;
+					if (tS) tS.textContent = sm.S;
+					if (tM) tM.textContent = sm.M;
+				}
+				container.classList.remove("hidden");
+			})
+			.catch(() => {
+				container.classList.add("hidden");
+				const inputEl = document.getElementById("sctxt") as HTMLInputElement | null;
+				if (inputEl) {
+					const originalPlaceholder = inputEl.placeholder;
+					inputEl.placeholder = "网络超时，待会再试吧~";
+					inputEl.classList.add("ring-2", "ring-yellow-400/50");
+					setTimeout(() => {
+						inputEl.placeholder = originalPlaceholder;
+						inputEl.classList.remove("ring-2", "ring-yellow-400/50");
+					}, 3000);
+				}
+			});
+	}
+	document.querySelector("#scbtn")?.addEventListener("click", show);
+</script>

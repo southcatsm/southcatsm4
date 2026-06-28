@@ -8,7 +8,7 @@ export interface Project {
 	image: string;
 	category: "tools" | "novels";
 	taga: string[];
-	status: "completed" | "recommend" | "hot" | "planned";
+	status: "completed" | "recommend" | "hot" | "planned" | "serialize";
 	guider?: string;
 	sourceCode?: string;
 	visitUrl?: string;
@@ -52,22 +52,34 @@ export const projectsData: Project[] = [
 		image: "https://cdn-docs.southcat.cc/projects/novels/vonnou.png",
 		category: "novels",
 		taga: ['同人', '暗黑', '宿命', '乡土'],
-		status: "planned",
+		status: "serialize",
 		startDate: "2025-01-22",
-		guider: "https://docs.qq.com/doc/DZWJVdGpSVW9Md0V4",
+		//guider: "https://docs.qq.com/doc/DZWJVdGpSVW9Md0V4",
 		visitUrl: "../projects/von-nou/"
 	},
 	{
 		id: "crematorium",
 		title: "天降白月光VS清纯青梅",
-		description: "退婚时你冷酷无情，追妻时你狼狈不堪，只是这次我连头都不会回，而你却死在了别人的水晶球下。",
+		description: "退婚时你冷酷无情，追妻时你狼狈不堪，只是这次我连头都不会回。",
 		image: "https://cdn-docs.southcat.cc/projects/novels/crematorium.png",
 		category: "novels",
 		taga: ['同人', '火葬场', '狗血', '修罗场'],
-		status: "planned",
+		status: "recommend",
 		startDate: "2025-06-22",
-		guider: "https://docs.qq.com/doc/DZWJVdGpSVW9Md0V4",
+		//guider: "https://docs.qq.com/doc/DZXVoVnViUG5pbk1E",
 		visitUrl: "../projects/crematorium/"
+	},
+	{
+		id: "teamgunmen",
+		title: "破晓四洋枪",
+		description: "四十万人用枪炮换来了自由，却换不来自己的生存。洋枪起义的胜利之日，竟是四位天骄的葬身之时。",
+		image: "https://cdn-docs.southcat.cc/projects/novels/teamgunmen.png",
+		category: "novels",
+		taga: ['同人', '英雄末路', '意难平', '热血'],
+		status: "serialize",
+		startDate: "2025-04-28",
+		//guider: "https://docs.qq.com/doc/DZU5mbVJKaWpJa3p4",
+		visitUrl: "../projects/teamgunmen/"
 	},
 	{
 		id: "myrevenge",
@@ -77,8 +89,8 @@ export const projectsData: Project[] = [
 		category: "novels",
 		taga: ['同人', '复仇逆袭', '宿命', '反目'],
 		status: "planned",
-		startDate: "2025-06-22",
-		guider: "https://docs.qq.com/doc/DZVhKb2RnUGJmRXpO",
+		startDate: "2025-03-22",
+		//guider: "https://docs.qq.com/doc/DZVhKb2RnUGJmRXpO",
 		visitUrl: "../projects/myrevenge/"
 	},
 ];
@@ -89,6 +101,7 @@ export const getProjectStats = () => {
 	const completed = projectsData.filter((p) => p.status === "completed").length,
 		  recommend = projectsData.filter((p) => p.status === "recommend").length,
 		  planned = projectsData.filter((p) => p.status === "planned").length,
+		  serialize = projectsData.filter((p) => p.status === "serialize").length,
 		  hot = projectsData.filter((p) => p.status === "hot").length;
 
 	return {

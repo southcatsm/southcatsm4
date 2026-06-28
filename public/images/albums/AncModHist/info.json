@@ -7,8 +7,8 @@
   "location": "Universe",
   "tags": ["历史", "搞笑", "游戏"],
   "cover": "https://cdn-docs.southcat.cc/albums/ancmodhist/cover.jpg",
-  "layout": "grid",
-  "columns": 3,
+  "layout": "masonary",
+  "columns": 1,
   "photos": [
     {
       "id": "amh-1",

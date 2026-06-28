@@ -151,6 +151,7 @@ enum I18nKey {
 	projectsCompleted = "projectsCompleted",
 	projectsHot = "projectsHot",
 	projectsRecommend = "projectRecommend",
+	projectsSerialize = "projectsSerialize",
 	projectTags = "projectTags",
 	projectsFeatured = "projectsFeatured",
 	projectsPlanned = "projectsPlanned",
@@ -158,6 +159,21 @@ enum I18nKey {
 	projectsSource = "projectsSource",
 	projectsVisit = "projectsVisit",
 	projectsGitHub = "projectsGitHub",
+	// inner project
+	projectSearch = "projectSearch",
+	projectEnterName = "projectEnterName",
+	projectBackTo = "projectBackTo",
+	projectNovCre = "projectNovCre",
+	projectNovCreSubtitle = "projectNovCreSubtitle",
+	projectNovVon = "projectNovVon",
+	projectNovVonSubtitle = "projectNovVonSubtitle",
+	projectNovMrg = "projectNovMrg",
+	projectNovMrgSubtitle = "projectNovMrgSubtitle",
+	projectNovTgm = "projectNovTgm",
+	projectNovTgmSubtitle = "projectNovTgmSubtitle",
+	projectSuccubus = "projectSuccubus",
+	projectSuccubusSubtitle = "projectSuccubusSubtitle",
+	projectSuccubusReceiveArchvie = "projectSuccubusReceiveArchvie",
 
 	// Skills page
 	skills = "skills",
@@ -186,8 +202,6 @@ enum I18nKey {
 	skillsByLevel = "skillsByLevel",
 	skillsByCategory = "skillsByCategory",
 	noData = "noData",
-
-	donate = "donate",
 
 	// Timeline page
 	timeline = "timeline",
@@ -343,6 +357,9 @@ enum I18nKey {
 	randomPosts = "randomPosts",
 	smartRecommend = "smartRecommend",
 	randomRecommend = "randomRecommend",
+
+	//捐赠相关
+	donate = "donate",
 }
 
 export default I18nKey;

@@ -64,8 +64,8 @@ async function initWidget() {
 			model: modelConfig as WidgetOptions["model"],
 			position,
 			size: pioConfig.width ?? 280,
-			transitionDuration: 1500,
-			transitionType: "slide",
+			transitionDuration: 2222,
+			transitionType: "fade",
 		};
 
 		// Map menus config

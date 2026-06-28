@@ -1,0 +1,77 @@
+{
+  "title": "B·o·n·j·o·u·r",
+  "mode": "external",
+  "hidden": false,
+  "description": "I dont know how to describe it.",
+  "date": "2026-06-28",
+  "location": "Pine Tree Mount.",
+  "tags": ["治愈"],
+  "cover": "https://cdn-docs.southcat.cc/albums/bonjour/cover.jpg",
+  "layout": "masonary",
+  "columns": 2,
+  "photos": [
+    {
+      "id": "bjr-1",
+      "src": "https://cdn-docs.southcat.cc/albums/bonjour/IMG_4934.JPG",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "bjr-2",
+      "src": "https://cdn-docs.southcat.cc/albums/bonjour/IMG_4935.JPG",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "bjr-3",
+      "src": "https://cdn-docs.southcat.cc/albums/bonjour/IMG_4936.JPG",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "bjr-4",
+      "src": "https://cdn-docs.southcat.cc/albums/bonjour/IMG_4937.JPG",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "bjr-5",
+      "src": "https://cdn-docs.southcat.cc/albums/bonjour/IMG_4938.JPG",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "bjr-6",
+      "src": "https://cdn-docs.southcat.cc/albums/bonjour/IMG_4939.JPG",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "bjr-7",
+      "src": "https://cdn-docs.southcat.cc/albums/bonjour/IMG_4940.JPG",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "bjr-8",
+      "src": "https://cdn-docs.southcat.cc/albums/bonjour/IMG_4941.JPG",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "bjr-9",
+      "src": "https://cdn-docs.southcat.cc/albums/bonjour/IMG_4942.JPG",
+      "alt": "",
+      "title": "",
+      "description": ""
+    }
+  ]
+}

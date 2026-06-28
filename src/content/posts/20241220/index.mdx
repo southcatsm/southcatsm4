@@ -1,0 +1,600 @@
+---
+title: 手把手部署Captcha！
+published: 2024-12-20
+updated: 2024-12-20
+description: 想要为自己的博客部署Captcha？来这里！手把手教会你！
+image: './20241218.png'
+tags: [Cloudflare, API, CAPTCHA]
+category: 'Tech'
+draft: false 
+---
+
+:::warning
+本篇博客改编于旧版博客系统的B20241220。
+:::
+
+在如今的网络世界里，各种自动化攻击手段层出不穷，像恶意爬虫、垃圾评论等，
+
+搞得大家人心惶惶的
+
+**怎么办？？？？？？？**
+
+部署captcha或许是个不错的主意！
+
+笔者深入研究了Turnstile、reCaptcha、hCaptcha这三种主流的captcha部署方案，
+
+现在手把手地为大家详细讲解如何部署这三种captcha。
+
+# hCaptcha
+
+:::important
+hCaptcha的**优势**：部署不需要科学上网
+
+hCaptcha的**劣势**：验证内容有点烧脑子
+:::
+
+## hCaptcha是什么
+
+自己去搜，不做赘述。
+
+## 前期准备
+
+<strong>前往：<a target="_blank" href="https://dashboard.hcaptcha.com/signup">注册hCaptcha页面</a></strong>
+
+进入页面后，填写你的邮箱。
+
+:::caution
+国家/地区最好选择日本、美国、港澳台地区
+:::
+
+~~当然你选择Google或者Github注册也可~~
+
+注册完毕后你应该会看见这个界面：
+
+![](https://cdn-docs.southcat.cc/articles/B20241220/20241220-01.png)
+
+查看你填写的邮箱收件箱，点击**确认电子邮件地址**或下方的url前去设置密码
+
+完成之后，hCaptcha也会发邮件恭喜你注册成功（会有中英文两封，如下图）
+
+![](https://cdn-docs.southcat.cc/articles/B20241220/20241220-02.png)
+
+<strong>前往：<a target="_blank" href="https://dashboard.hcaptcha.com/login">登录hCaptcha页面</a></strong>
+
+此时，前往登录即可
+
+## 获取密钥
+
+登录成功后，你会进入如下页面：
+
+![](https://cdn-docs.southcat.cc/articles/B20241220/20241220-03.png)
+
+点击**添加站点**，进入添加页面
+
+首先，姓名（网站名称）随意填写，你看得懂就好
+
+域名输入你的网站即可（按回车没有用滴）
+
+hCaptcha行为，看你的实际情况选择
+
+最终填写的示范如下（你的不一定要跟笔者一样哦）
+
+![](https://cdn-docs.southcat.cc/articles/B20241220/20241220-05.png)
+
+完成填写后，点击**节省（英文：Save，在此处应译为保存）**
+
+接下来，你会进入这个页面（如下图示意）
+
+![](https://cdn-docs.southcat.cc/articles/B20241220/20241220-06.png)
+
+首先，先复制站点密钥（站点名称下面那一长串，点击可以保存），
+
+然后，点击右上角头像→设置，下滑找到**账户级密钥**，然后点击**生成新秘密**
+
+（如果弹出了*当前账户级密钥将立即失效。是否继续？*的窗口，点击产生即可，不用理它）
+
+:::caution
+千万注意，这个密钥（ES开头）只会显示一次！推荐复制下来粘贴到记事本上，避免丢失！
+
+~~其实真丢了也可以重新生成只不过麻烦些~~
+:::
+
+## 正式部署
+
+<strong>更详细的：<a target="_blank" href="https://docs.hcaptcha.com/">hCaptcha帮助文档</a></strong>
+
+### 前端测试
+
+打开你的本地项目，首先键入基础代码：
+
+```html
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>Demo hCaptcha</title>
+		<script src="https://hcaptcha.com/1/api.js" async defer></script>
+		<style>
+			 .center{
+				text-align: center;
+				border-radius: 20px;
+				width: 300px;
+				height: 350px;
+				position: absolute;
+				left: 50%;
+				top: 50%;
+				transform: translate(-50%,-50%);
+			}
+		</style>
+	</head>
+	<body>
+		<div class="center">
+			<h1>hCaptcha 验证</h1>
+			<div data-sitekey=" " class="h-captcha"></div>
+			<!--              ^^^ Copy你的站点密钥进去 -->
+		</div>
+	</body>
+</html>
+```
+
+这个时候你的页面应该是这样子的：
+
+![](https://cdn-docs.southcat.cc/articles/B20241220/20241220-07.png)
+
+这个时候你就可以自己做一遍人机验证了（~~不太人性就是了~~）
+
+### 后端验证
+
+:::tip
+hCaptcha并不强制要求必须通过后端验证才能使用，所以如果你没有需要请点击：<a href="#验证方块">跳过</a>
+:::
+
+做完验证了，然后呢？做完就完了？怎么可能！
+
+接下来你需要在后端向hCaptcha发送验证请求！
+
+<a id="create" style="text-decoration: none;">
+
+首先我们需要创建一个Workers
+
+</a>
+
+打开Cloudflare仪表板→Workers和Pages（ 计算(Workers) ）→创建
+
+进入页面只管点击**从Hello world！开始 右边的“开始使用”**，然后你应该进入这个页面：
+
+![](https://cdn-docs.southcat.cc/articles/B20241220/20241220-04.png)
+
+> 名称你可随意填写，能辨别即可，笔者在此以api-verify为例
+
+下滑，点击部署，然后部署成功页面点击“地球”右上的**编辑代码**按钮
+
+进入页面后，删光原有代码，然后粘贴以下代码：
+
+```javascript
+export default {
+  async fetch(request, env, ctx) {
+    const url = "https://api.hcaptcha.com/siteverify"; // hCaptcha 后端验证网址
+	const secret = ""; //在此处填充你的账户级密钥
+    const token = (new URL(request.url)).pathname.split("/")[1];//获取挑战令牌
+    let response=await fetch(`${url}?secret=${secret}&response=${token}`,{method:"POST"});//发送验证请求
+    let res=await response.json();
+    return new Response(JSON.stringify(res),{headers:{
+      "content-type": "application/json;charset=UTF-8"}
+    });
+  },
+};
+```
+
+完毕后点击右上角的部署，当网页下方弹出绿色的*版本已保存* 就行了
+
+打开Cloudflare仪表板→计算（Workers）→*你的Worker* →设置（**如下图所示**）
+
+![](https://cdn-docs.southcat.cc/articles/B20241220/20241220-08.png)
+
+记下图中画蓝线的网址，然后打开你的本地项目，先给captcha的div容器新增参数：
+
+```html
+<div data-sitekey="" data-callback="rvCallback" class="h-captcha"></div>
+<!-- 意思就是，当挑战完成后自动执行rvCallback函数 -->
+```
+
+#### 验证方块
+
+在div容器上边增加脚本：
+
+```html
+<script>
+	async function rvCallback(args){
+		const url = "";//填充你刚才画蓝线的网址，注意加上 https:// 前缀
+		let response=await fetch(`${url}/${args}`);
+		let res=await response.json();
+		if(res.success)alert("OK");//目标：完成验证后弹窗
+	}
+</script>
+```
+
+如果你不需要后端验证的话就这样子：
+
+```html
+<script>
+	function rvCallback(args){
+        alert("OK");//目标：完成验证后弹窗
+        //这个函数就是验证完毕后自动执行的
+	}
+</script>
+```
+
+到这一步基本上大功告成了，如下图所示：
+
+![](https://cdn-docs.southcat.cc/articles/B20241220/20241220-09.gif)
+
+hCaptcha还有其他东西，你可以前往上文寻找他们的帮助文档
+
+### ~~本地部署~~
+
+hCaptcha的帮助文档提到过，在本地部署时，不允许本地主机发送请求，但可以通过修改hosts的方式发送请求
+
+但是！你可别信吼
+
+如果你试了就会发现，控制台一直在报错:
+
+```cmd
+Access to fetch at '...' from origin '...' has been blocked by CORS policy: 
+No 'Access-Control-Allow-Origin' header is present on the requested resource.
+```
+
+以下是笔者咨询ChatGPT后得到的答复：
+
+CORS 报错，其实不是**前端配置的问题**，而是由于 **hCaptcha 的后端验证 API** 
+<code>https://api.hcaptcha.com/siteverify</code>
+**并不支持从浏览器前端直接调用**。这属于安全设计 —— **账户密钥** <code>secret</code>
+**是敏感信息，只能在后端服务器中使用**，而不能暴露在浏览器中。
+前端浏览器的请求携带了 <code>secret</code> 密钥，被浏览器当成跨域请求（CORS），而 
+<code>api.hcaptcha.com</code> 出于安全考虑并不允许浏览器跨域访问验证接口。
+
+## 笔者说
+
+谁能想到hCaptcha的中文版好奇怪，一看就是直接拿翻译软件的，不然**保存**为什么会是**节省**
+
+~~虽然save的确有个意思就是**节省**啦...~~
+
+# Turnstile
+
+:::important
+Turnstile的**优势**：不需要做反人类的图像和文本验证
+
+Turnstile的**劣势**：大陆地区验证至少40%会验证失败
+:::
+
+## Turnstile是什么
+
+CF的帮助文档有，自己去搜
+
+## 前期准备
+
+打开Cloudflare仪表板→Turnstile（**如下图所示**）
+
+![](https://cdn-docs.southcat.cc/articles/B20241220/20241220-10.png)
+
+点击**添加小组件**
+
+小组件名称随便写，你看得懂就行
+
+主机名填写你的网站即可（注：如果你需要本地部署，可以增加`127.0.0.1`）
+
+剩下的小组件模式和预先许可，你可以查看它们的帮助文档（蓝色的框框）
+
+完成后下滑，点击**创建**，会弹出以下页面：
+
+![](https://cdn-docs.southcat.cc/articles/B20241220/20241220-11.png)
+
+对于这两个密钥，你可以先手复制，也可以稍后复制（反正它不会消失的嘿嘿~）
+
+## 开始部署
+
+<strong>更详细的：<a target="_blank" href="https://developers.cloudflare.com/turnstile/">Turnstile帮助文档</a></strong>
+
+### 前端测试
+
+打开你的本地项目，首先键入基础代码：
+
+```html
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>Demo CF-Turnstile</title>
+		<script src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=_turnstileCb" async defer></script>
+		<style>
+			 .center{
+				text-align: center;
+				border-radius: 20px;
+				width: 300px;
+				height: 350px;
+				position: absolute;
+				left: 50%;
+				top: 50%;
+				transform: translate(-50%,-50%);
+			}
+		</style>
+	</head>
+	<body>
+		<script>
+			function _turnstileCb() {  
+				turnstile.render('#cf-turnstile', { 
+					sitekey: '',// 填充你的站点密钥
+				}); 
+			}
+		</script>
+		<div class="center">
+			<h1>Turnstile 验证</h1>
+			<div id="cf-turnstile"></div>
+		</div>
+	</body>
+</html>
+```
+
+> 第6行，这是turnstile的api，必须有，其中`onload=_turnstileCb`意思是API加载成功后自动执行`_turnstileCb`函数
+
+这个时候你的页面应该是这样子的：
+
+![](https://cdn-docs.southcat.cc/articles/B20241220/20241220-12.png)
+
+这个时候你就可以自己做一遍了（~~可能有点慢？~~）
+
+## 后端验证
+
+首先我们需要创建一个Workers
+
+创建Workers的流程不再赘述，详情可看<a href="#create">创建Workers in hCaptcha</a>
+
+进入部署页面后，删光原有代码，然后粘贴以下代码：
+
+```javascript
+export default {
+	async fetch(request, env, ctx) {
+		const url = 'https://challenges.cloudflare.com/turnstile/v0/siteverify'; // CF 后端验证网址
+		const secret = ""; //在此处填充你的密钥（站点密钥下面那个）
+		const token = (new URL(request.url)).pathname.split("/")[1];//获取挑战编码
+		let packages=new FormData();
+		packages.append("secret",secret);
+		packages.append("response",token);
+		let response=await fetch(url,{body:packages,method:"POST"});//发送验证请求
+		let res=await response.json(); 
+		return new Response(JSON.stringify(res),{headers:{
+		  "content-type": "application/json;charset=UTF-8"}
+		});
+	},
+};
+```
+
+回到本地项目，给脚本加点东西：
+
+```javascript
+<script>
+	function _turnstileCb() {  
+		turnstile.render('#cf-turnstile', { 
+			sitekey: '',// 填充你的站点密钥
+			callback: async function(token){
+				const url = "";//填充你刚才画蓝线的网址，注意加上 https:// 前缀
+				let response=await fetch(`${url}/${token}`);
+				let res=await response.json();
+				if(res.success)alert("OK");//目标：完成验证后弹窗
+			}
+		}); 
+	}
+</script>
+```
+
+不要后端验证的：
+
+```javascript
+<script>
+	function _turnstileCb() {  
+		turnstile.render('#cf-turnstile', { 
+			sitekey: '',// 填充你的站点密钥
+			callback: async function(token){
+                alert("OK");//目标：完成验证后弹窗
+			}
+		}); 
+	}
+</script>
+```
+
+到这一步基本上大功告成了，如下图所示：
+
+![](https://cdn-docs.southcat.cc/articles/B20241220/20241220-13.gif)
+
+### 控制台的401
+
+部署的时候可能会发现：控制台报了401错误？
+
+![](https://cdn-docs.southcat.cc/articles/B20241220/20241220-14.png)
+
+笔者前去帮助文档找到了相关的内容：
+
+您可以放心地忽略该错误。它正在请求您的设备或浏览器尚不支持的专用访问令牌（PAT）。
+（原话：You can safely ignore the error. It is requesting a Private Access Token (PAT) 
+ that your device or browser does not support yet.）
+ 
+ 一句话总结：**不管它就得了**
+
+## 笔者说
+
+如何让Turnstile验证快一些？
+
+最好的办法就是科学上网，
+
+不得的话，那就只好多多点击页面，向CF表明你是真人，急切希望通过这个~~该死的~~挑战
+
+笔者亲试，成功率蛮高的（也高不到哪里去虽然说吧）
+
+# reCaptcha
+
+:::important
+reCaptcha的**优势**：使用率高，还算简单？
+
+reCaptcha的**劣势**：天崩开局炸退99%的人
+:::
+
+## reCaptcha是什么
+
+自己去搜
+
+## 前期准备
+
+首先你需要注册一个Google账户（具体如何注册，自行上网查阅）
+
+但是呢，由于Google在国内被防火长城墙了，所以会一直报响应超时或者连接重置
+
+这个时候你就得科学上网了吼
+
+笔者在线教学怎么科学上网：
+
+:::caution
+本内容由于违反了《中华人民共和国计算机信息网络国际联网管理暂行规定》等法律法规，故不予显示，望周知。
+:::
+
+<strong>前往：<a target="_blank" href="https://www.google.com/recaptcha/admin/create">谷歌reCaptcha 创建页面</a></strong>
+
+进入页面后，标签名称随便写，你看得懂就行
+
+reCaptcha类型，笔者在这里介绍的是v2的人机身份验证，若你
+有其他需求，可以去看reCaptcha的帮助文档，有介绍到
+
+域名填写你的网站即可（注：如果你需要本地部署，可以增加`127.0.0.1`
+而且可以按回车添加）
+
+至于Google Cloud Platform的项目名称，随便填填就得
+
+完成后下滑，点击**提交**，然后会弹出这个页面：
+
+![](https://cdn-docs.southcat.cc/articles/B20241220/20241220-15.png)
+
+对于这两个密钥，你可以先手复制，也可以稍后复制（反正它**也**不会消失的~）
+
+## 开始部署
+
+<strong>更详细的：<a target="_blank" href="https://cloud.google.com/recaptcha/docs?hl=zh-cn">reCaptcha（中文）帮助文档</a></strong>
+
+打开你的本地项目，首先键入基础代码：
+
+```html
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>Demo reCaptcha</title>
+		<script src="https://www.recaptcha.net/recaptcha/api.js?onload=onloadCallback&render=explicit"></script>
+		<style>
+			 .center{
+				text-align: center;
+				border-radius: 20px;
+				width: 300px;
+				height: 350px;
+				position: absolute;
+				left: 50%;
+				top: 50%;
+				transform: translate(-50%,-50%);
+			}
+		</style>
+	</head>
+	<body>
+		<script>
+			function onloadCallback() {
+				grecaptcha.render('recaptcha', {
+					'sitekey' : '',// 填充你的站点密钥
+				});
+			};
+		</script>
+		<div class="center">
+			<h1>reCaptcha 验证</h1>
+			<div id="recaptcha"></div>
+		</div>
+	</body>
+</html>
+```
+
+> 第6行，这是recaptcha的api，必须有，其中`onload=onloadCallback`意思是API加载
+> 成功后自动执行`onloadCallback`函数
+
+这个时候你的页面应该是这样子的：
+
+![](https://cdn-docs.southcat.cc/articles/B20241220/20241220-16.png)
+
+这个时候你就可以自己做一遍了
+
+## 后端验证
+
+首先我们需要创建一个Workers
+
+创建Workers的流程不再赘述，详情可看<a href="#create">创建Workers in hCaptcha</a>
+
+进入部署页面后，删光原有代码，然后粘贴以下代码：
+
+```javascript
+export default {
+	async fetch(request, env, ctx) {
+		const url = 'https://www.recaptcha.net/recaptcha/api/siteverify'; // recaptcha 后端验证网址
+		const secret = ""; //在此处填充你的密钥（站点密钥下面那个）
+		const token = (new URL(request.url)).pathname.split("/")[1];//获取挑战编码
+		let response=await fetch(`${url}?secret=${secret}&response=${token}`,{method:"POST"});//发送验证请求
+		let res=await response.json(); 
+		return new Response(JSON.stringify(res),{headers:{
+		  "content-type": "application/json;charset=UTF-8"}
+		});
+	},
+};
+```
+
+回到本地项目，给脚本加点东西：
+
+```html
+<script>
+	function onloadCallback() {
+		grecaptcha.render('recaptcha', {
+			'sitekey' : '',// 填充你的站点密钥
+			'callback' : async function(args){
+				const url = "";//填充你刚才画蓝线的网址，注意加上 https:// 前缀
+				let response=await fetch(`${url}/${args}`);
+				let res=await response.json();
+				if(res.success)alert("OK");//目标：完成验证后弹窗
+			}
+		});
+	};
+</script>
+```
+
+不要后端验证的：
+
+```html
+<script>
+	function onloadCallback() {
+		grecaptcha.render('recaptcha', {
+			'sitekey' : '',// 填充你的站点密钥
+			'callback' : async function(args){
+				alert("OK");//目标：完成验证后弹窗
+			}
+		});
+	};
+</script>
+```
+
+到这一步基本上大功告成了，如下图所示：
+
+![](https://cdn-docs.southcat.cc/articles/B20241220/20241220-17.gif)
+
+## 笔者说
+
+怎么reCaptcha在国内有的时候一下就过，有的时候验证十几二十次都不对？？？？？？？？？
+
+# 后记
+
+总而言之，言而总之
+
+希望大家都能学废吧（bushi）
+
+~~（最起码别给机器人把评论区刷成鸟屎）~~
+
+如果你碰到了难题，欢迎评论区留言

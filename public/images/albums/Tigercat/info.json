@@ -1,0 +1,56 @@
+{
+  "title": "CONFUSING",
+  "mode": "external",
+  "hidden": false,
+  "description": "This is a confusing conversation.",
+  "date": "2026-06-13",
+  "location": "zoo",
+  "tags": ["治愈"],
+  "cover": "https://cdn-docs.southcat.cc/albums/tigercat/cover.jpg",
+  "layout": "masonary",
+  "columns": 2,
+  "photos": [
+    {
+      "id": "tgc-1",
+      "src": "https://cdn-docs.southcat.cc/albums/tigercat/IMG_4884.JPG",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "tgc-2",
+      "src": "https://cdn-docs.southcat.cc/albums/tigercat/IMG_4885.JPG",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "tgc-3",
+      "src": "https://cdn-docs.southcat.cc/albums/tigercat/IMG_4886.JPG",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "tgc-4",
+      "src": "https://cdn-docs.southcat.cc/albums/tigercat/IMG_4887.JPG",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "tgc-5",
+      "src": "https://cdn-docs.southcat.cc/albums/tigercat/IMG_4888.JPG",
+      "alt": "",
+      "title": "",
+      "description": ""
+    },
+    {
+      "id": "tgc-6",
+      "src": "https://cdn-docs.southcat.cc/albums/tigercat/IMG_4889.JPG",
+      "alt": "",
+      "title": "",
+      "description": ""
+    }
+  ]
+}

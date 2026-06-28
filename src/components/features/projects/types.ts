@@ -6,7 +6,7 @@ tag: boolean;
 	image?: string;
 	category: string;
 	taga: string[];
-	status: "completed" | "hot" | "planned" |  "recommend";
+	status: "completed" | "hot" | "planned" |  "recommend" | "serialize";
 	demoUrl?: string;
 	sourceUrl?: string;
 	guider?: string;
