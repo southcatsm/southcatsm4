@@ -1,0 +1,467 @@
+---
+import { Icon } from "astro-icon/components";
+import Comment from "@components/comment/index.astro";
+import I18nKey from "../../i18n/i18nKey";
+import { PageHeader } from "@components/features/page-header";
+import { ShareCard } from "@components/features/posts/";
+import { projectsData } from "../../data/projects";
+import { PublishedDate } from "@components/features/posts/atoms";
+import { i18n } from "../../i18n/translation";
+import MainGridLayout from "../../layouts/MainGridLayout.astro";
+const title = i18n(I18nKey.projectYandere),
+      subtitle = i18n(I18nKey.projectYandereSubtitle),
+	  dt = new Date("2026-05-29"),
+	  ydr = projectsData[1];
+const a = {
+	"title":ydr.title,
+	"description":ydr.description,
+	"pubdate":ydr.startDate,
+	"url":"https://prev.southcat.cc/projects/yandere/",
+	"sitetitle":"Southcatsm's blogs",
+	"avatar":"https://cdn-docs.southcat.cc/profile.png",
+	"coverimage":ydr.image
+}
+const requiredname = i18n(I18nKey.projectNameRequired),
+	  timeout = i18n(I18nKey.projectNetTimeout),
+	  sch = i18n(I18nKey.projectSearch),
+	  sching = i18n(I18nKey.projectSearching);
+---
+<MainGridLayout title={title} description={subtitle}>
+	<script>
+		import("../../scripts/right-sidebar-layout.js");
+	</script>
+    <div
+		class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative min-h-32"
+	>
+        
+		<div class="card-base z-10 px-9 py-6 relative w-full">
+			<div
+				class="flex flex-row text-black/30 dark:text-white/30 gap-5 mb-3 transition onload-animation"
+			>
+				<a
+						href="/projects/"
+						class="inline-flex items-center gap-1.5 text-sm text-white/90 hover:text-white bg-black/30 hover:bg-black/50 backdrop-blur-sm px-3 py-1.5 rounded-lg transition-colors"
+					>
+						<Icon
+							name="material-symbols:arrow-back"
+							class="text-base"
+						/>
+						{i18n(I18nKey.projectBackTo)}
+				</a>
+				<div class="flex flex-row items-center">
+					<PublishedDate date={dt} />
+				</div>
+			</div>
+			<PageHeader title={title} subtitle={subtitle} />
+            
+            <div class="w-full">
+				<div class="relative flex items-center gap-2">
+					<div class="relative flex-1">
+						<input
+							type="text"
+							id="sctxt"
+							placeholder={i18n(I18nKey.projectEnterName)}
+							class="w-full px-4 py-2 pl-10 rounded-lg bg-[var(--btn-regular-bg)]
+								text-black/90 dark:text-white/90
+								border border-black/10 dark:border-white/10
+								focus:outline-none focus:ring-2 focus:ring-[var(--primary)]/50
+								transition-all duration-200"
+						/>
+						<svg
+							class="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-black/40 dark:text-white/40"
+							fill="none"
+							stroke="currentColor"
+							viewBox="0 0 24 24"
+						>
+							<path
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							stroke-width="2"
+							d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+							></path>
+						</svg>
+					</div>
+					<button class="btn-regular px-8 py-2 rounded-lg inline-flex items-center gap-3" id="scbtn">
+						<label id="scbtnt">{i18n(I18nKey.projectSearch)}</label>
+					</button>
+				</div>
+			</div>
+			<br />
+			<div id="archives" class="space-y-0">
+
+				<div id="progress-container" class="w-full h-1 bg-transparent rounded-full mb-6 opacity-0 transition-opacity duration-500">
+					<div id="progress-bar" class="h-full bg-gradient-to-r from-purple-500 via-pink-500 to-rose-500 rounded-full w-0 transition-all duration-300 ease-out"></div>
+				</div>
+
+				<div id="result-card" class="hidden relative overflow-hidden rounded-2xl border border-white/20 dark:border-white/10 bg-white/60 dark:bg-black/40 backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.12)] dark:shadow-[0_8px_32px_rgba(255,255,255,0.05)] transition-all duration-700 ease-out">
+					
+					<div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-purple-500 via-pink-500 to-rose-500"></div>
+					<div class="absolute -top-20 -right-20 w-40 h-40 bg-purple-400/20 dark:bg-purple-400/10 rounded-full blur-3xl"></div>
+					<div class="absolute -bottom-20 -left-20 w-40 h-40 bg-rose-400/20 dark:bg-rose-400/10 rounded-full blur-3xl"></div>
+
+					<div class="relative p-6 md:p-8 space-y-8">
+						
+						<div class="flex items-center gap-4">
+							<div id="profile-avatar" class="w-16 h-16 rounded-full flex items-center justify-center text-2xl font-bold text-white shadow-lg ring-2 ring-white/50 dark:ring-white/20 transition-all duration-500 hover:scale-105"></div>
+							<div class="space-y-1">
+								<div class="flex items-center gap-3">
+									<h2 id="profile-name" class="text-2xl font-bold text-gray-800 dark:text-white tracking-tight"></h2>
+									<span id="profile-gender" class="px-2 py-0.5 rounded-full text-xs font-medium bg-pink-100 text-pink-800 dark:bg-pink-900/50 dark:text-pink-200 border border-pink-200 dark:border-pink-700/50"></span>
+								</div>
+								<div class="flex items-center gap-3 text-sm text-gray-500 dark:text-gray-400">
+									<span class="flex items-center gap-1"> <span id="profile-id"></span></span>
+									<span class="w-1 h-1 bg-gray-400 rounded-full"></span>
+									<span class="flex items-center gap-1"><span id="profile-cup"></span> Cup</span>
+								</div>
+							</div>
+						</div>
+
+						<div class="relative p-5 rounded-xl bg-gradient-to-r from-purple-500/10 to-pink-500/10 dark:from-purple-500/20 dark:to-pink-500/20 border border-purple-200/50 dark:border-purple-500/30 backdrop-blur-sm">
+							<div class="absolute top-3 left-4 text-xs font-semibold text-purple-500/70 dark:text-purple-300/70 uppercase tracking-wider">内心独白</div>
+							<p id="profile-ana" class="pt-4 text-gray-700 dark:text-gray-200 italic leading-relaxed text-lg font-medium"></p>
+						</div>
+
+						<div class="space-y-6">
+							<div class="space-y-1">
+								<h3 class="text-sm font-semibold text-purple-600 dark:text-purple-400 uppercase tracking-wider flex items-center gap-2">
+									<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path></svg>
+									病娇人格档案
+								</h3>
+								<p class="text-xs text-gray-500 dark:text-gray-400 pl-6">每一个极端行为的背后，都藏着一颗极度渴望被爱的心。你的内心剧本，从这里开始书写。</p>
+								<div id="profile-tag" class="pl-6 mt-2 flex items-center gap-2">
+									<span class="px-3 py-1.5 bg-purple-100 dark:bg-purple-900/40 text-purple-700 dark:text-purple-200 rounded-full text-sm font-bold border border-purple-200 dark:border-purple-700/50"></span>
+									<span class="text-sm text-gray-600 dark:text-gray-300"></span>
+								</div>
+							</div>
+
+							<div class="space-y-1">
+								<h3 class="text-sm font-semibold text-rose-600 dark:text-rose-400 uppercase tracking-wider flex items-center gap-2">
+									<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+									凝视之瞳
+								</h3>
+								<p class="text-xs text-gray-500 dark:text-gray-400 pl-6">透过那双深邃的瞳孔，你能看到爱意的形状。它不仅定义了你，也定义了被你所注视的人。</p>
+								<div id="profile-pupil" class="pl-6 mt-2 flex items-center gap-2">
+									<span class="px-3 py-1.5 bg-rose-100 dark:bg-rose-900/40 text-rose-700 dark:text-rose-200 rounded-full text-sm font-bold border border-rose-200 dark:border-rose-700/50"></span>
+									<span class="text-sm text-gray-600 dark:text-gray-300"></span>
+								</div>
+							</div>
+						</div>
+
+						<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+							<div class="space-y-1">
+								<h3 class="text-sm font-semibold text-orange-600 dark:text-orange-400 uppercase tracking-wider flex items-center gap-2">
+									<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+									敏感开关
+								</h3>
+								<p class="text-xs text-gray-500 dark:text-gray-400 pl-6">每个病娇总有些敏感的地方，这是正常的。对于你来说，也不例外哟~ 轻轻触碰这些开关，便会引爆一场蓄谋已久的“意外”。</p>
+								<div id="profile-switches" class="pl-6 mt-2 space-y-2"></div>
+							</div>
+
+							<div class="space-y-1">
+								<h3 class="text-sm font-semibold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider flex items-center gap-2">
+									<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+									爱的表达
+								</h3>
+								<p class="text-xs text-gray-500 dark:text-gray-400 pl-6">爱到深处，便是极致的占有。你会用这些独特的方式，将“我爱你”刻进对方的骨髓里。</p>
+								<div id="profile-expressions" class="pl-6 mt-2 space-y-2"></div>
+							</div>
+
+							<div class="space-y-1">
+								<h3 class="text-sm font-semibold text-cyan-600 dark:text-cyan-400 uppercase tracking-wider flex items-center gap-2">
+									<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path></svg>
+									标志信物
+								</h3>
+								<p class="text-xs text-gray-500 dark:text-gray-400 pl-6">爱会留下痕迹，也会被赋予形态。这些看似平常的物品，承载着你所有沉默的疯狂。</p>
+								<div id="profile-symbols" class="pl-6 mt-2 space-y-2"></div>
+							</div>
+						</div>
+
+						<div class="space-y-4">
+							<h3 class="text-sm font-semibold text-violet-600 dark:text-violet-400 uppercase tracking-wider flex items-center gap-2">
+								<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+							人格数值扫描
+							</h3>
+							<p class="text-xs text-gray-500 dark:text-gray-400">从理性到疯狂，让数据来剖析你复杂的内心世界。每一个百分比，都是一次危险的告白。</p>
+							<div class="grid grid-cols-2 md:grid-cols-5 gap-4 mt-3">
+								<div class="flex flex-col items-center gap-2 p-3 rounded-xl bg-white/40 dark:bg-black/20 backdrop-blur-md border border-white/30 dark:border-white/5 transition-all duration-300 hover:bg-white/60 dark:hover:bg-black/30">
+									<div class="relative w-16 h-16">
+										<svg class="w-16 h-16 -rotate-90" viewBox="0 0 36 36">
+											<circle cx="18" cy="18" r="15.5" fill="none" stroke="currentColor" class="text-purple-200 dark:text-purple-800/50" stroke-width="2.5"></circle>
+											<circle id="circle-poss" cx="18" cy="18" r="15.5" fill="none" class="text-purple-500" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="0 100" pathLength="100"></circle>
+										</svg>
+										<span class="absolute inset-0 flex items-center justify-center text-sm font-bold text-purple-700 dark:text-purple-200" id="val-poss"></span>
+									</div>
+									<span class="text-xs font-semibold text-gray-600 dark:text-gray-400">独占度</span>
+								</div>
+
+								<div class="flex flex-col items-center gap-2 p-3 rounded-xl bg-white/40 dark:bg-black/20 backdrop-blur-md border border-white/30 dark:border-white/5 transition-all duration-300 hover:bg-white/60 dark:hover:bg-black/30">
+									<div class="relative w-16 h-16">
+										<svg class="w-16 h-16 -rotate-90" viewBox="0 0 36 36">
+											<circle cx="18" cy="18" r="15.5" fill="none" stroke="currentColor" class="text-rose-200 dark:text-rose-800/50" stroke-width="2.5"></circle>
+											<circle id="circle-dang" cx="18" cy="18" r="15.5" fill="none" class="text-rose-500" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="0 100" pathLength="100"></circle>
+										</svg>
+										<span class="absolute inset-0 flex items-center justify-center text-sm font-bold text-rose-700 dark:text-rose-200" id="val-dang"></span>
+									</div>
+									<span class="text-xs font-semibold text-gray-600 dark:text-gray-400">危险度</span>
+								</div>
+
+								<div class="flex flex-col items-center gap-2 p-3 rounded-xl bg-white/40 dark:bg-black/20 backdrop-blur-md border border-white/30 dark:border-white/5 transition-all duration-300 hover:bg-white/60 dark:hover:bg-black/30">
+									<div class="relative w-16 h-16">
+										<svg class="w-16 h-16 -rotate-90" viewBox="0 0 36 36">
+											<circle cx="18" cy="18" r="15.5" fill="none" stroke="currentColor" class="text-emerald-200 dark:text-emerald-800/50" stroke-width="2.5"></circle>
+											<circle id="circle-rati" cx="18" cy="18" r="15.5" fill="none" class="text-emerald-500" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="0 100" pathLength="100"></circle>
+										</svg>
+										<span class="absolute inset-0 flex items-center justify-center text-sm font-bold text-emerald-700 dark:text-emerald-200" id="val-rati"></span>
+									</div>
+									<span class="text-xs font-semibold text-gray-600 dark:text-gray-400">理性度</span>
+								</div>
+
+								<div class="flex flex-col items-center gap-2 p-3 rounded-xl bg-white/40 dark:bg-black/20 backdrop-blur-md border border-white/30 dark:border-white/5 transition-all duration-300 hover:bg-white/60 dark:hover:bg-black/30">
+									<div class="relative w-16 h-16">
+										<svg class="w-16 h-16 -rotate-90" viewBox="0 0 36 36">
+											<circle cx="18" cy="18" r="15.5" fill="none" stroke="currentColor" class="text-orange-200 dark:text-orange-800/50" stroke-width="2.5"></circle>
+											<circle id="circle-depe" cx="18" cy="18" r="15.5" fill="none" class="text-orange-500" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="0 100" pathLength="100"></circle>
+										</svg>
+										<span class="absolute inset-0 flex items-center justify-center text-sm font-bold text-orange-700 dark:text-orange-200" id="val-depe"></span>
+									</div>
+									<span class="text-xs font-semibold text-gray-600 dark:text-gray-400">依存度</span>
+								</div>
+
+								<div class="flex flex-col items-center gap-2 p-3 rounded-xl bg-white/40 dark:bg-black/20 backdrop-blur-md border border-white/30 dark:border-white/5 transition-all duration-300 hover:bg-white/60 dark:hover:bg-black/30">
+									<div class="relative w-16 h-16">
+										<svg class="w-16 h-16 -rotate-90" viewBox="0 0 36 36">
+											<circle cx="18" cy="18" r="15.5" fill="none" stroke="currentColor" class="text-slate-200 dark:text-slate-800/50" stroke-width="2.5"></circle>
+											<circle id="circle-blac" cx="18" cy="18" r="15.5" fill="none" class="text-slate-700 dark:text-slate-300" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="0 100" pathLength="100"></circle>
+										</svg>
+										<span class="absolute inset-0 flex items-center justify-center text-sm font-bold text-slate-700 dark:text-slate-200" id="val-blac"></span>
+									</div>
+									<span class="text-xs font-semibold text-gray-600 dark:text-gray-400">黑化度</span>
+								</div>
+							</div>
+						</div>
+
+						<div class="relative p-5 rounded-xl bg-gradient-to-r from-violet-500/10 to-fuchsia-500/10 dark:from-violet-500/20 dark:to-fuchsia-500/20 border border-violet-200/50 dark:border-violet-500/30 backdrop-blur-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+							<div class="flex items-center gap-4">
+								<span class="text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600 dark:from-purple-400 dark:to-pink-400" id="profile-mark"></span>
+								<div>
+									<p class="text-sm font-semibold text-violet-600 dark:text-violet-400 uppercase tracking-wider">综合评级</p>
+									<p id="profile-comment" class="text-gray-700 dark:text-gray-200 text-lg font-medium italic"></p>
+								</div>
+							</div>
+							<div class="flex space-x-1 self-end md:self-center">
+								<div class="w-2 h-8 bg-violet-400 rounded-full"></div>
+								<div class="w-2 h-10 bg-pink-400 rounded-full"></div>
+								<div class="w-2 h-6 bg-purple-400 rounded-full"></div>
+								<div class="w-2 h-9 bg-rose-400 rounded-full"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+			<ShareCard
+                title={a.title}
+                pubDate={a.pubdate}
+                url={a.url}
+                description={a.description}
+                avatar={a.avatar}
+                coverImage={a.coverimage}
+                siteTitle={a.sitetitle}
+			>
+		    </ShareCard>
+		</div>
+	</div>
+
+    <div class="mt-4">
+		<Comment path="/projects/yandere/" />
+	</div>
+
+</MainGridLayout>
+
+<script define:vars={{ requiredname, timeout, sch, sching }}>
+	function uuid4() {
+		let d = new Date().getTime(), d2 = performance.now() || 0;
+		return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+			let r = Math.random() * 16;
+			if (d > 0) {
+				r = (d + r) % 16 | 0;
+				d = Math.floor(d / 16);
+			} else {
+				r = (d2 + r) % 16 | 0;
+				d2 = Math.floor(d2 / 16);
+			}
+			return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+		});
+	}
+
+	const card = document.getElementById('result-card'),
+		  pgcontain = document.getElementById('progress-container'),
+		  pgbar = document.getElementById('progress-bar'),
+		  color = [
+		'bg-purple-500', 'bg-pink-500', 'bg-rose-500', 'bg-violet-500', 'bg-fuchsia-500',
+		'bg-sky-500', 'bg-emerald-500', 'bg-orange-500', 'bg-amber-500', 'bg-teal-500'
+	];
+
+	function animecirc(circleId, value) {
+		const circle = document.getElementById(circleId);
+		if (!circle) return;
+		const displayVal = document.getElementById(`val-${circleId.split('-')[1]}`);
+		if (displayVal) displayVal.textContent = value;
+		
+		const circumference = 2 * Math.PI * 15.5;
+		const offset = circumference - (value / 10) * circumference;
+		circle.style.strokeDasharray = `${circumference} ${circumference}`;
+		circle.style.strokeDashoffset = circumference;
+		
+		setTimeout(() => {
+			circle.style.transition = 'stroke-dashoffset 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+			circle.style.strokeDashoffset = offset;
+		}, 200);
+	}
+
+	function populateList(elementId, items) {
+		const container = document.getElementById(elementId);
+		if (!container) return;
+		container.innerHTML = '';
+		items.forEach(item => {
+			const div = document.createElement('div');
+			div.className = 'flex items-start gap-2';
+			div.innerHTML = `
+				<span class="w-1.5 h-1.5 rounded-full mt-2 flex-shrink-0 bg-current opacity-60"></span>
+				<div>
+					<span class="text-sm font-bold text-gray-700 dark:text-gray-200">${item.name}</span>
+					<p class="text-xs text-gray-500 dark:text-gray-400 leading-relaxed mt-0.5">${item.des}</p>
+				</div>
+			`;
+			container.appendChild(div);
+		});
+	}
+
+	function show() {
+		const input = document.getElementById("sctxt"),
+			  archive = document.getElementById("archives"),
+			  btn = document.getElementById("scbtn"),
+			  btntxt = document.getElementById("scbtnt"),
+			  name = input.value.trim();
+		if (!input || !archive || !btn || !btntxt) return;
+		if (name.length === 0) {
+			const placeholder = input.placeholder;
+			input.placeholder = requiredname;
+			input.classList.add("ring-2", "ring-red-400/50");
+			setTimeout(() => {
+				input.placeholder = placeholder;
+				input.classList.remove("ring-2", "ring-red-400/50");
+			}, 2000);
+			archive.classList.add("hidden");
+			return;
+		}
+
+
+		btntxt.textContent = sching;
+		pgcontain.style.opacity = '1';
+		pgbar.style.width = '0%';
+		card.classList.add('hidden');
+
+		let width = 0;
+		const interval = setInterval(() => {
+			if (width >= 90) {
+				clearInterval(interval);
+			} else {
+				width += (90 - width) * 0.15 + 1;
+				pgbar.style.width = `${width}%`;
+			}
+		}, 200);
+
+		const uid = uuid4();
+		fetch(`https://api.southcat.cc/v2-yandere?uuid=${uid}&name=${encodeURIComponent(name)}`)
+			.then(res => res.json())
+			.then(data => {
+				clearInterval(interval);
+				pgbar.style.width = '100%';
+				setTimeout(() => {
+					pgcontain.style.opacity = '0';
+					pgbar.style.width = '0%';
+					card.classList.remove('hidden');
+					requestAnimationFrame(() => {
+						card.style.opacity = '0';
+						card.style.transform = 'translateY(20px)';
+						requestAnimationFrame(() => {
+							card.style.transition = 'opacity 0.6s ease-out, transform 0.6s cubic-bezier(0.22, 0.61, 0.36, 1)';
+							card.style.opacity = '1';
+							card.style.transform = 'translateY(0)';
+						});
+					});
+					btntxt.textContent = sch;
+
+					const firstChar = data.name.charAt(0);
+					const avatar = document.getElementById('profile-avatar');
+					avatar.textContent = firstChar;
+					avatar.className = `w-16 h-16 rounded-full flex items-center justify-center text-2xl font-bold text-white shadow-lg ring-2 ring-white/50 dark:ring-white/20 ${color[Math.floor(Math.random() * color.length)]}`;
+
+					document.getElementById('profile-name').textContent = data.name;
+					document.getElementById('profile-id').textContent = `ID: ${data.ID}`;
+					document.getElementById('profile-gender').textContent = data.gender;
+					document.getElementById('profile-cup').textContent = data.cup;
+					document.getElementById('profile-ana').textContent = `"${data.ana}"`;
+
+					const tagContainer = document.getElementById('profile-tag');
+					tagContainer.innerHTML = '';
+					const tagSpan = document.createElement('span');
+					tagSpan.className = 'px-3 py-1.5 bg-purple-100 dark:bg-purple-900/40 text-purple-700 dark:text-purple-200 rounded-full text-sm font-bold border border-purple-200 dark:border-purple-700/50';
+					tagSpan.textContent = data.category.name;
+					const tagDes = document.createElement('span');
+					tagDes.className = 'text-sm text-gray-600 dark:text-gray-300';
+					tagDes.textContent = data.category.des;
+					tagContainer.appendChild(tagSpan);
+					tagContainer.appendChild(tagDes);
+
+					const pupilContainer = document.getElementById('profile-pupil');
+					pupilContainer.innerHTML = '';
+					const pupilSpan = document.createElement('span');
+					pupilSpan.className = 'px-3 py-1.5 bg-rose-100 dark:bg-rose-900/40 text-rose-700 dark:text-rose-200 rounded-full text-sm font-bold border border-rose-200 dark:border-rose-700/50';
+					pupilSpan.textContent = data.pupil.name;
+					const pupilDes = document.createElement('span');
+					pupilDes.className = 'text-sm text-gray-600 dark:text-gray-300';
+					pupilDes.textContent = data.pupil.des;
+					pupilContainer.appendChild(pupilSpan);
+					pupilContainer.appendChild(pupilDes);
+
+					populateList('profile-switches', data.switches.detail);
+					populateList('profile-expressions', data.expressions.detail);
+					populateList('profile-symbols', data.symbols.detail);
+
+					document.getElementById('profile-mark').textContent = data.rate.mark;
+					document.getElementById('profile-comment').textContent = data.rate.comment;
+
+					animecirc('circle-poss', data.rate.poss);
+					animecirc('circle-dang', data.rate.dang);
+					animecirc('circle-rati', data.rate.rati);
+					animecirc('circle-depe', data.rate.depe);
+					animecirc('circle-blac', data.rate.blac);
+					input.classList.add("ring-2", "ring-green-400/50");
+				}, 400);
+				input.classList.add("ring-2", "ring-green-400/50");
+				setTimeout(() => {
+					input.classList.remove("ring-2", "ring-green-400/50");
+				}, 1500);
+			})
+			.catch(() => {
+				clearInterval(interval);
+				pgbar.style.width = '100%';
+				setTimeout(() => {
+					pgcontain.style.opacity = '0';
+					pgbar.style.width = '0%';
+				}, 500);
+				btntxt.textContent = sch;
+				input.value = '';
+				input.placeholder = timeout;
+				input.classList.add("ring-2", "ring-yellow-400/50");
+				setTimeout(() => {
+					input.placeholder = "";
+					input.classList.remove("ring-2", "ring-yellow-400/50");
+				}, 3000);
+			});
+	}
+
+	document.querySelector("#scbtn")?.addEventListener("click", show);
+</script>

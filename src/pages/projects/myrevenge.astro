@@ -1,5 +1,6 @@
 ---
 import { getEntry, render } from "astro:content";
+import { projectsData } from "../../data/projects";
 import Comment from "@components/comment/index.astro";
 import { Icon } from "astro-icon/components";
 import { PageHeader } from "@components/features/page-header";
@@ -19,15 +20,16 @@ const { Content } = await render(my_revenge),
 	  { remarkPluginFrontmatter } = await render(my_revenge);
 const title = i18n(I18nKey.projectNovMrg),
       subtitle = i18n(I18nKey.projectNovMrgSubtitle),
-	  dt = new Date("2025-03-22");
+	  dt = new Date("2025-03-22"),
+	  mrv = projectsData[6];
 const a = {
-	"title":"西北三狼跪碎膝盖骨",
-	"description":"他熬过了虐待，他踩着仇人的尸骨上位，却没想到刀尖最后指向了唯一的兄弟，那就一起死吧。",
-	"pubdate":"2025-03-22",
+	"title":mrv.title,
+	"description":mrv.description,
+	"pubdate":mrv.startDate,
 	"url":"https://prev.southcat.cc/projects/myrevenge/",
 	"sitetitle":"Southcatsm's blogs",
 	"avatar":"https://cdn-docs.southcat.cc/profile.png",
-	"coverimage":"https://cdn-docs.southcat.cc/projects/novels/myrevenge.png"
+	"coverimage":mrv.image
 }
 ---
 

@@ -8,6 +8,7 @@ import { ReadingTime, WordCount, PublishedDate } from "@components/features/post
 import { ShareCard } from "@components/features/posts/";
 import I18nKey from "../../i18n/i18nKey";
 import { i18n } from "../../i18n/translation";
+import { projectsData } from "../../data/projects";
 import MainGridLayout from "../../layouts/MainGridLayout.astro";
 import CoverImage from "@components/widgets/music-player/atoms/CoverImage.svelte";
 
@@ -19,15 +20,16 @@ const { Content } = await render(vonnou),
 	  { remarkPluginFrontmatter } = await render(vonnou);
 const title = i18n(I18nKey.projectNovVon),
       subtitle = i18n(I18nKey.projectNovVonSubtitle),
-	  dt = new Date("2025-01-05");
+	  dt = new Date("2025-01-05"),
+	  vnn = projectsData[3];
 const a = {
-	"title":"冯·奴",
-	"description":"当生存成为唯一信仰，道德便成了最先碎掉的骨头。有些债，亡命天涯也躲不掉。",
-	"pubdate":"2025-01-05",
+	"title":vnn.title,
+	"description":vnn.description,
+	"pubdate":vnn.startDate,
 	"url":"https://prev.southcat.cc/projects/von-nou/",
 	"sitetitle":"Southcatsm's blogs",
 	"avatar":"https://cdn-docs.southcat.cc/profile.png",
-	"coverimage":"https://cdn-docs.southcat.cc/projects/novels/vonnou.png"
+	"coverimage":vnn.image
 }
 ---
 

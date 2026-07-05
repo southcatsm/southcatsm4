@@ -1,36 +1,38 @@
 ---
 import { Icon } from "astro-icon/components";
-import { getEntry, render } from "astro:content";
 import Comment from "@components/comment/index.astro";
-import Markdown from "@components/misc/Markdown.astro";
 import I18nKey from "../../i18n/i18nKey";
 import { PageHeader } from "@components/features/page-header";
 import { ShareCard } from "@components/features/posts/";
+import { projectsData } from "../../data/projects";
 import { PublishedDate } from "@components/features/posts/atoms";
 import { i18n } from "../../i18n/translation";
 import MainGridLayout from "../../layouts/MainGridLayout.astro";
-const succubuss = await getEntry("spec", "succubus");
-if (!succubuss) {
-	throw new Error("page content not found");
-}
-const { Content } = await render(succubuss);
 const title = i18n(I18nKey.projectSuccubus),
       subtitle = i18n(I18nKey.projectSuccubusSubtitle),
-	  dt = new Date("2024-11-11");
+	  dt = new Date("2024-11-11"),
+	  sbs = projectsData[0];
 const a = {
-	"title":"魅魔生成器",
-	"description":"检测一下你是怎样的一个魅魔哦(<ゝω・)☆",
-	"pubdate":"2024-11-11",
+	"title":sbs.title,
+	"description":sbs.description,
+	"pubdate":sbs.startDate,
 	"url":"https://prev.southcat.cc/projects/succubus/",
 	"sitetitle":"Southcatsm's blogs",
 	"avatar":"https://cdn-docs.southcat.cc/profile.png",
-	"coverimage":"https://cdn-docs.southcat.cc/projects/succubus/IMG_9752.png"
+	"coverimage":sbs.image
 }
+const requiredname = i18n(I18nKey.projectNameRequired),
+	  timeout = i18n(I18nKey.projectNetTimeout),
+	  sch = i18n(I18nKey.projectSearch),
+	  sching = i18n(I18nKey.projectSearching),
+	  countss = i18n(I18nKey.projectUcounts),
+	  exp7day = i18n(I18nKey.projectUexp7days);
 ---
 <MainGridLayout title={title} description={subtitle}>
 	<script>
 		import("../../scripts/right-sidebar-layout.js");
 	</script>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 	
     <div
 		class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative min-h-32"
@@ -62,7 +64,7 @@ const a = {
 						<input
 							type="text"
 							id="sctxt"
-							placeholder="请输入名字..."
+							placeholder={i18n(I18nKey.projectEnterName)}
 							class="w-full px-4 py-2 pl-10 rounded-lg bg-[var(--btn-regular-bg)]
 								text-black/90 dark:text-white/90
 								border border-black/10 dark:border-white/10
@@ -84,12 +86,12 @@ const a = {
 						</svg>
 					</div>
 					<button class="btn-regular px-8 py-2 rounded-lg inline-flex items-center gap-3" id="scbtn">
-						<label>{i18n(I18nKey.projectSearch)}</label>
+						<label id="scbtnt">{i18n(I18nKey.projectSearch)}</label>
 					</button>
 				</div>
 			</div>
 			<br />
-			<div id="resultContainer" class="hidden max-w-3xl mx-auto p-6">
+			<div id="archives" class="hidden max-w-3xl mx-auto p-6">
 				<table class="w-full border-2 border-pink-300 dark:border-pink-700 rounded-2xl overflow-hidden shadow-lg shadow-pink-200/50 dark:shadow-pink-900/30 transition-all duration-300 bg-white/70 dark:bg-gray-800/70 backdrop-blur-md">
 					<thead class="bg-gradient-to-r from-pink-400 to-purple-400 dark:from-pink-600 dark:to-purple-700 transition-all duration-300">
 						<tr>
@@ -101,58 +103,69 @@ const a = {
 					<tbody class="font-bold text-sm">
 						<tr class="divide-x divide-pink-100 dark:divide-pink-800">
 							<td class="px-4 py-3 text-pink-600 dark:text-pink-400 bg-white/50 dark:bg-gray-900/30">
-								<span class="text-gray-400 dark:text-gray-500">姓名：</span>
+								<span class="text-gray-400 dark:text-gray-500">{i18n(I18nKey.projectUname)}：</span>
 								<span class="truncate max-w-[120px] inline-block" id="tname"></span>
 							</td>
 							<td class="px-4 py-3 text-purple-600 dark:text-purple-400 bg-white/50 dark:bg-gray-900/30">
-								<span class="text-gray-400 dark:text-gray-500">性别：</span><label id="tgender"></label>
+								<span class="text-gray-400 dark:text-gray-500">{i18n(I18nKey.projectUgender)}：</span><label id="tgender"></label>
 							</td>
 							<td class="px-4 py-3 text-blue-500 dark:text-blue-400 bg-white/50 dark:bg-gray-900/30">
-								<span class="text-gray-400 dark:text-gray-500">标签：</span><label id="tcategory"></label>
+								<span class="text-gray-400 dark:text-gray-500">{i18n(I18nKey.projectUcategory)}：</span><label id="tcategory"></label>
 							</td>
 						</tr>
 						<tr class="divide-x divide-pink-100 dark:divide-pink-800 border-t border-pink-100 dark:border-pink-800">
 							<td class="px-4 py-3 text-green-600 dark:text-green-400 bg-white/50 dark:bg-gray-900/30">
-								<span class="text-gray-400 dark:text-gray-500">身高：</span><label id="theight"></label>
+								<span class="text-gray-400 dark:text-gray-500">{i18n(I18nKey.projectUheight)}：</span><label id="theight"></label>
 							</td>
 							<td class="px-4 py-3 text-yellow-600 dark:text-yellow-400 bg-white/50 dark:bg-gray-900/30">
-								<span class="text-gray-400 dark:text-gray-500">三围：</span><label id="tmeasurements"></label>
+								<span class="text-gray-400 dark:text-gray-500">{i18n(I18nKey.projectUweight)}：</span><label id="tweight"></label>
 							</td>
 							<td class="px-4 py-3 text-red-500 dark:text-red-400 bg-white/50 dark:bg-gray-900/30">
-								<span class="text-gray-400 dark:text-gray-500">罩杯：</span><label id="tcup"></label>
-							</td>
-						</tr>
-						<tr class="divide-x divide-pink-100 dark:divide-pink-800 border-t border-pink-100 dark:border-pink-800">
-							<td class="px-4 py-3 text-amber-700 dark:text-amber-400 bg-white/50 dark:bg-gray-900/30">
-								<span class="text-gray-400 dark:text-gray-500">发色：</span><label id="thair"></label>
-							</td>
-							<td class="px-4 py-3 text-teal-600 dark:text-teal-400 bg-white/50 dark:bg-gray-900/30">
-								<span class="text-gray-400 dark:text-gray-500">经验人数：</span><label id="texperience"></label>
-							</td>
-							<td class="px-4 py-3 text-fuchsia-600 dark:text-fuchsia-400 bg-white/50 dark:bg-gray-900/30">
-								<span class="text-gray-400 dark:text-gray-500">性欲值：</span><label id="tdesire"></label>
-							</td>
-						</tr>
-						<tr class="divide-x divide-pink-100 dark:divide-pink-800 border-t border-pink-100 dark:border-pink-800">
-							<td class="px-4 py-3 text-rose-600 dark:text-rose-400 bg-white/50 dark:bg-gray-900/30">
-								<span class="text-gray-400 dark:text-gray-500">敏感点：</span><label id="tpos"></label>
-							</td>
-							<td class="px-4 py-3 text-indigo-600 dark:text-indigo-400 bg-white/50 dark:bg-gray-900/30">
-								<span class="text-gray-400 dark:text-gray-500">银纹：</span><label id="tline"></label>
-							</td>
-							<td class="px-4 py-3 text-cyan-600 dark:text-cyan-400 bg-white/50 dark:bg-gray-900/30">
-								<span class="text-gray-400 dark:text-gray-500">高潮率：</span><label id="tclimax"></label>
+								<span class="text-gray-400 dark:text-gray-500">{i18n(I18nKey.projectUmeasurements)}：</span><label id="tmeasurements"></label>
 							</td>
 						</tr>
 						<tr class="divide-x divide-pink-100 dark:divide-pink-800 border-t border-pink-100 dark:border-pink-800">
 							<td class="px-4 py-3 text-orange-600 dark:text-orange-400 bg-white/50 dark:bg-gray-900/30">
-								<span class="text-gray-400 dark:text-gray-500">性癖：</span><label id="thobby"></label>
+								<span class="text-gray-400 dark:text-gray-500">{i18n(I18nKey.projectUcup)}：</span><label id="tcup"></label> Cup
 							</td>
-							<td class="px-4 py-3 text-emerald-600 dark:text-emerald-400 break-words max-w-[200px] bg-white/50 dark:bg-gray-900/30">
-								<span class="text-gray-400 dark:text-gray-500">特殊能力：</span><label id="tability"></label>
+							<td class="px-4 py-3 text-amber-700 dark:text-amber-400 bg-white/50 dark:bg-gray-900/30">
+								<span class="text-gray-400 dark:text-gray-500">{i18n(I18nKey.projectUhaircolor)}：</span><label id="thair"></label>
 							</td>
-							<td class="px-4 py-3 text-violet-600 dark:text-violet-400 bg-white/50 dark:bg-gray-900/30">
-								<span class="text-gray-400 dark:text-gray-500">评分：</span><label id="trating"></label>
+							<td class="px-4 py-3 text-emerald-600 dark:text-emerald-400 bg-white/50 dark:bg-gray-900/30">
+								<span class="text-gray-400 dark:text-gray-500">{i18n(I18nKey.projectUpupil)}：</span><label id="tpupil"></label>
+							</td>
+						</tr>
+						<tr class="divide-x divide-pink-100 dark:divide-pink-800 border-t border-pink-100 dark:border-pink-800">
+							<td class="px-4 py-3 text-slate-700 dark:text-slate-400 bg-white/50 dark:bg-gray-900/30">
+								<span class="text-gray-400 dark:text-gray-500">{i18n(I18nKey.projectUhabitat)}：</span><label id="thabitat"></label>
+							</td>
+							<td class="px-4 py-3 text-teal-600 dark:text-teal-400 bg-white/50 dark:bg-gray-900/30">
+								<span class="text-gray-400 dark:text-gray-500">{i18n(I18nKey.projectUoutput)}：</span><label id="toutput"></label>
+							</td>
+							<td class="px-4 py-3 text-fuchsia-600 dark:text-fuchsia-400 bg-white/50 dark:bg-gray-900/30">
+								<span class="text-gray-400 dark:text-gray-500">{i18n(I18nKey.projectUdesirevalue)}：</span><label id="tdesire"></label>
+							</td>
+						</tr>
+						<tr class="divide-x divide-pink-100 dark:divide-pink-800 border-t border-pink-100 dark:border-pink-800">
+							<td class="px-4 py-3 text-rose-600 dark:text-rose-400 bg-white/50 dark:bg-gray-900/30">
+								<span class="text-gray-400 dark:text-gray-500">{i18n(I18nKey.projectUsensitivepos)}：</span><label id="tpos"></label>
+							</td>
+							<td class="px-4 py-3 text-indigo-600 dark:text-indigo-400 bg-white/50 dark:bg-gray-900/30">
+								<span class="text-gray-400 dark:text-gray-500">{i18n(I18nKey.projectUsextattoo)}：</span><label id="tline"></label>
+							</td>
+							<td class="px-4 py-3 text-cyan-600 dark:text-cyan-400 bg-white/50 dark:bg-gray-900/30">
+								<span class="text-gray-400 dark:text-gray-500">{i18n(I18nKey.projectUclimaxpct)}：</span><label id="tclimax"></label>
+							</td>
+						</tr>
+						<tr class="divide-x divide-pink-100 dark:divide-pink-800 border-t border-pink-100 dark:border-pink-800">
+							<td class="px-4 py-3 text-orange-600 dark:text-orange-400 bg-white/50 dark:bg-gray-900/30">
+								<span class="text-gray-400 dark:text-gray-500">{i18n(I18nKey.projectUsexhobby)}：</span><label id="thobby"></label>
+							</td>
+							<td class="px-4 py-3 text-violet-600 dark:text-violet-400 break-words max-w-[200px] bg-white/50 dark:bg-gray-900/30">
+								<span class="text-gray-400 dark:text-gray-500">{i18n(I18nKey.projectUsexability)}：</span><label id="tability"></label>
+							</td>
+							<td class="px-4 py-3 text-rose-500 dark:text-rose-300 bg-white/50 dark:bg-gray-900/30">
+								<span class="text-gray-400 dark:text-gray-500">{i18n(I18nKey.projectUrating)}：</span><label id="trating"></label>
 							</td>
 						</tr>
 						<tr class="divide-x divide-pink-100 dark:divide-pink-800 border-t border-pink-100 dark:border-pink-800">
@@ -169,6 +182,14 @@ const a = {
 						</tr>
 					</tbody>
 				</table>
+				<div class="mt-6 max-w-3xl mx-auto border-2 border-pink-300 dark:border-pink-700 rounded-2xl overflow-hidden shadow-lg shadow-pink-200/50 dark:shadow-pink-900/30">
+					<div class="bg-gradient-to-r from-pink-400 to-purple-400 dark:from-pink-600 dark:to-purple-700 px-6 py-3">
+						<h3 id="exptitle" class="text-white font-bold text-center drop-shadow-md"></h3>
+					</div>
+					<div class="bg-white/60 dark:bg-gray-800/60 backdrop-blur-md p-4">
+						<canvas id="expchart" class="w-full h-64"></canvas>
+					</div>
+				</div>
 			</div>
 			<ShareCard
                 title={a.title}
@@ -180,9 +201,6 @@ const a = {
                 siteTitle={a.sitetitle}
 			>
 		    </ShareCard>
-			<Markdown class="mt-2">
-				<Content />
-			</Markdown>
 		</div>
 	</div>
 
@@ -192,7 +210,7 @@ const a = {
 
 </MainGridLayout>
 
-<script>
+<script define:vars={{ requiredname, timeout, sch, sching, countss, exp7day }}>
 	function uuid4() {
 		let d = new Date().getTime(), d2 = performance.now() || 0;
 		return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
@@ -207,39 +225,129 @@ const a = {
 			return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
 		}); 
 	}
+
+	let chartInstance = null;
+
+	function fill0(num) {
+		return num < 10 ? '0' + num : '' + num;
+	}
+
+	function renderChart(exp7days, name) {
+		const canvas = document.getElementById('expchart'),
+			  etitle = document.getElementById('exptitle'),
+			  ctx = canvas.getContext('2d');;
+		if (!canvas || !etitle || !ctx) return;
+
+		if (chartInstance) {
+			chartInstance.destroy();
+			chartInstance = null;
+		}
+
+		const sorted = [...exp7days].sort((a, b) => new Date(a.date) - new Date(b.date));
+		const labels = sorted.map(item => {
+			const d = new Date(item.date);
+			return fill0(d.getMonth() + 1) + '/' + fill0(d.getDate());
+		});
+		const data = sorted.map(item => item.count),
+			  year = sorted.length > 0 ? new Date(sorted[0].date).getFullYear() : '';
+
+		etitle.textContent = name + exp7day + "(" + year + ")";
+
+		chartInstance = new Chart(ctx, {
+			type: 'line',
+			data: {
+				labels: labels,
+				datasets: [{
+					label: countss,
+					data: data,
+					borderColor: '#f472b6',
+					backgroundColor: 'rgba(244, 114, 182, 0.1)',
+					borderWidth: 2.5,
+					pointBackgroundColor: '#ec4899',
+					pointBorderColor: '#ffffff',
+					pointBorderWidth: 2,
+					pointRadius: 5,
+					pointHoverRadius: 7,
+					tension: 0.3,
+					fill: true
+				}]
+			},
+			options: {
+				responsive: true,
+				maintainAspectRatio: false,
+				plugins: {
+					legend: {
+						display: false
+					},
+					tooltip: {
+						callbacks: {
+							title: function(a) {
+								const idx = a[0].dataIndex;
+								return sorted[idx] ? sorted[idx].date : '';
+							},
+							label: function(a) {
+								return `${countss}: ${a.parsed.y}`;
+							}
+						}
+					}
+				},
+				scales: {
+					x: {
+						ticks: { color: '#9ca3af', font: { size: 11 } },
+						grid: { color: 'rgba(156, 163, 175, 0.1)' }
+					},
+					y: {
+						ticks: { color: '#9ca3af', font: { size: 11 } },
+						grid: { color: 'rgba(156, 163, 175, 0.1)' },
+						beginAtZero: false
+					}
+				}
+			}
+		});
+	}
+
 	function show(){
-		const input = document.getElementById("sctxt") as HTMLInputElement | null;
-		const container = document.getElementById("resultContainer");
-		if (!input || !container) return;
-		const name = input.value.trim();
+		const input = document.getElementById("sctxt"),
+			  archive = document.getElementById("archives"),
+			  btn = document.getElementById("scbtn"),
+			  btntxt = document.getElementById("scbtnt"),
+			  name = input.value.trim();
+		if (!input || !archive || !btn || !btntxt) return;
 		if (name.length === 0) {
 			const placeholder = input.placeholder;
-			input.placeholder = "名字不能为空哦！";
+			input.placeholder = requiredname;
 			input.classList.add("ring-2", "ring-red-400/50");
 			setTimeout(() => {
 				input.placeholder = placeholder;
 				input.classList.remove("ring-2", "ring-red-400/50");
 			}, 2000);
-			container.classList.add("hidden");
+			archive.classList.add("hidden");
 			return;
 		}
-		const apiUrl = `https://api.southcat.cc/v2-succubus?uuid=${uuid4()}&name=${encodeURIComponent(name)}`;
-		fetch(apiUrl)
-			.then((response: Response) => {
+
+		btntxt.textContent = sching;
+		btn.disabled = true;
+
+		const api = `https://api.southcat.cc/v2-succubus?uuid=${uuid4()}&name=${encodeURIComponent(name)}`;
+		fetch(api)
+			.then((response) => {
 				if (!response.ok) {
 					throw new Error("Network response was not ok");
 				}
 				return response.json();
 			})
-			.then((data: any) => {
+			.then((data) => {
 				const tname = document.getElementById("tname"),
 					tgender = document.getElementById("tgender"),
 					tcategory = document.getElementById("tcategory"),
 					theight = document.getElementById("theight"),
+					tweight = document.getElementById("tweight"),
 					tmeasurements = document.getElementById("tmeasurements"),
 					tcup = document.getElementById("tcup"),
 					thair = document.getElementById("thair"),
-					texperience = document.getElementById("texperience"),
+					tpupil = document.getElementById("tpupil"),
+					thabitat = document.getElementById("thabitat"),
+					toutput = document.getElementById("toutput"),
 					tdesire = document.getElementById("tdesire"),
 					thobby = document.getElementById("thobby"),
 					tability = document.getElementById("tability"),
@@ -250,45 +358,60 @@ const a = {
 					tS = document.getElementById("tS"),
 					tM = document.getElementById("tM");
 
-				if (tname) tname.textContent = data.name;
-				if (tgender) tgender.textContent = data.gender;
-				if (tcategory) tcategory.textContent = data.category;
-				if (theight) theight.textContent = data.height;
-				if (data.measurements) {
-					const m: any = data.measurements;
-					const parts = [m.bust, m.waist, m.wips].filter(Boolean).join(" ");
-					if (tmeasurements) tmeasurements.textContent = parts;
-					if (tcup) tcup.textContent = m.cup ? `${m.cup} Cup` : "";
-				}
-				if (thair) thair.textContent = data.hair;
-				if (texperience) texperience.textContent = data.experience;
-				if (tdesire) tdesire.textContent = data.desire;
-				if (thobby) thobby.textContent = data.hobby;
-				if (tability) tability.textContent = data.ability;
-				if (trating) trating.textContent = data.rating;
-				if (tpos) tpos.textContent = data.pos;
-				if (tline) tline.textContent = data.line;
-				if (tclimax) tclimax.textContent = data.climax;
-				if (data.SM) {
-					const sm: any = data.SM;
-					if (tS) tS.textContent = sm.S;
-					if (tM) tM.textContent = sm.M;
-				}
-				container.classList.remove("hidden");
+				const map1 = {
+					'tname': 'name',
+					'tgender': 'gender',
+					'tcategory': 'category',
+					'theight': 'height',
+					'tweight': 'weight',
+					'thair': 'hair',
+					'tpupil': 'pupil',
+					'thabitat': 'habitat',
+					'toutput': 'output',
+					'tdesire': 'desire',
+					'thobby': 'hobby',
+					'tability': 'ability',
+					'trating': 'rating',
+					'tpos': 'pos',
+					'tline': 'line',
+					'tclimax': 'climax'
+				}, map2 = {
+					tname, tgender, tcategory, theight, tweight, thair,
+					tpupil, thabitat, toutput, tdesire, thobby, tability,
+					trating, tpos, tline, tclimax
+				};
+				Object.keys(map1).forEach(key => {
+					const el = map2[key], field = map1[key];
+					el.textContent = data[field];
+				});
+				const m = data.measurements,
+					  parts = [m.bust, m.waist, m.hips].filter(Boolean).join(" ");
+				tmeasurements.textContent = parts;
+				tcup.textContent = m.cup;
+				tS.textContent = data.SM.S;
+				tM.textContent = data.SM.M;
+				archive.classList.remove("hidden");
+				setTimeout(() => renderChart(data.exp7days, data.name || name), 100);
+				btntxt.textContent = sch;
+				btn.disabled = false;
+				input.classList.add("ring-2", "ring-green-400/50");
+				setTimeout(() => {
+					input.classList.remove("ring-2", "ring-green-400/50");
+				}, 1500);
 			})
 			.catch(() => {
-				container.classList.add("hidden");
-				const inputEl = document.getElementById("sctxt") as HTMLInputElement | null;
-				if (inputEl) {
-					const originalPlaceholder = inputEl.placeholder;
-					inputEl.placeholder = "网络超时，待会再试吧~";
-					inputEl.classList.add("ring-2", "ring-yellow-400/50");
-					setTimeout(() => {
-						inputEl.placeholder = originalPlaceholder;
-						inputEl.classList.remove("ring-2", "ring-yellow-400/50");
-					}, 3000);
-				}
+				archive.classList.add("hidden");
+				btntxt.textContent = sch;
+				btn.disabled = false;
+				input.value = '';
+				input.placeholder = timeout;
+				input.classList.add("ring-2", "ring-yellow-400/50");
+				setTimeout(() => {
+					input.placeholder = "";
+					input.classList.remove("ring-2", "ring-yellow-400/50");
+				}, 3000);
 			});
 	}
 	document.querySelector("#scbtn")?.addEventListener("click", show);
+	document.getElementById('sctxt')?.addEventListener('keypress', function(e) {if (e.key === 'Enter') {show();}});
 </script>

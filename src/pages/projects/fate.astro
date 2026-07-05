@@ -3,23 +3,24 @@ import { Icon } from "astro-icon/components";
 import Comment from "@components/comment/index.astro";
 import I18nKey from "../../i18n/i18nKey";
 import { PageHeader } from "@components/features/page-header";
+import { projectsData } from "../../data/projects";
 import { ShareCard } from "@components/features/posts/";
 import { i18n } from "../../i18n/translation";
 import MainGridLayout from "../../layouts/MainGridLayout.astro";
 const title = i18n(I18nKey.projectSuccubus),
-      subtitle = i18n(I18nKey.projectSuccubusSubtitle);
+      subtitle = i18n(I18nKey.projectSuccubusSubtitle),
+	  fate = projectsData[2];
 const a = {
-	"title":"西北三狼跪碎膝盖骨",
-	"description":"他熬过了虐待，他踩着仇人的尸骨上位，却没想到刀尖最后指向了唯一的兄弟，那就一起死吧。",
-	"pubdate":"2025-03-22",
-	"url":"https://prev.southcat.cc/projects/myrevenge/",
+	"title":fate.title,
+	"description":fate.description,
+	"pubdate":fate.startDate,
+	"url":"https://prev.southcat.cc/projects/fate/",
 	"sitetitle":"Southcatsm's blogs",
 	"avatar":"https://cdn-docs.southcat.cc/profile.png",
-	"coverimage":"https://cdn-docs.southcat.cc/projects/novels/myrevenge.png"
+	"coverimage":fate.image
 }
 ---
 <MainGridLayout title={title} description={subtitle}>
-	<!-- 引入右侧边栏布局管理器 -->
 	<script>
 		import("../../scripts/right-sidebar-layout.js");
 	</script>
@@ -60,7 +61,7 @@ const a = {
 		</div>
 	</div>
     <div class="mt-4">
-		    <Comment path="/projects/fate/" />
+		<Comment path="/projects/fate/" />
 	</div>
 
 </MainGridLayout>

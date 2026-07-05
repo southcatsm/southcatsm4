@@ -10,7 +10,7 @@ import I18nKey from "../../i18n/i18nKey";
 import { i18n } from "../../i18n/translation";
 import MainGridLayout from "../../layouts/MainGridLayout.astro";
 import CoverImage from "@components/widgets/music-player/atoms/CoverImage.svelte";
-
+import { projectsData } from "../../data/projects";
 const TeamGunmen = await getEntry("spec", "novels/teamgunmen");
 if (!TeamGunmen) {
 	throw new Error("page content not found");
@@ -19,15 +19,16 @@ const { Content } = await render(TeamGunmen),
 	  { remarkPluginFrontmatter } = await render(TeamGunmen);
 const title = i18n(I18nKey.projectNovTgm),
       subtitle = i18n(I18nKey.projectNovTgmSubtitle),
-	  dt = new Date("2025-04-28");
+	  dt = new Date("2025-04-28"),
+	  tmg = projectsData[5];
 const a = {
-	"title":"破晓四洋枪",
-	"description":"四十万人用枪炮换来了自由，却换不来自己的生存。洋枪起义的胜利之日，竟是四位天骄的葬身之时。",
-	"pubdate":"2025-04-28",
+	"title":tmg.title,
+	"description":tmg.description,
+	"pubdate":tmg.startDate,
 	"url":"https://prev.southcat.cc/projects/teamgunmen/",
 	"sitetitle":"Southcatsm's blogs",
 	"avatar":"https://cdn-docs.southcat.cc/profile.png",
-	"coverimage":"https://cdn-docs.southcat.cc/projects/novels/teamgunmen.png"
+	"coverimage": tmg.image
 }
 ---
 

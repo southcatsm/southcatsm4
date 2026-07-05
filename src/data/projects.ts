@@ -23,7 +23,7 @@ export const projectsData: Project[] = [
 	{
 		id: "succubus",
 		title: "魅魔生成",
-		description: "检测一下你是怎样的一个魅魔哦(<ゝω・)☆",
+		description: "输入名字，然后查收你的专属魅魔档案吧(<ゝω・)☆",
 		image: "https://cdn-docs.southcat.cc/projects/succubus/IMG_9752.png",
 		category: "tools",
 		taga: ['创意', '猎奇', '搞笑'],
@@ -34,13 +34,24 @@ export const projectsData: Project[] = [
 		visitUrl: "../projects/succubus/"
 	},
 	{
+		id: "yandere",
+		title: "病娇检测",
+		description: "输入名字，然后查收你的专属病娇档案吧ヽ(´•ω•`)､",
+		image: "https://cdn-docs.southcat.cc/projects/yandere/IMG_0778.png",
+		category: "tools",
+		taga: ['创意', '猎奇'],
+		status: "recommend",
+		startDate: "2026-05-29",
+		visitUrl: "../projects/yandere/"
+	},
+	{
 		id: "fate",
 		title: "缘分测定",
 		description: "检测一下你和ta有没有缘分呀(<ゝω・)☆",
 		image: "https://cdn-docs.southcat.cc/projects/fate/IMG_0016.jpg",
 		category: "tools",
 		taga: ['创意', '玄学', '搞笑'],
-		status: "completed",
+		status: "planned",
 		startDate: "2023-07-30",
 		guider: "https://preview.southcat.cc/blog/20240930/",
 		visitUrl: "../projects/fate/"
@@ -88,7 +99,7 @@ export const projectsData: Project[] = [
 		image: "https://cdn-docs.southcat.cc/projects/novels/myrevenge.png",
 		category: "novels",
 		taga: ['同人', '复仇逆袭', '宿命', '反目'],
-		status: "planned",
+		status: "serialize",
 		startDate: "2025-03-22",
 		//guider: "https://docs.qq.com/doc/DZVhKb2RnUGJmRXpO",
 		visitUrl: "../projects/myrevenge/"

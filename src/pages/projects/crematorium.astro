@@ -7,6 +7,7 @@ import Markdown from "@components/misc/Markdown.astro";
 import { ReadingTime, WordCount, PublishedDate } from "@components/features/posts/atoms";
 import { ShareCard } from "@components/features/posts/";
 import I18nKey from "../../i18n/i18nKey";
+import { projectsData } from "../../data/projects";
 import { i18n } from "../../i18n/translation";
 import MainGridLayout from "../../layouts/MainGridLayout.astro";
 import CoverImage from "@components/widgets/music-player/atoms/CoverImage.svelte";
@@ -19,15 +20,16 @@ const { Content } = await render(crematoriuma),
 	  { remarkPluginFrontmatter } = await render(crematoriuma);
 const title = i18n(I18nKey.projectNovCre),
       subtitle = i18n(I18nKey.projectNovCreSubtitle),
-	  dt = new Date("2025-06-22");
+	  dt = new Date("2025-06-22"),
+	  cmi = projectsData[4];
 const a = {
-	"title":"天降白月光VS清纯青梅",
-	"description":"退婚时你冷酷无情，追妻时你狼狈不堪，只是这次我连头都不会回，而你却死在了别人的水晶球下。",
-	"pubdate":"2025-06-22",
+	"title":cmi.title,
+	"description":cmi.description,
+	"pubdate":cmi.startDate,
 	"url":"https://prev.southcat.cc/projects/crematorium/",
 	"sitetitle":"Southcatsm's blogs",
 	"avatar":"https://cdn-docs.southcat.cc/profile.png",
-	"coverimage":"https://cdn-docs.southcat.cc/projects/novels/crematorium.png"
+	"coverimage":cmi.image
 }
 ---
 
