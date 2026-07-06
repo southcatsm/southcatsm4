@@ -464,4 +464,5 @@ const requiredname = i18n(I18nKey.projectNameRequired),
 	}
 
 	document.querySelector("#scbtn")?.addEventListener("click", show);
+ document.getElementById('sctxt')?.addEventListener('keypress', function(e) {if (e.key === 'Enter') {show();}});
 </script>
