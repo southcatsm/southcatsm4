@@ -4,6 +4,7 @@ import Comment from "@components/comment/index.astro";
 import I18nKey from "../../i18n/i18nKey";
 import { PageHeader } from "@components/features/page-header";
 import { ShareCard } from "@components/features/posts/";
+import { ProjectWarning } from "@components/features/projects";
 import { projectsData } from "../../data/projects";
 import { PublishedDate } from "@components/features/posts/atoms";
 import { i18n } from "../../i18n/translation";
@@ -201,6 +202,7 @@ const requiredname = i18n(I18nKey.projectNameRequired),
                 siteTitle={a.sitetitle}
 			>
 		    </ShareCard>
+			<ProjectWarning />
 		</div>
 	</div>
 

@@ -165,6 +165,7 @@ export const zh_CN: Translation = {
   [Key.projectsGitHub]: "GitHub",
   //inner
   [Key.projectSearch]: "查询",
+  [Key.projectWarning]: "本作品内容仅供娱乐，请理性看待，一切以现实为准。",
   [Key.projectSearching]: "查询中",
   [Key.projectEnterName]: "输入你的名字",
   [Key.projectNameRequired]: "名字不能为空哦~",
@@ -208,6 +209,24 @@ export const zh_CN: Translation = {
   [Key.projectUrating]: "评分",
   [Key.projectUcounts]: "次数",
   [Key.projectUexp7days]: "の近7天性行为图表",
+  [Key.projectHydarchive]: "病娇人格档案",
+  [Key.projectHydarchiveex]: "每一个极端行为的背后，都藏着一颗极度渴望被爱的心。",
+  [Key.projectHpupil]: "凝视之瞳",
+  [Key.projectHpupilex]: "透过那双深邃的瞳孔，你能看到爱意的形状。它不仅定义了你，也定义了被你所注视的人。",
+  [Key.projectHswitches]: "敏感开关",
+  [Key.projectHswitchesex]: "每个病娇总有些敏感的地方，这是正常的。对于你来说，也不例外哟~ ",
+  [Key.projectHexpress]: "爱的表达",
+  [Key.projectHexpressex]: "爱到深处便是占有。你会用这些独特的方式，将“我爱你”刻进对方的DNA里。",
+  [Key.projectHsymbol]: "标志信物",
+  [Key.projectHsymbolex]: "爱会留下痕迹，也会被赋予形态。看似平常的物品，却承载着你被压抑的情感。",
+  [Key.projectHprsscan]: "人格数值扫描",
+  [Key.projectHprsscanex]: "从理性到疯狂，让数据来剖析你复杂的内心世界吧。",
+  [Key.projectHdang]: "危险度",
+  [Key.projectHposs]: "占有度",
+  [Key.projectHrati]: "理性度",
+  [Key.projectHdepe]: "依赖度",
+  [Key.projectHblac]: "黑化度",
+  [Key.projectHmark]: "综合评定",
 
   // 技能展示页面
   [Key.skills]: "技能展示",
@@ -398,4 +417,6 @@ export const zh_CN: Translation = {
   [Key.randomPosts]: "随机文章",
   [Key.smartRecommend]: "智能推荐",
   [Key.randomRecommend]: "随机推荐",
+
+  [Key.warmTip]: "温馨提示",
 };

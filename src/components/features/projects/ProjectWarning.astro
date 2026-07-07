@@ -1,0 +1,35 @@
+---
+import { Icon } from "astro-icon/components";
+import I18nKey from "../../../i18n/i18nKey";
+import { i18n } from "../../../i18n/translation";
+---
+<div
+  class:list={[
+    "p-6 bg-red-50 dark:bg-red-950 border-2 border-red-200 dark:border-red-800 rounded-xl mb-6 onload-animation"
+  ]}
+>
+  <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+    <div class="flex items-center gap-3 flex-1">
+      <div
+        class="flex items-center justify-center h-12 w-12 rounded-lg bg-red-100 dark:bg-red-900/50"
+      >
+        <Icon
+          name="material-symbols:warning"
+          class="text-3xl text-red-600 dark:text-red-400"
+        />
+      </div>
+      <div class="flex flex-col gap-1">
+        <div
+          class="text-[1.0rem] leading-tight font-semibold text-red-700 dark:text-red-300"
+        >
+          {i18n(I18nKey.warmTip)}
+        </div>
+        <p
+          class="text-[0.8rem] leading-tight text-red-600/80 dark:text-red-400/80"
+        >
+          {i18n(I18nKey.projectWarning)}
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

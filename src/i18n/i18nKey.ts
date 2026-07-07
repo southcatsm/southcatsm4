@@ -184,6 +184,24 @@ enum I18nKey {
 	projectUrating = "projectUrating",
 	projectUcounts = "projectUcounts",
 	projectUexp7days = "projectUexp7days",
+	projectHydarchive = "projectHydarchive",
+	projectHydarchiveex = "projectHydarchiveex",
+	projectHpupil = "projectHpupil",
+	projectHpupilex = "projectHpupilex",
+	projectHswitches = "projectHswitches",
+	projectHswitchesex = "projectHswitchesex",
+	projectHexpress = "projectHexpress",
+	projectHexpressex = "projectHexpressex",
+	projectHsymbol = "projectHsymbol",
+	projectHsymbolex = "projectHsymbolex",
+	projectHprsscan = "projectHprsscan",
+	projectHposs = "projectHposs",
+	projectHdang = "projectHdang",
+	projectHrati = "projectHrati",
+	projectHdepe = "projectHdepe",
+	projectHblac = "projectHblac",
+	projectHmark = "projectHmark",
+ 	projectHprsscanex = "projectHprsscanex",
 	projectEnterName = "projectEnterName",
 	projectBackTo = "projectBackTo",
 	projectNovCre = "projectNovCre",
@@ -385,6 +403,9 @@ enum I18nKey {
 
 	//捐赠相关
 	donate = "donate",
+
+	warmTip = "warmTip",
+	projectWarning = "projectWarning",
 }
 
 export default I18nKey;

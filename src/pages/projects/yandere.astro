@@ -4,6 +4,7 @@ import Comment from "@components/comment/index.astro";
 import I18nKey from "../../i18n/i18nKey";
 import { PageHeader } from "@components/features/page-header";
 import { ShareCard } from "@components/features/posts/";
+import { ProjectWarning } from "@components/features/projects";
 import { projectsData } from "../../data/projects";
 import { PublishedDate } from "@components/features/posts/atoms";
 import { i18n } from "../../i18n/translation";
@@ -125,9 +126,9 @@ const requiredname = i18n(I18nKey.projectNameRequired),
 							<div class="space-y-1">
 								<h3 class="text-sm font-semibold text-purple-600 dark:text-purple-400 uppercase tracking-wider flex items-center gap-2">
 									<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path></svg>
-									病娇人格档案
+									{i18n(I18nKey.projectHydarchive)}
 								</h3>
-								<p class="text-xs text-gray-500 dark:text-gray-400 pl-6">每一个极端行为的背后，都藏着一颗极度渴望被爱的心。你的内心剧本，从这里开始书写。</p>
+								<p class="text-xs text-gray-500 dark:text-gray-400 pl-6">{i18n(I18nKey.projectHydarchiveex)}</p>
 								<div id="profile-tag" class="pl-6 mt-2 flex items-center gap-2">
 									<span class="px-3 py-1.5 bg-purple-100 dark:bg-purple-900/40 text-purple-700 dark:text-purple-200 rounded-full text-sm font-bold border border-purple-200 dark:border-purple-700/50"></span>
 									<span class="text-sm text-gray-600 dark:text-gray-300"></span>
@@ -137,9 +138,9 @@ const requiredname = i18n(I18nKey.projectNameRequired),
 							<div class="space-y-1">
 								<h3 class="text-sm font-semibold text-rose-600 dark:text-rose-400 uppercase tracking-wider flex items-center gap-2">
 									<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
-									凝视之瞳
+									{i18n(I18nKey.projectHpupil)}
 								</h3>
-								<p class="text-xs text-gray-500 dark:text-gray-400 pl-6">透过那双深邃的瞳孔，你能看到爱意的形状。它不仅定义了你，也定义了被你所注视的人。</p>
+								<p class="text-xs text-gray-500 dark:text-gray-400 pl-6">{i18n(I18nKey.projectHpupilex)}</p>
 								<div id="profile-pupil" class="pl-6 mt-2 flex items-center gap-2">
 									<span class="px-3 py-1.5 bg-rose-100 dark:bg-rose-900/40 text-rose-700 dark:text-rose-200 rounded-full text-sm font-bold border border-rose-200 dark:border-rose-700/50"></span>
 									<span class="text-sm text-gray-600 dark:text-gray-300"></span>
@@ -151,27 +152,27 @@ const requiredname = i18n(I18nKey.projectNameRequired),
 							<div class="space-y-1">
 								<h3 class="text-sm font-semibold text-orange-600 dark:text-orange-400 uppercase tracking-wider flex items-center gap-2">
 									<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-									敏感开关
+									{i18n(I18nKey.projectHswitches)}
 								</h3>
-								<p class="text-xs text-gray-500 dark:text-gray-400 pl-6">每个病娇总有些敏感的地方，这是正常的。对于你来说，也不例外哟~ 轻轻触碰这些开关，便会引爆一场蓄谋已久的“意外”。</p>
+								<p class="text-xs text-gray-500 dark:text-gray-400 pl-6">{i18n(I18nKey.projectHswitchesex)}</p>
 								<div id="profile-switches" class="pl-6 mt-2 space-y-2"></div>
 							</div>
 
 							<div class="space-y-1">
 								<h3 class="text-sm font-semibold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider flex items-center gap-2">
 									<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
-									爱的表达
+									{i18n(I18nKey.projectHexpress)}
 								</h3>
-								<p class="text-xs text-gray-500 dark:text-gray-400 pl-6">爱到深处，便是极致的占有。你会用这些独特的方式，将“我爱你”刻进对方的骨髓里。</p>
+								<p class="text-xs text-gray-500 dark:text-gray-400 pl-6">{i18n(I18nKey.projectHexpressex)}</p>
 								<div id="profile-expressions" class="pl-6 mt-2 space-y-2"></div>
 							</div>
 
 							<div class="space-y-1">
 								<h3 class="text-sm font-semibold text-cyan-600 dark:text-cyan-400 uppercase tracking-wider flex items-center gap-2">
 									<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path></svg>
-									标志信物
+									{i18n(I18nKey.projectHsymbol)}
 								</h3>
-								<p class="text-xs text-gray-500 dark:text-gray-400 pl-6">爱会留下痕迹，也会被赋予形态。这些看似平常的物品，承载着你所有沉默的疯狂。</p>
+								<p class="text-xs text-gray-500 dark:text-gray-400 pl-6">{i18n(I18nKey.projectHsymbolex)}</p>
 								<div id="profile-symbols" class="pl-6 mt-2 space-y-2"></div>
 							</div>
 						</div>
@@ -179,9 +180,9 @@ const requiredname = i18n(I18nKey.projectNameRequired),
 						<div class="space-y-4">
 							<h3 class="text-sm font-semibold text-violet-600 dark:text-violet-400 uppercase tracking-wider flex items-center gap-2">
 								<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
-							人格数值扫描
+								{i18n(I18nKey.projectHprsscan)}
 							</h3>
-							<p class="text-xs text-gray-500 dark:text-gray-400">从理性到疯狂，让数据来剖析你复杂的内心世界。每一个百分比，都是一次危险的告白。</p>
+							<p class="text-xs text-gray-500 dark:text-gray-400">{i18n(I18nKey.projectHprsscanex)}</p>
 							<div class="grid grid-cols-2 md:grid-cols-5 gap-4 mt-3">
 								<div class="flex flex-col items-center gap-2 p-3 rounded-xl bg-white/40 dark:bg-black/20 backdrop-blur-md border border-white/30 dark:border-white/5 transition-all duration-300 hover:bg-white/60 dark:hover:bg-black/30">
 									<div class="relative w-16 h-16">
@@ -191,7 +192,7 @@ const requiredname = i18n(I18nKey.projectNameRequired),
 										</svg>
 										<span class="absolute inset-0 flex items-center justify-center text-sm font-bold text-purple-700 dark:text-purple-200" id="val-poss"></span>
 									</div>
-									<span class="text-xs font-semibold text-gray-600 dark:text-gray-400">独占度</span>
+									<span class="text-xs font-semibold text-gray-600 dark:text-gray-400">{i18n(I18nKey.projectHposs)}</span>
 								</div>
 
 								<div class="flex flex-col items-center gap-2 p-3 rounded-xl bg-white/40 dark:bg-black/20 backdrop-blur-md border border-white/30 dark:border-white/5 transition-all duration-300 hover:bg-white/60 dark:hover:bg-black/30">
@@ -202,7 +203,7 @@ const requiredname = i18n(I18nKey.projectNameRequired),
 										</svg>
 										<span class="absolute inset-0 flex items-center justify-center text-sm font-bold text-rose-700 dark:text-rose-200" id="val-dang"></span>
 									</div>
-									<span class="text-xs font-semibold text-gray-600 dark:text-gray-400">危险度</span>
+									<span class="text-xs font-semibold text-gray-600 dark:text-gray-400">{i18n(I18nKey.projectHdang)}</span>
 								</div>
 
 								<div class="flex flex-col items-center gap-2 p-3 rounded-xl bg-white/40 dark:bg-black/20 backdrop-blur-md border border-white/30 dark:border-white/5 transition-all duration-300 hover:bg-white/60 dark:hover:bg-black/30">
@@ -213,7 +214,7 @@ const requiredname = i18n(I18nKey.projectNameRequired),
 										</svg>
 										<span class="absolute inset-0 flex items-center justify-center text-sm font-bold text-emerald-700 dark:text-emerald-200" id="val-rati"></span>
 									</div>
-									<span class="text-xs font-semibold text-gray-600 dark:text-gray-400">理性度</span>
+									<span class="text-xs font-semibold text-gray-600 dark:text-gray-400">{i18n(I18nKey.projectHrati)}</span>
 								</div>
 
 								<div class="flex flex-col items-center gap-2 p-3 rounded-xl bg-white/40 dark:bg-black/20 backdrop-blur-md border border-white/30 dark:border-white/5 transition-all duration-300 hover:bg-white/60 dark:hover:bg-black/30">
@@ -224,7 +225,7 @@ const requiredname = i18n(I18nKey.projectNameRequired),
 										</svg>
 										<span class="absolute inset-0 flex items-center justify-center text-sm font-bold text-orange-700 dark:text-orange-200" id="val-depe"></span>
 									</div>
-									<span class="text-xs font-semibold text-gray-600 dark:text-gray-400">依存度</span>
+									<span class="text-xs font-semibold text-gray-600 dark:text-gray-400">{i18n(I18nKey.projectHrati)}</span>
 								</div>
 
 								<div class="flex flex-col items-center gap-2 p-3 rounded-xl bg-white/40 dark:bg-black/20 backdrop-blur-md border border-white/30 dark:border-white/5 transition-all duration-300 hover:bg-white/60 dark:hover:bg-black/30">
@@ -235,7 +236,7 @@ const requiredname = i18n(I18nKey.projectNameRequired),
 										</svg>
 										<span class="absolute inset-0 flex items-center justify-center text-sm font-bold text-slate-700 dark:text-slate-200" id="val-blac"></span>
 									</div>
-									<span class="text-xs font-semibold text-gray-600 dark:text-gray-400">黑化度</span>
+									<span class="text-xs font-semibold text-gray-600 dark:text-gray-400">{i18n(I18nKey.projectHblac)}</span>
 								</div>
 							</div>
 						</div>
@@ -244,7 +245,7 @@ const requiredname = i18n(I18nKey.projectNameRequired),
 							<div class="flex items-center gap-4">
 								<span class="text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600 dark:from-purple-400 dark:to-pink-400" id="profile-mark"></span>
 								<div>
-									<p class="text-sm font-semibold text-violet-600 dark:text-violet-400 uppercase tracking-wider">综合评级</p>
+									<p class="text-sm font-semibold text-violet-600 dark:text-violet-400 uppercase tracking-wider">{i18n(I18nKey.projectHmark)}</p>
 									<p id="profile-comment" class="text-gray-700 dark:text-gray-200 text-lg font-medium italic"></p>
 								</div>
 							</div>
@@ -259,6 +260,7 @@ const requiredname = i18n(I18nKey.projectNameRequired),
 				</div>
 
 			</div>
+			<br />
 			<ShareCard
                 title={a.title}
                 pubDate={a.pubdate}
@@ -269,9 +271,11 @@ const requiredname = i18n(I18nKey.projectNameRequired),
                 siteTitle={a.sitetitle}
 			>
 		    </ShareCard>
+			<ProjectWarning />
 		</div>
+		
 	</div>
-
+	
     <div class="mt-4">
 		<Comment path="/projects/yandere/" />
 	</div>
@@ -298,31 +302,31 @@ const requiredname = i18n(I18nKey.projectNameRequired),
 		  pgcontain = document.getElementById('progress-container'),
 		  pgbar = document.getElementById('progress-bar'),
 		  color = [
-		'bg-purple-500', 'bg-pink-500', 'bg-rose-500', 'bg-violet-500', 'bg-fuchsia-500',
-		'bg-sky-500', 'bg-emerald-500', 'bg-orange-500', 'bg-amber-500', 'bg-teal-500'
-	];
+			'bg-purple-500', 'bg-pink-500', 'bg-rose-500', 'bg-violet-500', 'bg-fuchsia-500',
+			'bg-sky-500', 'bg-emerald-500', 'bg-orange-500', 'bg-amber-500', 'bg-teal-500',
+			'bg-indigo-500', 'bg-red-500', 'bg-blue-500', 'bg-cyan-500', 'bg-lime-500'
+		  ];
 
 	function animecirc(circleId, value) {
-		const circle = document.getElementById(circleId);
-		if (!circle) return;
-		const displayVal = document.getElementById(`val-${circleId.split('-')[1]}`);
-		if (displayVal) displayVal.textContent = value;
+		const circ = document.getElementById(circleId);
+		if (!circ) return;
+		const dspval = document.getElementById(`val-${circleId.split('-')[1]}`);
+		if (dspval) dspval.textContent = value;
 		
-		const circumference = 2 * Math.PI * 15.5;
-		const offset = circumference - (value / 10) * circumference;
-		circle.style.strokeDasharray = `${circumference} ${circumference}`;
-		circle.style.strokeDashoffset = circumference;
+		const cference = 2 * Math.PI * 15.5, offset = cference - (value / 10) * cference;
+		circ.style.strokeDasharray = `${cference} ${cference}`;
+		circ.style.strokeDashoffset = cference;
 		
 		setTimeout(() => {
-			circle.style.transition = 'stroke-dashoffset 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
-			circle.style.strokeDashoffset = offset;
+			circ.style.transition = 'stroke-dashoffset 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+			circ.style.strokeDashoffset = offset;
 		}, 200);
 	}
 
-	function populateList(elementId, items) {
-		const container = document.getElementById(elementId);
-		if (!container) return;
-		container.innerHTML = '';
+	function lst(elementId, items) {
+		const cntaer = document.getElementById(elementId);
+		if (!cntaer) return;
+		cntaer.innerHTML = '';
 		items.forEach(item => {
 			const div = document.createElement('div');
 			div.className = 'flex items-start gap-2';
@@ -333,7 +337,7 @@ const requiredname = i18n(I18nKey.projectNameRequired),
 					<p class="text-xs text-gray-500 dark:text-gray-400 leading-relaxed mt-0.5">${item.des}</p>
 				</div>
 			`;
-			container.appendChild(div);
+			cntaer.appendChild(div);
 		});
 	}
 
@@ -393,10 +397,9 @@ const requiredname = i18n(I18nKey.projectNameRequired),
 					});
 					btntxt.textContent = sch;
 
-					const firstChar = data.name.charAt(0);
-					const avatar = document.getElementById('profile-avatar');
+					const firstChar = data.name.charAt(0), avatar = document.getElementById('profile-avatar');
 					avatar.textContent = firstChar;
-					avatar.className = `w-16 h-16 rounded-full flex items-center justify-center text-2xl font-bold text-white shadow-lg ring-2 ring-white/50 dark:ring-white/20 ${color[Math.floor(Math.random() * color.length)]}`;
+					avatar.className = `w-16 h-16 rounded-full flex items-center justify-center text-2xl font-bold text-white shadow-lg ring-2 ring-white/50 dark:ring-white/20 ${color[data.ID % color.length]}`;
 
 					document.getElementById('profile-name').textContent = data.name;
 					document.getElementById('profile-id').textContent = `ID: ${data.ID}`;
@@ -404,31 +407,31 @@ const requiredname = i18n(I18nKey.projectNameRequired),
 					document.getElementById('profile-cup').textContent = data.cup;
 					document.getElementById('profile-ana').textContent = `"${data.ana}"`;
 
-					const tagContainer = document.getElementById('profile-tag');
-					tagContainer.innerHTML = '';
-					const tagSpan = document.createElement('span');
-					tagSpan.className = 'px-3 py-1.5 bg-purple-100 dark:bg-purple-900/40 text-purple-700 dark:text-purple-200 rounded-full text-sm font-bold border border-purple-200 dark:border-purple-700/50';
-					tagSpan.textContent = data.category.name;
+					const tgcontain = document.getElementById('profile-tag');
+					tgcontain.innerHTML = '';
+					const tgspan = document.createElement('span');
+					tgspan.className = 'px-3 py-1.5 bg-purple-100 dark:bg-purple-900/40 text-purple-700 dark:text-purple-200 rounded-full text-sm font-bold border border-purple-200 dark:border-purple-700/50';
+					tgspan.textContent = data.category.name;
 					const tagDes = document.createElement('span');
 					tagDes.className = 'text-sm text-gray-600 dark:text-gray-300';
 					tagDes.textContent = data.category.des;
-					tagContainer.appendChild(tagSpan);
-					tagContainer.appendChild(tagDes);
+					tgcontain.appendChild(tgspan);
+					tgcontain.appendChild(tagDes);
 
-					const pupilContainer = document.getElementById('profile-pupil');
-					pupilContainer.innerHTML = '';
-					const pupilSpan = document.createElement('span');
-					pupilSpan.className = 'px-3 py-1.5 bg-rose-100 dark:bg-rose-900/40 text-rose-700 dark:text-rose-200 rounded-full text-sm font-bold border border-rose-200 dark:border-rose-700/50';
-					pupilSpan.textContent = data.pupil.name;
+					const pupcontain = document.getElementById('profile-pupil');
+					pupcontain.innerHTML = '';
+					const pupspan = document.createElement('span');
+					pupspan.className = 'px-3 py-1.5 bg-rose-100 dark:bg-rose-900/40 text-rose-700 dark:text-rose-200 rounded-full text-sm font-bold border border-rose-200 dark:border-rose-700/50';
+					pupspan.textContent = data.pupil.name;
 					const pupilDes = document.createElement('span');
 					pupilDes.className = 'text-sm text-gray-600 dark:text-gray-300';
 					pupilDes.textContent = data.pupil.des;
-					pupilContainer.appendChild(pupilSpan);
-					pupilContainer.appendChild(pupilDes);
+					pupcontain.appendChild(pupspan);
+					pupcontain.appendChild(pupilDes);
 
-					populateList('profile-switches', data.switches.detail);
-					populateList('profile-expressions', data.expressions.detail);
-					populateList('profile-symbols', data.symbols.detail);
+					lst('profile-switches', data.switches.detail);
+					lst('profile-expressions', data.expressions.detail);
+					lst('profile-symbols', data.symbols.detail);
 
 					document.getElementById('profile-mark').textContent = data.rate.mark;
 					document.getElementById('profile-comment').textContent = data.rate.comment;
@@ -445,13 +448,14 @@ const requiredname = i18n(I18nKey.projectNameRequired),
 					input.classList.remove("ring-2", "ring-green-400/50");
 				}, 1500);
 			})
-			.catch(() => {
+			.catch((e) => {
 				clearInterval(interval);
 				pgbar.style.width = '100%';
 				setTimeout(() => {
 					pgcontain.style.opacity = '0';
 					pgbar.style.width = '0%';
 				}, 500);
+				console.log(e);
 				btntxt.textContent = sch;
 				input.value = '';
 				input.placeholder = timeout;
@@ -462,7 +466,6 @@ const requiredname = i18n(I18nKey.projectNameRequired),
 				}, 3000);
 			});
 	}
-
 	document.querySelector("#scbtn")?.addEventListener("click", show);
- document.getElementById('sctxt')?.addEventListener('keypress', function(e) {if (e.key === 'Enter') {show();}});
+	document.getElementById('sctxt')?.addEventListener('keypress', function(e) {if (e.key === 'Enter') {show();}});
 </script>
